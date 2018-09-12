@@ -15,10 +15,12 @@ const Location = withGoogleMap(props => (
     {props.places.length > 0 &&
       props.places.map(place => (
         <LocationMarker
-          lat={43.156338}
-        lng={282.385696}
-          description={"Description"}
-          name={"Hotel"}
+          key={`place${place.id}`}
+          id={place.id}
+          lat={place.latitude}
+          lng={place.longitude}
+          description={place.description}
+          name={place.name}
         />
       ))}
   </GoogleMap>
@@ -66,8 +68,11 @@ export class Map extends Component {
   }
 
   fetchPlacesFromApi() {
-    const place = <LocationMarker lat={43.156338} lng={282.385696} name={"Hotel"} description={"Hotel desc"} />; 
-    this.setState({places: [place]})
+    // const place = <LocationMarker lat={43.156338} lng={282.385696} name={"Hotel"} description={"Hotel desc"} />; 
+    this.setState({places: []})
+
+    fetch("/api/places?min_lng=${this.xMapBounds.min}&max_lng=${this.xMapBounds.max}&min_lat=${this.yMapBounds.min}&max_lat=${this.yMapBounds.max}",
+      {method: 'GET'} );
   }
 
   getMapBounds(){
