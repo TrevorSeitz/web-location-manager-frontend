@@ -4,9 +4,23 @@ import { LocationInfoWindow } from "./LocationInfoWindow";
 import { LocationMarker } from "./LocationMarker";
 
 const Location = withGoogleMap(props => (
-  <GoogleMap 
-  defaultCenter={props.center} defaultZoom={props.zoom}>
-  {props.places}
+  <GoogleMap
+    ref={props.onMapMounted}
+    onZoomChanged={props.handleMapChanged}
+    onDragEnd={props.handleMapChanged}
+    onBoundsChanged={props.handleMapFullyLoaded}
+    defaultCenter={props.center}
+    defaultZoom={props.zoom}
+  >
+    {props.places.length > 0 &&
+      props.places.map(place => (
+        <LocationMarker
+          lat={43.156338}
+        lng={282.385696}
+          description={"Description"}
+          name={"Hotel"}
+        />
+      ))}
   </GoogleMap>
 ));
 
@@ -14,21 +28,91 @@ export class Map extends Component {
   constructor(props) {
     super(props)
 
+    this.xMapBounds = { min: null, max: null }
+    this.yMapBounds = { min: null, max: null }
+
+    this.mapFullyLoaded = false
     this.zoom = 7
 
     this.state = {
+      places: [],
       lat: 43.156338,
       lng: 282.385696
     };
   }
 
-  render() {
-    const { lat, lng } = this.state;
-    const places = [<LocationMarker lat={lat} lng={lng} name={"Hotel"} description={"Hotel desc"} />];
+  handleMapChanged() {
+    this.getMapBounds()
+    this.setMapCenterPoint()
+    this.fetchPlacesFromApi()
+  }
 
-    return <div style={{ width: `750px`, height: `750px` }}>
-      <Location center={{ lat: lat, lng: lng }} zoom={this.zoom} places={places} containerElement={<div style={{ height: `100%` }} />} mapElement={<div style={{ height: `100%` }}/>} />
-      </div>;
+  handleMapMounted(map) {
+    this.map = map
   }
+
+  handleMapFullyLoaded() {
+    if (this.MapFullyLoaded)
+      return
+        this.MapFullyLoaded = true
+        this.handleMapChanged()
   }
+
+  setMapCenterPoint() {
+    this.setState({
+      lat: this.map.getCenter().lat(),
+      lng: this.map.getCenter().lng()
+    })
+  }
+
+  fetchPlacesFromApi() {
+    const place = <LocationMarker lat={43.156338} lng={282.385696} name={"Hotel"} description={"Hotel desc"} />; 
+    this.setState({places: [place]})
+  }
+
+  getMapBounds(){
+    var mapBounds = this.map.getBounds()
+    var xMapBounds = mapBounds.b
+    var yMapBounds = mapBounds.f
+
+    this.xMapBounds.min = xMapBounds.b
+    this.xMapBounds.max = xMapBounds.f
+
+    this.yMapBounds.min = yMapBounds.f
+    this.yMapBounds.max = yMapBounds.b
+  }
+
+  render() {
+    const { lat, lng, places } = this.state;
+    
+    return (
+      <div style={{ width: `750px`, height: `550px` }}>
+     
+        <ul>
+          <li>lng: {lng}</li>
+          <li>lat: {lat}</li>
+            <li>xMapBounds.min: {this.xMapBounds.min}</li>
+            <li>xMapBounds.max: {this.xMapBounds.max}</li>
+            <li>yMapBounds.min: {this.yMapBounds.min}</li>
+            <li>yMapBounds.max: {this.yMapBounds.max}</li>
+        </ul>
+        
+        <Location 
+          onMapMounted={this.handleMapMounted.bind(this)}
+          handleMapChanged={this.handleMapChanged.bind(this)}
+          handleMapFullyLoaded={this.handleMapFullyLoaded.bind(this)}
+          center={{ lat: lat, lng: lng }} 
+          places={places}
+          zoom={this.zoom}  
+          containerElement={
+            <div style={{ height: `100%` }} />
+          } 
+          mapElement={
+          <div style={{ height: `100%` }} />
+          }
+          />
+      </div>
+    );
+  }
+}
 export default Map
