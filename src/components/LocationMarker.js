@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { Marker } from "react-google-maps";
 import { LocationInfoWindow } from './LocationInfoWindow'
 
 export class LocationMarker extends Component {
+  
   constructor(props) {
     super(props)
 
@@ -20,20 +22,21 @@ export class LocationMarker extends Component {
 
   render() {
     const { showTooltip } = this.state
-    const { lat, lng, name, description } = this.props
+    const { lat, lng, name, description} = this.props
 
     return (
-      <Marker        
-        ...
-        onClick={this.clickTooltip.bind(this)}>
+      <Marker // markerWithLabel={window.MarkerWithLabel}
+        onClick={this.clickTooltip.bind(this)}
+        position={{ lat: parseFloat(lat), lng: parseFloat(lng) }} >);
+      
         {showTooltip && (
           <LocationInfoWindow description={description}
             name={name}
             closeWindow={this.closeWindow.bind(this)} />
-        )}
-      </Marker>
-    );
+        )} 
+      </Marker> 
+    )
   }
 }
 
-export defaultLocationeMarker
+export default LocationMarker
