@@ -71,8 +71,10 @@ export class Map extends Component {
     // const place = <LocationMarker lat={43.156338} lng={282.385696} name={"Hotel"} description={"Hotel desc"} />; 
     this.setState({places: []})
 
-    fetch("/api/places?min_lng=${this.xMapBounds.min}&max_lng=${this.xMapBounds.max}&min_lat=${this.yMapBounds.min}&max_lat=${this.yMapBounds.max}",
-      {method: 'GET'} );
+    fetch('/api/locations?min_lng=${this.xMapBounds.min}&max_lng=${this.xMapBounds.max}&min_lat=${this.yMapBounds.min}&max_lat=${this.yMapBounds.max}',
+      {method: 'GET'} )
+      .then((response) => response.json())
+      .then((response) => this.setState({places: response}))
   }
 
   getMapBounds(){
