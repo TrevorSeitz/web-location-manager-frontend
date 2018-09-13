@@ -24,11 +24,13 @@ export class PlaceMarker extends Component {
     const { lat, lng, name, description, id } = this.props;
 
     return (
-      <Marker // markerWithLabel={window.MarkerWithLabel}
+      <Marker
+        markerWithLabel={window.MarkerWithLabel}
         onClick={this.clickTooltip.bind(this)}
         position={{ lat: parseFloat(lat), lng: parseFloat(lng) }}
+        key={`marker${id}`}
       >
-        ); key={`marker${id}`}>;
+        ;
         {showTooltip && (
           <PlaceInfoWindow
             key={`info${id}`}

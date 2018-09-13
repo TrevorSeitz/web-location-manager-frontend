@@ -39,7 +39,7 @@ export class Map extends Component {
     this.state = {
       places: [],
       lat: 43.156338,
-      lng: 282.385696
+      lng: -77.614304
     };
   }
 
@@ -67,7 +67,6 @@ export class Map extends Component {
   }
 
   fetchPlacesFromApi() {
-    // const place = <PlaceMarker lat={43.156338} lng={282.385696} name={"Hotel"} description={"Hotel desc"} />;
     this.setState({ places: [] });
 
     fetch(
@@ -88,24 +87,14 @@ export class Map extends Component {
     this.xMapBounds.min = xMapBounds.b;
     this.xMapBounds.max = xMapBounds.f;
 
-    this.yMapBounds.min = yMapBounds.f;
-    this.yMapBounds.max = yMapBounds.b;
+    this.yMapBounds.min = yMapBounds.b;
+    this.yMapBounds.max = yMapBounds.f;
   }
 
   render() {
     const { lat, lng, places } = this.state;
-
     return (
       <div style={{ width: `750px`, height: `550px` }}>
-        <ul>
-          <li>lng: {lng}</li>
-          <li>lat: {lat}</li>
-          <li>xMapBounds.min: {this.xMapBounds.min}</li>
-          <li>xMapBounds.max: {this.xMapBounds.max}</li>
-          <li>yMapBounds.min: {this.yMapBounds.min}</li>
-          <li>yMapBounds.max: {this.yMapBounds.max}</li>
-        </ul>
-
         <AirbnbMap
           onMapMounted={this.handleMapMounted.bind(this)}
           handleMapChanged={this.handleMapChanged.bind(this)}
