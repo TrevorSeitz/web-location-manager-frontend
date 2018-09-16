@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { withGoogleMap, GoogleMap } from "react-google-maps";
 // import { PlaceInfoWindow } from "./PlaceInfoWindow";
 import { PlaceMarker } from "./PlaceMarker";
+import allReducers from "../reducer";
 
 const AirbnbMap = withGoogleMap(props => (
   <GoogleMap
