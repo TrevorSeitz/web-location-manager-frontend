@@ -2,6 +2,18 @@ import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import FileUpload from "./FileUpload";
 import submit from "../submit";
+import axios from "axios";
+import {
+  AxiosProvider,
+  Request,
+  Get,
+  Delete,
+  Head,
+  Post,
+  Put,
+  Patch,
+  withAxios
+} from "react-axios";
 
 const blankForm = {
   locationName: "",
@@ -13,14 +25,26 @@ const blankForm = {
   permitNo: "",
   notes: ""
 };
+function reset() {
+  this.setState(this.blankForm);
+}
 
 class SimpleForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      blankForm
+      locationName: "",
+      venue: "",
+      contactName: "",
+      contactPhone: "",
+      email: "",
+      permitYes: "",
+      permitNo: "",
+      notes: ""
     };
+    this.blankForm = this.state;
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(e) {
@@ -28,8 +52,11 @@ class SimpleForm extends Component {
   }
 
   handleSubmit(e) {
+    e.preventDefault();
     let bob = this.state;
-    console.log(bob);
+    alert(bob.locationName);
+    // axios.post("http://locathost:4000/api/places");
+    // reset();
   }
 
   render() {
