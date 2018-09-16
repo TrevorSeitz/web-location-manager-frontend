@@ -1,11 +1,11 @@
-export default function locationReducer(
+export default function placesReducer(
   state = {
     photos: []
   },
   action
 ) {
   switch (action.type) {
-    case "INCREASE_COUNT":
+    case "COUNT_PHOTOS":
       return state.photos.length;
 
     default:

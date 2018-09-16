@@ -1,15 +1,15 @@
-import { createStore, combineReducers } from "redux";
+import { combineReducers } from "redux";
 import { reducer as formReducer } from "redux-form";
-import locationReducer from "./reducers/locationsReducer";
+import placesReducer from "./reducers/placesReducer";
 // Or with Immutablejs:
 // import { reducer as formReducer } from 'redux-form/immutable';
 
 const reducers = {
   // ... your other reducers here ...
-  locationReducer,
+  placesReducer,
   form: formReducer
 };
-const reducer = combineReducers(reducers);
-const store = createStore(formReducer, ["Use Redux"]);
+const allReducers = combineReducers(reducers);
+// const store = createStore(formReducer, ["Use Redux"]);
 
-export default reducer;
+export default allReducers;
