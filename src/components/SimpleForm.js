@@ -3,18 +3,22 @@ import { Field, reduxForm } from "redux-form";
 import FileUpload from "./FileUpload";
 import submit from "../submit";
 
+const blankForm = {
+  locationName: "",
+  venue: "",
+  contactName: "",
+  contactPhone: "",
+  email: "",
+  permitYes: "",
+  permitNo: "",
+  notes: ""
+};
+
 class SimpleForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      locationName: "",
-      venue: "",
-      contactName: "",
-      contactPhone: "",
-      email: "",
-      permitYes: "",
-      permitNo: "",
-      notes: ""
+      blankForm
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -25,9 +29,11 @@ class SimpleForm extends Component {
 
   handleSubmit(e) {
     let bob = this.state;
+    console.log(bob);
   }
-  // const { handleSubmit, pristine, reset, submitting } = props;
+
   render() {
+    const { handleSubmit, pristine, reset, submitting } = this.props;
     return (
       <form onSubmit={this.handleSubmit}>
         <div>
@@ -37,7 +43,7 @@ class SimpleForm extends Component {
               name="locationName"
               component="input"
               type="text"
-              placeholder="Location  Name"
+              placeholder="Location Name"
               onChange={this.handleChange}
             />
           </div>
@@ -130,21 +136,27 @@ class SimpleForm extends Component {
         <div className="fileUpload">
           <FileUpload />
         </div>
-        {/* Buttons were here */}
+        {/* Buttons here */}
+        <div>
+          <button
+            type="submit"
+            // disabled={pristine || submitting}
+            onClick={this.handleSubmit}
+          >
+            Submit
+          </button>
+          <button
+            type="button"
+            // disabled={pristine || submitting}
+            onClick={reset}
+          >
+            Clear Values
+          </button>
+        </div>
       </form>
     );
   }
 }
-
-//  Buttons
-// <div>
-//   <button type="submit" disabled={pristine || submitting}>
-//     Submit
-//   </button>
-//   <button type="button" disabled={pristine || submitting} onClick={reset}>
-//     Clear Values
-//   </button>
-// </div>
 
 // Favorite Color
 // <div>

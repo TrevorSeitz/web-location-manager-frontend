@@ -13,7 +13,6 @@ class App extends Component {
         </div>
         <div className="form">
           <SimpleForm />
-          <SubmitButton />
         </div>
       </div>
     );
