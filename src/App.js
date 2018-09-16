@@ -1,10 +1,22 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { Map } from "./components/Map";
-import './App.css';
+import SimpleForm from "./components/SimpleForm";
+import SubmitButton from "./components/SubmitButton";
+import "./App.css";
 
 class App extends Component {
   render() {
-    return <Map />;
+    return (
+      <div>
+        <div className="map">
+          <Map />
+        </div>
+        <div className="form">
+          <SimpleForm />
+          <SubmitButton />
+        </div>
+      </div>
+    );
   }
 }
 
