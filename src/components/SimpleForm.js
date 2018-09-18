@@ -1,33 +1,31 @@
 import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
-import FileUpload from "./FileUpload";
+// import FileUpload from "./FileUpload";
 import submit from "../submit";
+// import ExifReader from "exifreader";
 import axios from "axios";
-import {
-  AxiosProvider,
-  Request,
-  Get,
-  Delete,
-  Head,
-  Post,
-  Put,
-  Patch,
-  withAxios
-} from "react-axios";
+// import {
+//   AxiosProvider,
+//   Request,
+//   Get,
+//   Delete,
+//   Head,
+//   Post,
+//   Put,
+//   Patch,
+//   withAxios
+// } from "react-axios";
 
-const blankForm = {
-  locationName: "",
-  venue: "",
-  contactName: "",
-  contactPhone: "",
-  email: "",
-  permitYes: "",
-  permitNo: "",
-  notes: ""
-};
-function reset() {
-  this.setState(this.blankForm);
-}
+// const blankForm = {
+//   locationName: "",
+//   venue: "",
+//   contactName: "",
+//   contactPhone: "",
+//   email: "",
+//   permitYes: "",
+//   permitNo: "",
+//   notes: ""
+// };
 
 class SimpleForm extends Component {
   constructor(props) {
@@ -53,14 +51,14 @@ class SimpleForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    let bob = this.state;
-    alert(bob.locationName);
-    // axios.post("http://locathost:4000/api/places");
-    // reset();
+    let currentPlace = this.state;
+    alert(currentPlace.locationName);
+    axios.post("http://localhost:4000/api/places", currentPlace);
   }
 
   render() {
-    const { handleSubmit, pristine, reset, submitting } = this.props;
+    // const { handleSubmit, pristine, reset, submitting } = this.props;
+    const { reset } = this.props;
     return (
       <form onSubmit={this.handleSubmit}>
         <div>
@@ -160,9 +158,8 @@ class SimpleForm extends Component {
             />
           </div>
         </div>
-        <div className="fileUpload">
-          <FileUpload />
-        </div>
+
+        {/* FileUpload here */}
         {/* Buttons here */}
         <div>
           <button
@@ -184,6 +181,10 @@ class SimpleForm extends Component {
     );
   }
 }
+
+// <div className="fileUpload">
+//   <FileUpload />
+// </div>
 
 // Favorite Color
 // <div>
