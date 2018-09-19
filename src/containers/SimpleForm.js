@@ -28,11 +28,7 @@ class SimpleForm extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleFileSelect = this.handleFileSelect.bind(this);
-    // let mapLat = "";
-    // let mapLong = "";
   }
-  // let mapLat = ''
-  // let mapLong = ''
 
   handleFileSelect(e) {
     this.setState({ selectedFile: e.target.files[0] });
@@ -49,7 +45,6 @@ class SimpleForm extends Component {
         "' " +
         lat[2]["numerator"] / 100 +
         '"';
-      // console.log(mapLat);
       mapLong =
         lng[0]["numerator"] +
         " " +
@@ -57,16 +52,20 @@ class SimpleForm extends Component {
         "' " +
         lng[2]["numerator"] / 100 +
         '"';
-      // console.log(mapLong);
     });
     // debugger;
-    // console.log(mapLat);
-    // console.log(mapLong);
-    // console.log(this.props.addLat(mapLat));
-    debugger;
-    var bob = this.state.lat;
     this.props.addLat(mapLat);
     this.props.addLong(mapLong);
+    // async issue here causes issues
+    debugger;
+    this.state.lat = mapLat;
+    this.state.long = mapLong;
+    // componentWillReceiveProps(nextProps) {
+    //   if (!this.props.addLong && nextProps.addLong) {
+    debugger;
+    //   }
+    // }
+    // debugger;
   }
 
   handleChange(e) {
@@ -92,19 +91,21 @@ class SimpleForm extends Component {
           </div>
           <div>
             <label>Lat/Long</label>
+
             <div>
               <Field
                 name="lat"
                 component="input"
                 type="text"
-                placeholder={this.props.fileLat}
+                placeholder={this.state.lat}
                 onChange={this.handleChange}
               />
+
               <Field
                 name="long"
                 component="input"
                 type="text"
-                placeholder={this.props.fileLong}
+                placeholder={this.state.long}
                 onChange={this.handleChange}
               />
             </div>
