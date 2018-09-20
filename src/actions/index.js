@@ -1,5 +1,5 @@
 export const addLat = mapLat => {
-  // debugger;
+  debugger;
   return {
     type: "ADD_LAT",
     lat: mapLat

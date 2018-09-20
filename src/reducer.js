@@ -7,7 +7,7 @@ import placesReducer from "./reducers/placesReducer";
 const latReducer = (state = "", action) => {
   switch (action.type) {
     case "ADD_LAT":
-      // debugger;
+      debugger;
       return action.lat;
 
     default:

@@ -32,7 +32,7 @@ class SimpleForm extends Component {
 
   handleFileSelect(e) {
     this.setState({ selectedFile: e.target.files[0] });
-    var mapLat = "";
+    let mapLat = "";
     let mapLong = "";
 
     const latLong = EXIF.getData(e.target.files[0], function() {
@@ -53,20 +53,17 @@ class SimpleForm extends Component {
         lng[2]["numerator"] / 100 +
         '"';
     });
-    // debugger;
-    this.props.addLat(mapLat);
-    this.props.addLong(mapLong);
+
     // async issue here causes issues
     debugger;
-    this.state.lat = mapLat;
-    this.state.long = mapLong;
-    // componentWillReceiveProps(nextProps) {
-    //   if (!this.props.addLong && nextProps.addLong) {
-    debugger;
-    //   }
-    // }
-    // debugger;
+    if (mapLat !== "" && mapLong !== "") {
+      this.props.addLat(mapLat);
+      this.props.addLong(mapLong);
+      // debugger;
+    }
   }
+  // this.state.lat = mapLat;
+  // this.state.lng = mapLong;
 
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
@@ -97,7 +94,7 @@ class SimpleForm extends Component {
                 name="lat"
                 component="input"
                 type="text"
-                placeholder={this.state.lat}
+                placeholder={this.props.fileLat}
                 onChange={this.handleChange}
               />
 
@@ -105,7 +102,7 @@ class SimpleForm extends Component {
                 name="long"
                 component="input"
                 type="text"
-                placeholder={this.state.long}
+                placeholder={this.props.fileLong}
                 onChange={this.handleChange}
               />
             </div>
@@ -271,6 +268,7 @@ class SimpleForm extends Component {
 // export default SimpleForm;
 
 const mapStateToProps = state => {
+  debugger;
   return {
     fileLat: state.latReducer,
     fileLong: state.longReducer
