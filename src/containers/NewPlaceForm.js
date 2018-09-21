@@ -32,8 +32,8 @@ class NewPlaceForm extends Component {
   }
 
   handleFileSelect(e) {
-    this.setState({ selectedFile: e.target.files[0] });
-
+    this.setState({ selectedFile: e.target.files[0].name });
+    debugger;
     let mapLat = "";
     let mapLong = "";
     let lat = "";
@@ -46,6 +46,8 @@ class NewPlaceForm extends Component {
       that.props.addLong(mapLong);
 
       console.log("3finished");
+      that.setState({ lat: that.props.fileLat });
+      that.setState({ lng: that.props.fileLong });
     }
 
     function makeReadable(lat, lng) {
@@ -83,7 +85,9 @@ class NewPlaceForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    debugger;
     let currentPlace = this.state;
+    debugger;
     alert(currentPlace.locationName);
     axios.post("http://localhost:4000/api/places", currentPlace);
   }
