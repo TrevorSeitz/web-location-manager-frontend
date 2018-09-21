@@ -6,6 +6,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "cors": "^2.8.4",
+    "exif": "^0.6.0",
     "exif-js": "^2.3.0",
     "exif-parser": "^0.1.12",
     "exifreader": "^2.5.0",
@@ -30,6 +31,7 @@
   },
   "devDependencies": {
     "babel-plugin-transform-class-properties": "^6.24.1",
+    "exif-async": "^1.0.6",
     "redux-devtools-extension": "^2.13.5"
   }
 }

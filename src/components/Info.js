@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
-import SimpleForm from "./SimpleForm";
+import NewPlaceForm from "./NewPlaceForm";
 
 /* Add basic styling for NavLinks */
 const link = {

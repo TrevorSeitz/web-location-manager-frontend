@@ -7,8 +7,9 @@ import axios from "axios";
 import * as EXIF from "exif-js";
 import * as actions from "../actions";
 import allReducers from "../reducer";
+import getExif from "exif-async";
 
-class SimpleForm extends Component {
+class NewPlaceForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -32,12 +33,22 @@ class SimpleForm extends Component {
 
   handleFileSelect(e) {
     this.setState({ selectedFile: e.target.files[0] });
+
     let mapLat = "";
     let mapLong = "";
+    let lat = "";
+    let lng = "";
+    let file = e.target.files[0];
+    let that = this;
 
-    const latLong = EXIF.getData(e.target.files[0], function() {
-      var lat = EXIF.getTag(this, "GPSLatitude");
-      var lng = EXIF.getTag(this, "GPSLongitude");
+    function setProps(mapLat, mapLong) {
+      that.props.addLat(mapLat);
+      that.props.addLong(mapLong);
+
+      console.log("3finished");
+    }
+
+    function makeReadable(lat, lng) {
       mapLat =
         lat[0]["numerator"] +
         " " +
@@ -52,18 +63,19 @@ class SimpleForm extends Component {
         "' " +
         lng[2]["numerator"] / 100 +
         '"';
-    });
-
-    // async issue here causes issues
-    debugger;
-    if (mapLat !== "" && mapLong !== "") {
-      this.props.addLat(mapLat);
-      this.props.addLong(mapLong);
-      // debugger;
+      console.log("2setProps about to start");
+      setProps(mapLat, mapLong);
     }
+
+    const latLong = EXIF.getData(file, function() {
+      lat = EXIF.getTag(this, "GPSLatitude");
+      lng = EXIF.getTag(this, "GPSLongitude");
+
+      console.log("1makeReadable about to start");
+
+      makeReadable(lat, lng);
+    });
   }
-  // this.state.lat = mapLat;
-  // this.state.lng = mapLong;
 
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
@@ -268,10 +280,9 @@ class SimpleForm extends Component {
 // export default SimpleForm;
 
 const mapStateToProps = state => {
-  debugger;
   return {
-    fileLat: state.latReducer,
-    fileLong: state.longReducer
+    fileLat: state.addLatReducer,
+    fileLong: state.addLongReducer
   };
 };
 
@@ -280,7 +291,7 @@ export default connect(
   actions
 )(
   reduxForm({
-    form: "simple", // a unique identifier for this form
+    form: "newPlace", // a unique identifier for this form
     onSubmit: submit
-  })(SimpleForm)
+  })(NewPlaceForm)
 );

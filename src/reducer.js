@@ -4,10 +4,10 @@ import placesReducer from "./reducers/placesReducer";
 // Or with Immutablejs:
 // import { reducer as formReducer } from 'redux-form/immutable';
 
-const latReducer = (state = "", action) => {
+const getLatReducer = (state = "", action) => {
   switch (action.type) {
     case "ADD_LAT":
-      debugger;
+      // debugger;
       return action.lat;
 
     default:
@@ -15,11 +15,31 @@ const latReducer = (state = "", action) => {
   }
 };
 
-const longReducer = (state = "", action) => {
+const getLongReducer = (state = "", action) => {
   switch (action.type) {
     case "ADD_LONG":
       // debugger;
-      return action.long;
+      return action.lng;
+
+    default:
+      return state;
+  }
+};
+
+const addLatReducer = (state = "", action) => {
+  switch (action.type) {
+    case "ADD_LAT":
+      return action.lat;
+
+    default:
+      return state;
+  }
+};
+
+const addLongReducer = (state = "", action) => {
+  switch (action.type) {
+    case "ADD_LONG":
+      return action.lng;
 
     default:
       return state;
@@ -29,8 +49,10 @@ const longReducer = (state = "", action) => {
 const reducers = {
   // ... your other reducers here ...
   // placesReducer,
-  latReducer,
-  longReducer,
+  getLatReducer,
+  getLongReducer,
+  addLatReducer,
+  addLongReducer,
   // fileUploadReducer,
   form: formReducer
 };

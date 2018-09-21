@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Map } from "./components/Map";
-import SimpleForm from "./containers/SimpleForm";
+import NewPlaceForm from "./containers/NewPlaceForm";
 // import FileUploadForm from "./components/FileUpload";
 import "./App.css";
 // import Navbar from "./components/Info";
@@ -13,7 +13,7 @@ class App extends Component {
           <Map />
         </div>
         <div className="form">
-          <SimpleForm />
+          <NewPlaceForm />
         </div>
       </div>
     );
