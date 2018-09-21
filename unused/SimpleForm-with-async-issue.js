@@ -7,16 +7,15 @@ import axios from "axios";
 import * as EXIF from "exif-js";
 import * as actions from "../actions";
 import allReducers from "../reducer";
-import getExif from "exif-async";
 
-class NewPlaceForm extends Component {
+class SimpleForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       locationName: "",
       venue: "",
-      latitude: "",
-      longitude: "",
+      lat: "",
+      lng: "",
       contactName: "",
       contactPhone: "",
       email: "",
@@ -32,24 +31,13 @@ class NewPlaceForm extends Component {
   }
 
   handleFileSelect(e) {
-    this.setState({ selectedFile: e.target.files[0].name });
+    this.setState({ selectedFile: e.target.files[0] });
     let mapLat = "";
     let mapLong = "";
-    let lat = "";
-    let lng = "";
-    let file = e.target.files[0];
-    let that = this;
 
-    function setProps(mapLat, mapLong) {
-      that.props.addLat(mapLat);
-      that.props.addLong(mapLong);
-
-      console.log("3finished");
-      that.setState({ latitude: that.props.fileLat });
-      that.setState({ longitude: that.props.fileLong });
-    }
-
-    function makeReadable(lat, lng) {
+    const latLong = EXIF.getData(e.target.files[0], function() {
+      var lat = EXIF.getTag(this, "GPSLatitude");
+      var lng = EXIF.getTag(this, "GPSLongitude");
       mapLat =
         lat[0]["numerator"] +
         " " +
@@ -64,19 +52,17 @@ class NewPlaceForm extends Component {
         "' " +
         lng[2]["numerator"] / 100 +
         '"';
-      console.log("2setProps about to start");
-      setProps(mapLat, mapLong);
-    }
-
-    const latLong = EXIF.getData(file, function() {
-      lat = EXIF.getTag(this, "GPSLatitude");
-      lng = EXIF.getTag(this, "GPSLongitude");
-
-      console.log("1makeReadable about to start");
-
-      makeReadable(lat, lng);
     });
+
+    // async issue here causes issues
+    // debugger;
+
+    // this.props.addLat(mapLat);
+    // this.props.addLong(mapLong);
+    // debugger;
   }
+  // this.state.lat = mapLat;
+  // this.state.lng = mapLong;
 
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
@@ -85,7 +71,6 @@ class NewPlaceForm extends Component {
   handleSubmit(e) {
     e.preventDefault();
     let currentPlace = this.state;
-    debugger;
     alert(currentPlace.locationName);
     axios.post("http://localhost:4000/api/places", currentPlace);
   }
@@ -108,7 +93,7 @@ class NewPlaceForm extends Component {
                 name="lat"
                 component="input"
                 type="text"
-                placeholder={this.props.fileLat}
+                value={this.props.fileLat}
                 onChange={this.handleChange}
               />
 
@@ -116,7 +101,7 @@ class NewPlaceForm extends Component {
                 name="long"
                 component="input"
                 type="text"
-                placeholder={this.props.fileLong}
+                value={this.props.fileLong}
                 onChange={this.handleChange}
               />
             </div>
@@ -182,14 +167,28 @@ class NewPlaceForm extends Component {
             </div>
           </div>
           <div>
-            <label htmlFor="permit">Permit Required?(check for yes)</label>
+            <label>Permit Required?</label>
             <div>
-              <Field
-                name="permit"
-                id="permit"
-                component="input"
-                type="checkbox"
-              />
+              <label>
+                <Field
+                  name="permitYes"
+                  component="input"
+                  type="radio"
+                  value="yes"
+                  onChange={this.handleChange}
+                />{" "}
+                Yes
+              </label>
+              <label>
+                <Field
+                  name="permitNo"
+                  component="input"
+                  type="radio"
+                  value="no"
+                  onChange={this.handleChange}
+                />{" "}
+                No
+              </label>
             </div>
           </div>
           {/* Favorite Color was here */}
@@ -204,6 +203,7 @@ class NewPlaceForm extends Component {
               />
             </div>
           </div>
+
           {/* FileUpload here */}
           {/* Buttons here */}
           <div>
@@ -245,30 +245,16 @@ class NewPlaceForm extends Component {
 //   </div>
 // </div>
 
-// Radio Buttons
+// Employed
 // <div>
-//   <label>Permit Required?</label>
+//   <label htmlFor="employed">Employed</label>
 //   <div>
-//     <label>
-//       <Field
-//         name="permitYes"
-//         component="input"
-//         type="radio"
-//         value="yes"
-//         onChange={this.handleChange}
-//       />{" "}
-//       Yes
-//     </label>
-//     <label>
-//       <Field
-//         name="permitNo"
-//         component="input"
-//         type="radio"
-//         value="no"
-//         onChange={this.handleChange}
-//       />{" "}
-//       No
-//     </label>
+//     <Field
+//       name="employed"
+//       id="employed"
+//       component="input"
+//       type="checkbox"
+//     />
 //   </div>
 // </div>
 
@@ -281,9 +267,10 @@ class NewPlaceForm extends Component {
 // export default SimpleForm;
 
 const mapStateToProps = state => {
+  debugger;
   return {
-    fileLat: state.addLatReducer,
-    fileLong: state.addLongReducer
+    fileLat: state.latReducer,
+    fileLong: state.longReducer
   };
 };
 
@@ -292,7 +279,7 @@ export default connect(
   actions
 )(
   reduxForm({
-    form: "newPlace", // a unique identifier for this form
+    form: "simple", // a unique identifier for this form
     onSubmit: submit
-  })(NewPlaceForm)
+  })(SimpleForm)
 );
