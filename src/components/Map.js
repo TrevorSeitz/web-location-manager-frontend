@@ -21,6 +21,9 @@ const AirbnbMap = withGoogleMap(props => (
           lat={place.latitude}
           lng={place.longitude}
           description={place.description}
+          contactName={place.contactName}
+          contactPhone={place.contactPhone}
+          email={place.email}
           name={place.name}
         />
       ))}

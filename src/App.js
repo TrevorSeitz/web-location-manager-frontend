@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Map } from "./components/Map";
+import { NavBar } from "./components/NavBar";
 import NewPlaceForm from "./containers/NewPlaceForm";
 // import FileUploadForm from "./components/FileUpload";
 import "./App.css";
-// import Navbar from "./components/Info";
 
 class App extends Component {
   render() {
@@ -13,6 +13,7 @@ class App extends Component {
           <Map />
         </div>
         <div className="form">
+          {/*<NavBar />*/}
           <NewPlaceForm />
         </div>
       </div>

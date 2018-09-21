@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
-import NewPlaceForm from "./NewPlaceForm";
+// import NewPlaceForm from "./NewPlaceForm";
 
 /* Add basic styling for NavLinks */
 const link = {
@@ -14,7 +14,7 @@ const link = {
 };
 
 /* add the navbar component */
-const Navbar = () => (
+const NavBar = () => (
   <div>
     <NavLink
       to="/"
@@ -74,7 +74,7 @@ const Login = () => (
 ReactDOM.render(
   <Router>
     <React.Fragment>
-      <Navbar />
+      <NavBar />
       <Route exact path="/" component={Home} />
       <Route exact path="/about" component={About} />
       <Route exact path="/login" component={Login} />
@@ -83,4 +83,4 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
-export default Navbar;
+export default NavBar;

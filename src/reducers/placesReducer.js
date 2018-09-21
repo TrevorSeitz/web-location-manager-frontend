@@ -1,17 +1,17 @@
 export default (
   state = {
     photos: [],
-    locationName: "",
+    name: "",
     venue: "",
     lat: "",
     lng: "",
     contactName: "",
     contactPhone: "",
     email: "",
-    permitYes: "",
-    permitNo: "",
-    notes: "",
-    fileName: ""
+    description: "",
+    fileName: "",
+    GPSLatitudeRef: "",
+    GPSLongitudeRef: ""
   },
   action
 ) => {

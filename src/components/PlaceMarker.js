@@ -21,7 +21,7 @@ export class PlaceMarker extends Component {
 
   render() {
     const { showTooltip } = this.state;
-    const { lat, lng, name, description, id } = this.props;
+    const { lat, lng, name, description, contactName, id } = this.props;
 
     return (
       <Marker
@@ -36,6 +36,7 @@ export class PlaceMarker extends Component {
             key={`info${id}`}
             description={description}
             name={name}
+            contactName={contactName}
             closeWindow={this.closeWindow.bind(this)}
           />
         )}

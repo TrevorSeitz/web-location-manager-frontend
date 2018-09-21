@@ -13,17 +13,17 @@ class NewPlaceForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      locationName: "",
+      name: "",
       venue: "",
       latitude: "",
       longitude: "",
       contactName: "",
       contactPhone: "",
       email: "",
-      permitYes: "",
-      permitNo: "",
-      notes: "",
-      selectedFile: null
+      description: "",
+      fileName: null,
+      GPSLatitudeRef: "",
+      GPSLongitudeRef: ""
     };
     this.blankForm = this.state;
     this.handleChange = this.handleChange.bind(this);
@@ -32,49 +32,59 @@ class NewPlaceForm extends Component {
   }
 
   handleFileSelect(e) {
-    this.setState({ selectedFile: e.target.files[0].name });
+    this.setState({ fileName: e.target.files[0].name });
     let mapLat = "";
     let mapLong = "";
     let lat = "";
     let lng = "";
+    let latRef = "";
+    let lngRef = "";
     let file = e.target.files[0];
     let that = this;
 
-    function setProps(mapLat, mapLong) {
+    function setProps(mapLat, mapLong, latRef, lngRef) {
       that.props.addLat(mapLat);
       that.props.addLong(mapLong);
 
-      console.log("3finished");
       that.setState({ latitude: that.props.fileLat });
       that.setState({ longitude: that.props.fileLong });
+      that.setState({ GPSLatitudeRef: latRef });
+      that.setState({ GPSLongitudeRef: lngRef });
+      // debugger;
     }
 
-    function makeReadable(lat, lng) {
-      mapLat =
+    function makeReadable(lat, lng, latRef, lngRef) {
+      mapLat = parseFloat(
         lat[0]["numerator"] +
-        " " +
-        lat[1]["numerator"] +
-        "' " +
-        lat[2]["numerator"] / 100 +
-        '"';
-      mapLong =
+          lat[1]["numerator"] / 60 +
+          lat[2]["numerator"] / 3600
+      ).toFixed(6);
+
+      if (latRef === "S") {
+        mapLat = -1 * mapLat;
+      }
+
+      mapLong = parseFloat(
         lng[0]["numerator"] +
-        " " +
-        lng[1]["numerator"] +
-        "' " +
-        lng[2]["numerator"] / 100 +
-        '"';
-      console.log("2setProps about to start");
-      setProps(mapLat, mapLong);
+          lng[1]["numerator"] / 60 +
+          lng[2]["numerator"] / 3600
+      ).toFixed(6);
+
+      if (lngRef === "W") {
+        mapLong = -1 * mapLong;
+      }
+      setProps(mapLat, mapLong, latRef, lngRef);
     }
 
     const latLong = EXIF.getData(file, function() {
       lat = EXIF.getTag(this, "GPSLatitude");
       lng = EXIF.getTag(this, "GPSLongitude");
+      latRef = EXIF.getTag(this, "GPSLatitudeRef");
+      lngRef = EXIF.getTag(this, "GPSLongitudeRef");
 
       console.log("1makeReadable about to start");
 
-      makeReadable(lat, lng);
+      makeReadable(lat, lng, latRef, lngRef);
     });
   }
 
@@ -85,8 +95,7 @@ class NewPlaceForm extends Component {
   handleSubmit(e) {
     e.preventDefault();
     let currentPlace = this.state;
-    debugger;
-    alert(currentPlace.locationName);
+    alert(currentPlace.name);
     axios.post("http://localhost:4000/api/places", currentPlace);
   }
 
@@ -125,10 +134,10 @@ class NewPlaceForm extends Component {
             <label>Location Name</label>
             <div>
               <Field
-                name="locationName"
+                name="name"
                 component="input"
                 type="text"
-                placeholder="Location Name"
+                placeholder="Name"
                 onChange={this.handleChange}
               />
             </div>
@@ -195,10 +204,10 @@ class NewPlaceForm extends Component {
           {/* Favorite Color was here */}
           {/* employed Color was here */}
           <div>
-            <label>Notes</label>
+            <label>Description and Notes</label>
             <div>
               <Field
-                name="notes"
+                name="description"
                 component="textarea"
                 onChange={this.handleChange}
               />
