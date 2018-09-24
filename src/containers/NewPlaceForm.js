@@ -1,13 +1,10 @@
 import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
-import FileUploadForm from "./FileUpload";
 import submit from "../submit";
 import axios from "axios";
 import * as EXIF from "exif-js";
 import * as actions from "../actions";
-import allReducers from "../reducer";
-import getExif from "exif-async";
 
 class NewPlaceForm extends Component {
   constructor(props) {
@@ -20,8 +17,10 @@ class NewPlaceForm extends Component {
       contactName: "",
       contactPhone: "",
       email: "",
+      permit: "",
       description: "",
       fileName: null,
+      main_picture: null,
       GPSLatitudeRef: "",
       GPSLongitudeRef: ""
     };
@@ -32,6 +31,7 @@ class NewPlaceForm extends Component {
   }
 
   handleFileSelect(e) {
+    this.setState({ main_picture: e.target.files[0] });
     this.setState({ fileName: e.target.files[0].name });
     let mapLat = "";
     let mapLong = "";
@@ -39,7 +39,6 @@ class NewPlaceForm extends Component {
     let lng = "";
     let latRef = "";
     let lngRef = "";
-    let file = e.target.files[0];
     let that = this;
 
     function setProps(mapLat, mapLong, latRef, lngRef) {
@@ -50,39 +49,42 @@ class NewPlaceForm extends Component {
       that.setState({ longitude: that.props.fileLong });
       that.setState({ GPSLatitudeRef: latRef });
       that.setState({ GPSLongitudeRef: lngRef });
-      // debugger;
     }
 
     function makeReadable(lat, lng, latRef, lngRef) {
       mapLat = parseFloat(
         lat[0]["numerator"] +
           lat[1]["numerator"] / 60 +
-          lat[2]["numerator"] / 3600
-      ).toFixed(6);
+          lat[2]["numerator"] / 360000
+      ).toFixed(13);
 
       if (latRef === "S") {
         mapLat = -1 * mapLat;
+      } else {
+        mapLat = 1 * mapLat;
       }
 
       mapLong = parseFloat(
         lng[0]["numerator"] +
           lng[1]["numerator"] / 60 +
-          lng[2]["numerator"] / 3600
-      ).toFixed(6);
+          lng[2]["numerator"] / 360000
+      ).toFixed(13);
 
       if (lngRef === "W") {
         mapLong = -1 * mapLong;
+      } else {
+        mapLong = 1 * mapLong;
       }
+
       setProps(mapLat, mapLong, latRef, lngRef);
     }
 
-    const latLong = EXIF.getData(file, function() {
+    // first function to be hit when handleFileSelect is called
+    EXIF.getData(file, function() {
       lat = EXIF.getTag(this, "GPSLatitude");
       lng = EXIF.getTag(this, "GPSLongitude");
       latRef = EXIF.getTag(this, "GPSLatitudeRef");
       lngRef = EXIF.getTag(this, "GPSLongitudeRef");
-
-      console.log("1makeReadable about to start");
 
       makeReadable(lat, lng, latRef, lngRef);
     });
@@ -95,13 +97,13 @@ class NewPlaceForm extends Component {
   handleSubmit(e) {
     e.preventDefault();
     let currentPlace = this.state;
-    alert(currentPlace.name);
+    // debugger;
     axios.post("http://localhost:4000/api/places", currentPlace);
   }
 
   render() {
-    console.log(this.props.addLat);
     const { reset } = this.props;
+    // debugger;
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
@@ -198,6 +200,9 @@ class NewPlaceForm extends Component {
                 id="permit"
                 component="input"
                 type="checkbox"
+                value="false"
+                checked={false}
+                onChange={this.handleChange}
               />
             </div>
           </div>
