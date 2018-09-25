@@ -11,3 +11,10 @@ export const addLong = mapLong => {
     lng: mapLong
   };
 };
+
+export const getVisibleLocations = places => {
+  return {
+    type: "GET_LOC",
+    payload: places
+  };
+};

@@ -1,8 +1,11 @@
 import React, { Component } from "react";
-import { Map } from "./components/Map";
+import { Map } from "./containers/Map";
 import { NavBar } from "./components/NavBar";
-import NewPlaceForm from "./containers/NewPlaceForm";
-// import FileUploadForm from "./components/FileUpload";
+import NewPlaceForm from "./components/NewPlaceForm";
+import ListLocations from "./components/ListLocations";
+import ListContacts from "./components/ListContacts";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
 import "./App.css";
 
 class App extends Component {
@@ -12,13 +15,30 @@ class App extends Component {
         <div className="map">
           <Map />
         </div>
-        <div className="form">
-          {/*<NavBar />*/}
-          <NewPlaceForm />
-        </div>
+        <div>
+          <Router>
+            <Switch>
+              <Route exact path="/" component={NewPlaceForm} />
+              <Route exact path="/ListLocations" component={ListLocations} />
+              <Route exact path="/ListContacts" component={ListContacts} />
+            </Switch>
+          </Router>
+        </div>;
       </div>
     );
   }
 }
+
+// <div className="navbar">
+//   <NavBar />
+// </div>
+
+// <div className="form">
+//   {/*<NavBar />*/}
+//   <NewPlaceForm />
+// </div>
+// {div className="locList">
+//   <ListLocations />
+// </div>
 
 export default App;

@@ -16,12 +16,13 @@
 
 .map {
   float:left;
-  width: 65%;
+  width: 60%;
 }
 
 .form {
-  float:left;
+  float:right;
   width: 35%;
+  border-left: 10%;
 }
 
 .App-title {

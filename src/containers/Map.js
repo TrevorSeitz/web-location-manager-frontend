@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { withGoogleMap, GoogleMap } from "react-google-maps";
-// import { PlaceInfoWindow } from "./PlaceInfoWindow";
-import { PlaceMarker } from "./PlaceMarker";
-// import allReducers from "../reducer";
+import { PlaceMarker } from "../components/PlaceMarker";
+import { connect } from "react-redux";
+// import ListLocations from "./ListLocations";
+// import NewPlaceForm from "../containers/NewPlaceForm";
 
-const AirbnbMap = withGoogleMap(props => (
+const LocationMap = withGoogleMap(props => (
   <GoogleMap
     ref={props.onMapMounted}
     onZoomChanged={props.handleMapChanged}
@@ -72,7 +73,6 @@ export class Map extends Component {
 
   fetchPlacesFromApi() {
     this.setState({ places: [] });
-
     fetch(
       `/api/places?min_lng=${this.xMapBounds.min}&max_lng=${
         this.xMapBounds.max
@@ -97,20 +97,31 @@ export class Map extends Component {
 
   render() {
     const { lat, lng, places } = this.state;
+
     return (
-      <div style={{ width: `750px`, height: `550px` }}>
-        <AirbnbMap
-          onMapMounted={this.handleMapMounted.bind(this)}
-          handleMapChanged={this.handleMapChanged.bind(this)}
-          handleMapFullyLoaded={this.handleMapFullyLoaded.bind(this)}
-          center={{ lat: lat, lng: lng }}
-          places={places}
-          zoom={this.zoom}
-          containerElement={<div style={{ height: `100%` }} />}
-          mapElement={<div style={{ height: `100%` }} />}
-        />
+      <div>
+        <div className="map" style={{ width: `750px`, height: `550px` }}>
+          <LocationMap
+            onMapMounted={this.handleMapMounted.bind(this)}
+            handleMapChanged={this.handleMapChanged.bind(this)}
+            handleMapFullyLoaded={this.handleMapFullyLoaded.bind(this)}
+            center={{ lat: lat, lng: lng }}
+            places={places}
+            zoom={this.zoom}
+            containerElement={<div style={{ height: `100%` }} />}
+            mapElement={<div style={{ height: `100%` }} />}
+          />
+        </div>
       </div>
     );
   }
 }
-export default Map;
+
+const mapStateToProps = state => {
+  debugger;
+  return {
+    places: state.places
+  };
+};
+
+export default connect(mapStateToProps)(Map);

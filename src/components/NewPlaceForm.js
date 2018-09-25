@@ -10,6 +10,8 @@ class NewPlaceForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      image: null,
+      fileName: null,
       name: "",
       venue: "",
       latitude: "",
@@ -19,8 +21,6 @@ class NewPlaceForm extends Component {
       email: "",
       permit: "",
       description: "",
-      fileName: null,
-      main_picture: null,
       GPSLatitudeRef: "",
       GPSLongitudeRef: ""
     };
@@ -31,8 +31,9 @@ class NewPlaceForm extends Component {
   }
 
   handleFileSelect(e) {
-    this.setState({ main_picture: e.target.files[0] });
-    this.setState({ fileName: e.target.files[0].name });
+    let image = e.target.files[0];
+    this.setState({ image: image });
+    this.setState({ fileName: image.name });
     let mapLat = "";
     let mapLong = "";
     let lat = "";
@@ -80,7 +81,7 @@ class NewPlaceForm extends Component {
     }
 
     // first function to be hit when handleFileSelect is called
-    EXIF.getData(file, function() {
+    EXIF.getData(image, function() {
       lat = EXIF.getTag(this, "GPSLatitude");
       lng = EXIF.getTag(this, "GPSLongitude");
       latRef = EXIF.getTag(this, "GPSLatitudeRef");
@@ -96,8 +97,8 @@ class NewPlaceForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    let currentPlace = this.state;
-    // debugger;
+    let currentPlace = { place: this.state };
+    debugger;
     axios.post("http://localhost:4000/api/places", currentPlace);
   }
 

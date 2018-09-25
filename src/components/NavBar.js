@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
-// import NewPlaceForm from "./NewPlaceForm";
+import NewPlaceForm from "./NewPlaceForm";
 
 /* Add basic styling for NavLinks */
 const link = {
@@ -14,73 +14,69 @@ const link = {
 };
 
 /* add the navbar component */
-const NavBar = () => (
-  <div>
-    <NavLink
-      to="/"
-      /* set exact so it knows to only set activeStyle when route is deeply equal to link */
-      exact
-      /* add styling to Navlink */
-      style={link}
-      /* add prop for activeStyle */
-      activeStyle={{
-        background: "darkblue"
-      }}
-    >
-      Home
-    </NavLink>
-    <NavLink
-      to="/about"
-      exact
-      style={link}
-      activeStyle={{
-        background: "darkblue"
-      }}
-    >
-      About
-    </NavLink>
-    <NavLink
-      to="/login"
-      exact
-      style={link}
-      activeStyle={{
-        background: "darkblue"
-      }}
-    >
-      Login
-    </NavLink>
-  </div>
-);
-
-const Home = () => <h1>Home!</h1>;
-
-const About = () => <h1>This is my about component!</h1>;
-
-const Login = () => (
-  <form>
-    <h1>Login</h1>
-    <div>
-      <input type="text" name="username" placeholder="Username" />
-      <label htmlFor="username">Username</label>
-    </div>
-    <div>
-      <input type="password" name="password" placeholder="Password" />
-      <label htmlFor="password">Password</label>
-    </div>
-    <input type="submit" value="Login" />
-  </form>
-);
-
-ReactDOM.render(
-  <Router>
-    <React.Fragment>
-      <NavBar />
-      <Route exact path="/" component={Home} />
-      <Route exact path="/about" component={About} />
-      <Route exact path="/login" component={Login} />
-    </React.Fragment>
-  </Router>,
-  document.getElementById("root")
-);
-
-export default NavBar;
+// const NavBar = () => (
+//   <div>
+//     <NavLink
+//       to="/"
+//       exact
+//       style={link}
+//       activeStyle={{
+//         background: "darkblue"
+//       }}
+//     >
+//       NewPlace
+//     </NavLink>
+//     <NavLink
+//       to="/NewPlaceForm"
+//       exact
+//       style={link}
+//       activeStyle={{
+//         background: "darkblue"
+//       }}
+//     >
+//       About
+//     </NavLink>
+//     <NavLink
+//       to="/ListContacts"
+//       exact
+//       style={link}
+//       activeStyle={{
+//         background: "darkblue"
+//       }}
+//     >
+//       Login
+//     </NavLink>
+//   </div>
+// );
+//
+// const NewPlace = () => <h1>Add a New Place</h1>;
+//
+// const ListLocations = () => <h1>List Locations on the Map</h1>;
+//
+// const ListContacts = () => <h1>List Contacts of all Locations</h1>;
+//
+// ReactDOM.render(
+//   <Router>
+//     <React.Fragment>
+//       <NavBar />
+//       <Route exact path="/" component={NewPlaceForm} />
+//       <Route exact path="/ListLocations" component={ListLocations} />
+//       <Route exact path="/ListContacts" component={ListContacts} />
+//     </React.Fragment>
+//   </Router>,
+//   document.getElementById("root")
+// );
+//
+// export default NavBar;
+//
+// // <button type="button" disabled={pristine || submitting} onClick={reset}>
+// // <Button color="primary" className="px-4"
+// //                       onClick={this.routeChange}
+// //                         >
+// //                         List Contacts
+// //                       </Button>
+// //
+// // routeChange(){
+// // let path = "/ListContacts";
+// // this.props.history.push(path);
+// // }

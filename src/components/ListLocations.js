@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
 import * as actions from "../actions";
-import { PlaceMarker } from "../components/PlaceMarker";
+import { PlaceMarker } from "./PlaceMarker";
 import { App } from "../App";
 
 export class ListLocations extends Component {
@@ -15,7 +15,6 @@ export class ListLocations extends Component {
   }
 
   getLocations() {
-    // debugger;
     this.props.getVisibleLocations;
   }
 
