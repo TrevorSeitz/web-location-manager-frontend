@@ -1,7 +1,13 @@
 import React, { Component } from "react";
 import { withGoogleMap, GoogleMap } from "react-google-maps";
+// import { GoogleApiWrapper } from "google-maps-react";
 import { PlaceMarker } from "../components/PlaceMarker";
 import { connect } from "react-redux";
+// // import { bindActionCreators } from "redux";
+import * as actions from "../actions";
+// import {getVisibleLocations} from "../actions";
+// import axios from "axios";
+// import * as EXIF from "exif-js";
 // import ListLocations from "./ListLocations";
 // import NewPlaceForm from "../containers/NewPlaceForm";
 
@@ -31,7 +37,7 @@ const LocationMap = withGoogleMap(props => (
   </GoogleMap>
 ));
 
-export class Map extends Component {
+class Map extends Component {
   constructor(props) {
     super(props);
 
@@ -46,6 +52,7 @@ export class Map extends Component {
       lat: 43.156338,
       lng: -77.614304
     };
+    // this.props.getVisibleLocations = this.props.getVisibleLocations.bind(this);
   }
 
   handleMapChanged() {
@@ -72,14 +79,24 @@ export class Map extends Component {
   }
 
   fetchPlacesFromApi() {
-    this.setState({ places: [] });
-    fetch(
-      `/api/places?min_lng=${this.xMapBounds.min}&max_lng=${
-        this.xMapBounds.max
-      }&min_lat=${this.yMapBounds.min}&max_lat=${this.yMapBounds.max}`,
-      { method: "GET" }
-    )
-      .then(response => response.json())
+    // this.setState({ places: [] });
+    // debugger;
+    this.props
+      .getVisibleLocations(
+        null,
+        this.xMapBounds.min,
+        this.xMapBounds.max,
+        this.yMapBounds.min,
+        this.yMapBounds.max
+      )
+      // fetch(
+      //   `/api/places?min_lng=${this.xMapBounds.min}&max_lng=${
+      //     this.xMapBounds.max
+      //   }&min_lat=${this.yMapBounds.min}&max_lat=${this.yMapBounds.max}`,
+      //   { method: "GET" }
+      // )
+      // debugger;
+      // .then(response => response.json())
       .then(response => this.setState({ places: response }));
   }
 
@@ -97,7 +114,6 @@ export class Map extends Component {
 
   render() {
     const { lat, lng, places } = this.state;
-
     return (
       <div>
         <div className="map" style={{ width: `750px`, height: `550px` }}>
@@ -118,10 +134,14 @@ export class Map extends Component {
 }
 
 const mapStateToProps = state => {
-  debugger;
+  // debugger;
   return {
-    places: state.places
+    // places: state.places
+    places: state.getVisibleLocationsReducer
   };
 };
 
-export default connect(mapStateToProps)(Map);
+export default connect(
+  mapStateToProps,
+  actions
+)(Map);

@@ -12,9 +12,23 @@ export const addLong = mapLong => {
   };
 };
 
-export const getVisibleLocations = places => {
-  return {
-    type: "GET_LOC",
-    payload: places
+export const getVisibleLocations = (dispatch, xMin, xMax, yMin, yMax) => {
+  // debugger;
+  return dispatch => {
+    dispatch({ type: "ASYNC_START" });
+
+    fetch(
+      `http://localhost:4000/api/places?min_lng=${xMin}&max_lng=${xMax}&min_lat=${yMin}&max_lat=${yMax}`,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        }
+      }
+    )
+      .then(response => response.json())
+      .then(jsonData => dispatch({ type: "GET_LOC", payload: jsonData }));
   };
 };
+// };
