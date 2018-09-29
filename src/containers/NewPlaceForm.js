@@ -3,6 +3,7 @@ import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import submit from "../submit";
 import axios from "axios";
+import axiosClient from "../axiosClient";
 import * as EXIF from "exif-js";
 import * as actions from "../actions";
 import * as ActiveStorage from "activestorage";
@@ -12,19 +13,26 @@ class NewPlaceForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      image: null,
-      fileName: null,
-      name: "",
-      venue: "",
-      latitude: "",
-      longitude: "",
-      contactName: "",
-      contactPhone: "",
-      email: "",
-      permit: "",
-      description: "",
-      GPSLatitudeRef: "",
-      GPSLongitudeRef: ""
+      selectedPlaceImageFiles: [],
+      submitFormProgress: 0,
+      isSubmittingForm: false,
+      didFormSubmissionComplete: false,
+      place: {
+        id: this.props.match.params.id,
+        image: null,
+        fileName: null,
+        name: "",
+        venue: "",
+        latitude: "",
+        longitude: "",
+        contactName: "",
+        contactPhone: "",
+        email: "",
+        permit: "",
+        description: "",
+        GPSLatitudeRef: "",
+        GPSLongitudeRef: ""
+      }
     };
     this.blankForm = this.state;
     this.handleChange = this.handleChange.bind(this);
@@ -36,31 +44,40 @@ class NewPlaceForm extends Component {
 
   handleFileSelect(e) {
     let image = e.target.files[0];
-    this.setState({ image: image });
-    this.setState({ fileName: image.name });
+    let { place } = this.state;
+    place.image = image;
+    place.fileName = image.name;
+    // this.setState.place({ image: image });
+    // this.setState.place({ fileName: image.name });
     let mapLat = "";
     let mapLong = "";
     let lat = "";
     let lng = "";
     let latRef = "";
     let lngRef = "";
-    let fileNAme = "";
+    let fileName = "";
     let that = this;
 
-    if (e.target.files && e.target.files[0]) {
-      let formPayLoad = new FormData();
-      formPayLoad.append("uploaded_image", e.target.files[0]);
-    }
+    // if (e.target.files && e.target.files[0]) {
+    //   let formPayLoad = new FormData();
+    //   formPayLoad.append("uploaded_image", e.target.files[0]);
+    // }
 
     function setProps(mapLat, mapLong, latRef, lngRef) {
+      // debugger;
       that.props.addLat(mapLat);
       that.props.addLong(mapLong);
 
-      debugger;
-      that.setState({ latitude: that.props.fileLat });
-      that.setState({ longitude: that.props.fileLong });
-      that.setState({ GPSLatitudeRef: latRef });
-      that.setState({ GPSLongitudeRef: lngRef });
+      let { place } = that.state;
+      place.latitude = that.props.fileLat;
+      place.longitude = that.props.fileLong;
+      place.GPSLatitudeRef = latRef;
+      place.GPSLongitudeRef = lngRef;
+
+      // that.setState.place({ latitude: that.props.fileLat });
+      // that.setState.place({ longitude: that.props.fileLong });
+      // that.setState.place({ GPSLatitudeRef: latRef });
+      // that.setState.place({ GPSLongitudeRef: lngRef });
     }
 
     function makeReadable(lat, lng, latRef, lngRef) {
@@ -103,34 +120,104 @@ class NewPlaceForm extends Component {
   }
 
   handleChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
+    // debugger;
+    let { place } = this.state;
+    place[e.target.name] = e.target.value;
+    // this.setState.place({ [e.target.name]: e.target.value });
   }
 
   handleSubmit(e) {
     e.preventDefault();
     // let currentPlace = this.state;
-    let currentPlace = { place: this.state };
+    let { place } = this.state.place;
+    // let currentPlace = { place: this.state };
     //  TODO is this working???
-    let image = this.state.image;
-    debugger;
-    // axios.post("http://localhost:4000/api/places", currentPlace, image);
-    // axios.post("http://localhost:4000/api/places", currentPlace);
-    // formPayLoad = this.state;
-    // fetch(`http://localhost:4000/api/places`, {
-    //   credentials: "same-origin",
-    //   headers: {},
-    //   method: "POST",
-    //   body: formPayLoad
-    // })
-    //   .then(response => response.json())
-    //   .then(imageFromController => {
-    //     // optionally, you can set the state of the component to contain the image
-    //     // object itself that was returned from the rails controller, completing
-    //     // the post cycle
-    //     this.setState({
-    //       uploads: this.state.uploads.concat(imageFromController)
-    //     });
-    //   });
+    // let image = this.state.place.image;
+    this.setState(
+      {
+        isSubmittingForm: true,
+        place: place
+      },
+      () => {
+        this.submitForm();
+      }
+    );
+  }
+
+  submitForm() {
+    // let submitMethod = this.state.place.id ? "patch" : "post";
+    let submitMethod = "post";
+    let url = this.state.place.id
+      ? `/places/${this.state.place.id}.json`
+      : "/places.json";
+
+    axiosClient[submitMethod](url, this.buildFormData(), {
+      onUploadProgress: progressEvent => {
+        let percentage = (progressEvent.loaded * 100.0) / progressEvent.total;
+        this.setState({
+          submitFormProgress: percentage
+        });
+      }
+    })
+      .then(response => {
+        this.setState({
+          didFormSubmissionComplete: true
+        });
+        this.props.histpry.push("/places");
+      })
+      .catch(error => {
+        let { place } = this.state;
+        place.errors = error.response.data;
+        this.setState({
+          isSubmittingForm: false,
+          submitFormProgress: 0,
+          place: place
+        });
+      });
+  }
+
+  renderUploadFormProgress() {
+    if (this.state.isSubmittingForm === false) {
+      return null;
+    }
+    return (
+      <div className="progress">
+        <div
+          className={
+            "progress-bar progress-bar-info progress-bar-striped" +
+            (this.state.submitFormProgress < 100 ? "active" : "")
+          }
+          role="progressbar"
+          aria-valuenow={this.state.submitFormProgress}
+          areaValuemin="0"
+          areaValuemax="100"
+          style={{ width: this.state.submitFormProgress + "%" }}
+        >
+          {this.state.submitFormProgress}%autoComplete
+        </div>
+      </div>
+    );
+  }
+
+  buildFormData() {
+    let formData = new FormData();
+    formData.append("place[name]", this.state.place.name);
+    formData.append("place[description]", this.state.place.description);
+    formData.append("place[fileName]", this.state.place.image.name);
+    formData.append("place[mapLat]", this.state.place.mapLat);
+    formData.append("place[mapLong]", this.state.place.mapLong);
+    formData.append("place[lat]", this.state.place.lat);
+    formData.append("place[lng]", this.state.place.lng);
+    formData.append("place[latRef]", this.state.place.latRef);
+    formData.append("place[lngRef]", this.state.place.lngRef);
+
+    formData.append(
+      "place[image]",
+      this.state.place.image,
+      this.state.place.image.name
+    );
+
+    return formData;
   }
 
   render() {
@@ -160,7 +247,13 @@ class NewPlaceForm extends Component {
           <form onSubmit={this.handleSubmit}>
             <label>File Upload</label>
             <div>
-              <input type="file" onChange={this.handleFileSelect} />
+              <input
+                type="file"
+                accept="image/*"
+                multiple={false}
+                disabled={this.state.isSubmittingForm}
+                onChange={this.handleFileSelect}
+              />
             </div>
             <div>
               <label>Lat/Long</label>
