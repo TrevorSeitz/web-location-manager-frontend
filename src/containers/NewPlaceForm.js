@@ -13,10 +13,6 @@ class NewPlaceForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedPlaceImageFiles: [],
-      submitFormProgress: 0,
-      isSubmittingForm: false,
-      didFormSubmissionComplete: false,
       place: {
         id: this.props.match.params.id,
         image: null,
@@ -32,19 +28,27 @@ class NewPlaceForm extends Component {
         description: "",
         GPSLatitudeRef: "",
         GPSLongitudeRef: ""
-      }
+      },
+      selectedPlaceImageFiles: [],
+      submitFormProgress: 0,
+      isSubmittingForm: false,
+      didFormSubmissionComplete: false
     };
+
     this.blankForm = this.state;
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleFileSelect = this.handleFileSelect.bind(this);
+    this.submitForm = this.submitForm.bind(this);
+    this.renderUploadFormProgress = this.renderUploadFormProgress.bind(this);
+    this.buildFormData = this.buildFormData.bind(this);
 
     ActiveStorage.start();
   }
 
   handleFileSelect(e) {
     let image = e.target.files[0];
-    let { place } = this.state;
+    var place = this.state.place;
     place.image = image;
     place.fileName = image.name;
     // this.setState.place({ image: image });
@@ -64,11 +68,10 @@ class NewPlaceForm extends Component {
     // }
 
     function setProps(mapLat, mapLong, latRef, lngRef) {
-      // debugger;
       that.props.addLat(mapLat);
       that.props.addLong(mapLong);
-
-      let { place } = that.state;
+      //
+      var place = that.state.place;
       place.latitude = that.props.fileLat;
       place.longitude = that.props.fileLong;
       place.GPSLatitudeRef = latRef;
@@ -120,8 +123,7 @@ class NewPlaceForm extends Component {
   }
 
   handleChange(e) {
-    // debugger;
-    let { place } = this.state;
+    var place = this.state.place;
     place[e.target.name] = e.target.value;
     // this.setState.place({ [e.target.name]: e.target.value });
   }
@@ -129,7 +131,7 @@ class NewPlaceForm extends Component {
   handleSubmit(e) {
     e.preventDefault();
     // let currentPlace = this.state;
-    let { place } = this.state.place;
+    var place = this.state.place;
     // let currentPlace = { place: this.state };
     //  TODO is this working???
     // let image = this.state.place.image;
@@ -147,10 +149,7 @@ class NewPlaceForm extends Component {
   submitForm() {
     // let submitMethod = this.state.place.id ? "patch" : "post";
     let submitMethod = "post";
-    let url = this.state.place.id
-      ? `/places/${this.state.place.id}.json`
-      : "/places.json";
-
+    let url = "/api/places";
     axiosClient[submitMethod](url, this.buildFormData(), {
       onUploadProgress: progressEvent => {
         let percentage = (progressEvent.loaded * 100.0) / progressEvent.total;
@@ -166,8 +165,8 @@ class NewPlaceForm extends Component {
         this.props.histpry.push("/places");
       })
       .catch(error => {
-        let { place } = this.state;
-        place.errors = error.response.data;
+        var place = this.state.place;
+        // place.errors = error.response.data;
         this.setState({
           isSubmittingForm: false,
           submitFormProgress: 0,
@@ -201,18 +200,21 @@ class NewPlaceForm extends Component {
 
   buildFormData() {
     let formData = new FormData();
-    formData.append("place[name]", this.state.place.name);
-    formData.append("place[description]", this.state.place.description);
     formData.append("place[fileName]", this.state.place.image.name);
-    formData.append("place[mapLat]", this.state.place.mapLat);
-    formData.append("place[mapLong]", this.state.place.mapLong);
-    formData.append("place[lat]", this.state.place.lat);
-    formData.append("place[lng]", this.state.place.lng);
-    formData.append("place[latRef]", this.state.place.latRef);
-    formData.append("place[lngRef]", this.state.place.lngRef);
+    formData.append("place[name]", this.state.place.name);
+    formData.append("place[venue]", this.state.place.venue);
+    formData.append("place[latitude]", this.state.place.latitude);
+    formData.append("place[longitude]", this.state.place.longitude);
+    formData.append("place[contactName]", this.state.place.contactName);
+    formData.append("place[contactPhone]", this.state.place.contactPhone);
+    formData.append("place[email]", this.state.place.email);
+    formData.append("place[permit]", this.state.place.permit);
+    formData.append("place[description]", this.state.place.description);
+    formData.append("place[GPSLatitudeRef]", this.state.place.GPSLatitudeRef);
+    formData.append("place[GPSLongitudeRef]", this.state.place.GPSLongitudeRef);
 
     formData.append(
-      "place[image]",
+      // this.state.place.image.name,
       this.state.place.image,
       this.state.place.image.name
     );
@@ -426,7 +428,6 @@ class NewPlaceForm extends Component {
 // </div>
 
 const mapStateToProps = state => {
-  // debugger;
   return {
     fileLat: state.addLatReducer,
     fileLong: state.addLongReducer
