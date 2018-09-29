@@ -14,6 +14,11 @@
   color: white;
 }
 
+.main-page{
+  width:100%;
+
+}
+
 .map {
   float:left;
   width: 60%;
@@ -21,7 +26,7 @@
 
 .not-map {
   float:right;
-  width: 35%;
+  width: 30%;
   border-left: 10%;
 }
 

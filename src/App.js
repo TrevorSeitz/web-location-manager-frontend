@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Map from "./containers/Map";
-import { NavBar } from "./components/NavBar";
-import NewPlaceForm from "./components/NewPlaceForm";
+import NavBar from "./components/NavBar";
+import NewPlaceForm from "./containers/NewPlaceForm";
 import ListLocations from "./components/ListLocations";
 import ListContacts from "./components/ListContacts";
 import * as actions from "./actions";
@@ -12,7 +12,7 @@ import "./App.css";
 class App extends Component {
   render() {
     return (
-      <div>
+      <div className="main-page">
         <div className="map">
           <Map />
         </div>
@@ -23,12 +23,13 @@ class App extends Component {
           <div>
             <Router>
               <Switch>
+                {/*<Route exact path="/" component={ListContacts} />*/}
                 <Route exact path="/" component={NewPlaceForm} />
                 <Route exact path="/ListLocations" component={ListLocations} />
                 <Route exact path="/ListContacts" component={ListContacts} />
               </Switch>
             </Router>
-          </div>;
+          </div>
         </div>
       </div>
     );

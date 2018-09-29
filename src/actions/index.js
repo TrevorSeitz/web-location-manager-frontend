@@ -12,13 +12,19 @@ export const addLong = mapLong => {
   };
 };
 
-export const getVisibleLocations = (dispatch, xMin, xMax, yMin, yMax) => {
+export const getVisibleLocations = (
+  dispatch,
+  min_lng,
+  max_lng,
+  min_lat,
+  max_lat
+) => {
   // debugger;
   return dispatch => {
     dispatch({ type: "ASYNC_START" });
 
     fetch(
-      `http://localhost:4000/api/places?min_lng=${xMin}&max_lng=${xMax}&min_lat=${yMin}&max_lat=${yMax}`,
+      `http://localhost:4000/api/places?min_lng=${min_lng}&max_lng=${max_lng}&min_lat=${min_lat}&max_lat=${max_lat}`,
       {
         method: "GET",
         headers: {

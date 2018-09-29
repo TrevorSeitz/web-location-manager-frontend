@@ -24,7 +24,7 @@ const addLongReducer = (state = "", action) => {
 const getVisibleLocationsReducer = (state = [], action) => {
   switch (action.type) {
     case "GET_LOC":
-      debugger;
+      // debugger;
       return action.payload;
 
     default:

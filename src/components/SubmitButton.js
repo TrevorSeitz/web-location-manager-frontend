@@ -17,4 +17,4 @@ const Buttons = props => {
     </div>
   );
 };
-export default connect()(Buttons);
+export default Buttons;
