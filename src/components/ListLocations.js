@@ -4,25 +4,43 @@ import axios from "axios";
 import * as actions from "../actions";
 import { PlaceMarker } from "./PlaceMarker";
 import { App } from "../App";
+import { NavLink } from "react-router-dom";
 
-export class ListLocations extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      places: [],
-      hello: "hello"
-    };
+const ListLocations = props => {
+  debugger;
+
+  function getLocations() {
+    places: props.getVisibleLocations;
   }
 
-  getLocations() {
-    this.props.getVisibleLocations;
-  }
-
-  render() {
-    return (
+  // render() {
+  getLocations();
+  debugger;
+  return (
+    <div>
+      <div className="navbar">
+        <NavLink
+          to="/"
+          exact
+          activeStyle={{
+            background: "darkblue"
+          }}
+        >
+          Add Location
+        </NavLink>
+        <NavLink
+          to="/ListContacts"
+          exact
+          activeStyle={{
+            background: "darkblue"
+          }}
+        >
+          See Contacts
+        </NavLink>
+      </div>
       <div className="place">
-        {this.props.places.length > 0 &&
-          this.props.places.map(place => (
+        {props.places.length > 0 &&
+          props.places.map(place => (
             <PlaceMarker
               key={`place${place.id}`}
               id={place.id}
@@ -36,12 +54,13 @@ export class ListLocations extends Component {
             />
           ))}
       </div>
-    );
-    // debugger;
-    // <div>{(this, state.places.map(place => <p> {place.name} </p>))}</div>
-    // );
-  }
-}
+    </div>
+  );
+  // debugger;
+  // <div>{(this, state.places.map(place => <p> {place.name} </p>))}</div>
+  // );
+  // }
+};
 
 // props.places.map(place => (
 // <div>

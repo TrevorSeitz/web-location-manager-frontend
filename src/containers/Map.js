@@ -52,7 +52,6 @@ class Map extends Component {
       lat: 43.156338,
       lng: -77.614304
     };
-    // this.props.getVisibleLocations = this.props.getVisibleLocations.bind(this);
   }
 
   handleMapChanged() {
@@ -79,25 +78,22 @@ class Map extends Component {
   }
 
   fetchPlacesFromApi() {
-    // this.setState({ places: [] });
-    // debugger;
-    this.props
-      .getVisibleLocations(
-        null,
-        this.xMapBounds.min,
-        this.xMapBounds.max,
-        this.yMapBounds.min,
-        this.yMapBounds.max
-      )
-      // fetch(
-      //   `/api/places?min_lng=${this.xMapBounds.min}&max_lng=${
-      //     this.xMapBounds.max
-      //   }&min_lat=${this.yMapBounds.min}&max_lat=${this.yMapBounds.max}`,
-      //   { method: "GET" }
-      // )
-      // debugger;
-      // .then(response => response.json())
-      .then(response => this.setState({ places: response }));
+    this.props.getVisibleLocations(
+      null,
+      this.xMapBounds.min,
+      this.xMapBounds.max,
+      this.yMapBounds.min,
+      this.yMapBounds.max
+    );
+
+    // fetch(
+    //   `/api/places?min_lng=${this.xMapBounds.min}&max_lng=${
+    //     this.xMapBounds.max
+    //   }&min_lat=${this.yMapBounds.min}&max_lat=${this.yMapBounds.max}`,
+    //   { method: "GET" }
+    // )
+    //   .then(response => response.json())
+    //   .then(response => this.setState({ places: response }));
   }
 
   getMapBounds() {
@@ -113,7 +109,10 @@ class Map extends Component {
   }
 
   render() {
-    const { lat, lng, places } = this.state;
+    let { lat, lng, places } = this.state;
+    // debugger;
+    // console.log(this.state);
+
     return (
       <div>
         <div className="map" style={{ width: `750px`, height: `550px` }}>
@@ -134,13 +133,14 @@ class Map extends Component {
 }
 
 const mapStateToProps = state => {
-  // debugger;
+  // console.log(state);
   return {
-    // places: state.places
     places: state.getVisibleLocationsReducer
+    // numberOfPlaces: state.getVisibleLocationsReducer.length
   };
 };
 
+// export default ConnectedMap = connect(
 export default connect(
   mapStateToProps,
   actions
