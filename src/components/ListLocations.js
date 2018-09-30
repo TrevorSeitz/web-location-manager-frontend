@@ -8,9 +8,8 @@ import { NavLink } from "react-router-dom";
 
 const ListLocations = props => {
   debugger;
-
   function getLocations() {
-    places: props.getVisibleLocations;
+    places: props.places;
   }
 
   // render() {

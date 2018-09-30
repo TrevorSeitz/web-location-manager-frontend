@@ -16,7 +16,7 @@ class ListAllContacts extends Component {
     this.state = { allPlaces: [] };
 
     this.FetchAllContactsFromAPI = this.FetchAllContactsFromAPI.bind(this);
-    this.ContactListBuilder = this.ContactListBuilder.bind(this);
+    // this.ContactListBuilder = this.ContactListBuilder.bind(this);
     let allContacts = [];
     // let allPlaces = this.state.allPlaces;
   }
@@ -32,7 +32,7 @@ class ListAllContacts extends Component {
       .then(response => this.setState({ allPlaces: response }));
 
     allContacts = this.state.allPlaces;
-    debugger;
+    // debugger;
     // if (this.state.allPlaces !== []) {
     //   this.ContactListBuilder();
     // }
@@ -43,27 +43,27 @@ class ListAllContacts extends Component {
     // debugger;
   }
 
-  ContactListBuilder() {
-    debugger;
-    // this.FetchAllContactsFromAPI();
-    // if (allContacts.length > 0 && allContacts !== [])
-    {
-      contactList = (
-        <ul>
-          {this.state.allPlaces.map(place => {
-            return (
-              <div key={place.id}>
-                <p>Place: {place.name}</p>
-                <p>Contact Name: {place.contactName}</p>
-                <p>Contact Phone: {place.contactPhone}</p>
-                <p>email: {place.email}</p>
-              </div>
-            );
-          })}
-        </ul>
-      );
-    }
-  }
+  // ContactListBuilder() {
+  //   // debugger;
+  //   // this.FetchAllContactsFromAPI();
+  //   // if (allContacts.length > 0 && allContacts !== [])
+  //   {
+  //     contactList = (
+  //       <ul>
+  //         {this.state.allPlaces.map(place => {
+  //           return (
+  //             <div key={place.id}>
+  //               <p>Place: {place.name}</p>
+  //               <p>Contact Name: {place.contactName}</p>
+  //               <p>Contact Phone: {place.contactPhone}</p>
+  //               <p>email: {place.email}</p>
+  //             </div>
+  //           );
+  //         })}
+  //       </ul>
+  //     );
+  //   }
+  // }
   //   </div>
   // );
 
