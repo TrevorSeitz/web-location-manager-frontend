@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 // import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 import NewPlaceForm from "../containers/NewPlaceForm";
 import ListLocations from "./ListLocations";
-import ListContacts from "./ListContacts";
+import ListContacts from "../containers/ListContacts";
 import {
   BrowserRouter as Router,
   Route,

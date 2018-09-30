@@ -12,13 +12,7 @@ export const addLong = mapLong => {
   };
 };
 
-export const getVisibleLocations = (
-  dispatch,
-  min_lng,
-  max_lng,
-  min_lat,
-  max_lat
-) => {
+export const getLocations = (dispatch, min_lng, max_lng, min_lat, max_lat) => {
   // debugger;
   return dispatch => {
     dispatch({ type: "ASYNC_START" });

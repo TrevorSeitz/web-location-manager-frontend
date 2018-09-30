@@ -21,7 +21,7 @@ const addLongReducer = (state = "", action) => {
   }
 };
 
-const getVisibleLocationsReducer = (state = [], action) => {
+const getLocationsReducer = (state = [], action) => {
   switch (action.type) {
     case "GET_LOC":
       // debugger;
@@ -34,7 +34,7 @@ const getVisibleLocationsReducer = (state = [], action) => {
 
 const reducers = {
   // ... your other reducers here ...
-  getVisibleLocationsReducer,
+  getLocationsReducer,
   addLatReducer,
   addLongReducer,
   form: formReducer

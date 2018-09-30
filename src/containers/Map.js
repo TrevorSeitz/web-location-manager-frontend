@@ -1,15 +1,8 @@
 import React, { Component } from "react";
 import { withGoogleMap, GoogleMap } from "react-google-maps";
-// import { GoogleApiWrapper } from "google-maps-react";
 import { PlaceMarker } from "../components/PlaceMarker";
 import { connect } from "react-redux";
-// // import { bindActionCreators } from "redux";
 import * as actions from "../actions";
-// import {getVisibleLocations} from "../actions";
-// import axios from "axios";
-// import * as EXIF from "exif-js";
-// import ListLocations from "./ListLocations";
-// import NewPlaceForm from "../containers/NewPlaceForm";
 
 const LocationMap = withGoogleMap(props => (
   <GoogleMap
@@ -78,7 +71,7 @@ class Map extends Component {
   }
 
   fetchPlacesFromApi() {
-    this.props.getVisibleLocations(
+    this.props.getLocations(
       null,
       this.xMapBounds.min,
       this.xMapBounds.max,
@@ -135,8 +128,8 @@ class Map extends Component {
 const mapStateToProps = state => {
   // console.log(state);
   return {
-    places: state.getVisibleLocationsReducer
-    // numberOfPlaces: state.getVisibleLocationsReducer.length
+    places: state.getLocationsReducer
+    // numberOfPlaces: state.getLocationsReducer.length
   };
 };
 

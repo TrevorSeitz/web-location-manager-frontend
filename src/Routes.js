@@ -4,7 +4,7 @@ import createBrowserHistory from "history/createBrowserHistory";
 
 import NewPlaceForm from "./containers/NewPlaceForm";
 import ListLocations from "./components/ListLocations";
-import ListContacts from "./components/ListContacts";
+import ListContacts from "./containers/ListContacts";
 
 // import BookIndex from "./Book/Index";
 // import BookNew from "./Book/New";

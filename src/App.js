@@ -3,7 +3,7 @@ import Map from "./containers/Map";
 import NavBar from "./components/NavBar";
 import NewPlaceForm from "./containers/NewPlaceForm";
 import ListLocations from "./components/ListLocations";
-import ListContacts from "./components/ListContacts";
+import ListContacts from "./containers/ListContacts";
 import * as actions from "./actions";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
