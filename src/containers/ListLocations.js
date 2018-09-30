@@ -11,14 +11,9 @@ class ListLocations extends Component {
     super(props);
     // this.state = { places: [] };
   }
-  debugger;
-
-  // getLocations() {
-  //   places: props.places;
-  // }
 
   render() {
-    debugger;
+    // debugger;
     return (
       <div>
         <div className="navbar">
