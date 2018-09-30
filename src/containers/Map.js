@@ -102,9 +102,10 @@ class Map extends Component {
   }
 
   render() {
-    let { lat, lng, places } = this.state;
+    let { lat, lng } = this.state;
+    let places = this.props.places;
+    // console.log(this.props);
     // debugger;
-    // console.log(this.state);
 
     return (
       <div>
