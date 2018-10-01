@@ -16,9 +16,11 @@
 }
 
 .button {
-  /* margin-bottom: 20px;
-  margin-right: 15px; */
   margin: 20px;
+}
+
+.contact-list {
+  padding-bottom: 30px;
 }
 
 .main-page{

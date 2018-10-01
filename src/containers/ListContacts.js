@@ -54,11 +54,11 @@ class ListAllContacts extends Component {
             <button className="button">See locations</button>
           </NavLink>
         </div>
-        <div className="contact-list">
+        <div>
           <ul>
             {this.state.allPlaces.map(place => {
               return (
-                <div key={place.id}>
+                <div className="contact-list" key={place.id}>
                   <p>Place: {place.name}</p>
                   <p>Contact Name: {place.contactName}</p>
                   <p>Contact Phone: {place.contactPhone}</p>
