@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+
 }
 
 .App-logo {
@@ -16,12 +17,14 @@
 
 .main-page{
   width:100%;
-
+  background-color: #659DBD
 }
 
 .map {
   float:left;
   width: 60%;
+  position: fixed;
+  overflow-y: hidden;
 }
 
 .not-map {
