@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import submit from "../submit";
-import axios from "axios";
 import axiosClient from "../axiosClient";
 import * as EXIF from "exif-js";
 import * as actions from "../actions";
@@ -224,7 +223,7 @@ class NewPlaceForm extends Component {
 
   render() {
     const { reset } = this.props;
-    console.log(this.props);
+    console.log(this.state.place.image);
     return (
       <div>
         <NavLink
@@ -257,6 +256,7 @@ class NewPlaceForm extends Component {
                 onChange={this.handleFileSelect}
               />
             </div>
+            <div />
             <div>
               <label>Lat/Long</label>
               <div>
