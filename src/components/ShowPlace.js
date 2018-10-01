@@ -31,7 +31,7 @@ const ShowPlace = props => {
             background: "darkblue"
           }}
         >
-          Add Location
+          <button className="button">Add Location</button>
         </NavLink>
         <NavLink
           to="/ListContacts"
@@ -40,7 +40,7 @@ const ShowPlace = props => {
             background: "darkblue"
           }}
         >
-          See Contacts
+          <button className="button">See Contacts</button>
         </NavLink>
       </div>
       <div className="locations">

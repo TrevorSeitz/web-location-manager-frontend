@@ -25,7 +25,7 @@ class ListLocations extends Component {
               background: "darkblue"
             }}
           >
-            Add Location
+            <button className="button">Add Location</button>
           </NavLink>
           <NavLink
             to="/ListContacts"
@@ -34,7 +34,7 @@ class ListLocations extends Component {
               background: "darkblue"
             }}
           >
-            See Contacts
+            <button className="button">See Contacts</button>
           </NavLink>
         </div>
         <div className="locations">

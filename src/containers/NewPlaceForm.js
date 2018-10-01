@@ -233,7 +233,7 @@ class NewPlaceForm extends Component {
             background: "darkblue"
           }}
         >
-          See Contacts
+          <button className="button">See Contacts</button>
         </NavLink>
         <NavLink
           to="/ListLocations"
@@ -242,7 +242,7 @@ class NewPlaceForm extends Component {
             background: "darkblue"
           }}
         >
-          See locations
+          <button className="button">See locations</button>
         </NavLink>
         <div>
           <form onSubmit={this.handleSubmit}>
