@@ -1,19 +1,20 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import axios from "axios";
 import * as actions from "../actions";
-import { PlaceMarker } from "../components/PlaceMarker";
-import { App } from "../App";
-import { NavLink } from "react-router-dom";
+import { NavLink, BrowserRouter, Route, Link } from "react-router-dom";
+import * as ActiveStorage from "activestorage";
+import IMG_0774 from "../assets/images/IMG_0774.jpg";
 
 class ListLocations extends Component {
   constructor(props) {
     super(props);
     // this.state = { places: [] };
+
+    ActiveStorage.start();
   }
 
   render() {
-    // debugger;
+    debugger;
     return (
       <div>
         <div className="navbar">
@@ -41,10 +42,24 @@ class ListLocations extends Component {
             {this.props.places.map(place => {
               return (
                 <div key={place.id}>
-                  <p>Place: {place.name}</p>
+                  <Link
+                    to={{
+                      pathname: `place/${place.id}`,
+                      query: { id: place.id }
+                    }}
+                  >
+                    <p>Place: {place.name}</p>
+                  </Link>
                   <p>Contact Name: {place.contactName}</p>
                   <p>Contact Phone: {place.contactPhone}</p>
                   <p>email: {place.email}</p>
+                  <p>image: {place.image}</p>
+                  <img
+                    src={require("../assets/images/IMG_0774.jpg")}
+                    width="250"
+                    alt=""
+                  />
+                  {/*<img src={require("")} width="250" alt="" />*/}
                 </div>
               );
             })}
