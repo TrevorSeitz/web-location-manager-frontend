@@ -15,7 +15,7 @@ class EditPlaceForm extends Component {
       place: props.history.location.state.place
     };
 
-    debugger;
+    // debugger;
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleFileSelect = this.handleFileSelect.bind(this);
@@ -116,7 +116,7 @@ class EditPlaceForm extends Component {
 
   submitForm() {
     let submitMethod = "patch";
-    let url = "/api/places/{this.props.place.id}";
+    let url = `/api/place/{this.props.place.id}`;
     axiosClient[submitMethod](url, this.buildFormData(), {
       onUploadProgress: progressEvent => {
         let percentage = (progressEvent.loaded * 100.0) / progressEvent.total;
@@ -166,21 +166,14 @@ class EditPlaceForm extends Component {
   }
 
   buildFormData() {
+    debugger;
     let formData = new FormData();
-    formData.append("place[fileName]", this.state.place.image.name);
-    formData.append("place[name]", this.state.place.name);
-    formData.append("place[venue]", this.state.place.venue);
-    formData.append("place[latitude]", this.state.place.latitude);
-    formData.append("place[longitude]", this.state.place.longitude);
-    formData.append("place[contactName]", this.state.place.contactName);
-    formData.append("place[contactPhone]", this.state.place.contactPhone);
-    formData.append("place[email]", this.state.place.email);
-    formData.append("place[permit]", this.state.place.permit);
-    formData.append("place[description]", this.state.place.description);
-    formData.append("place[GPSLatitudeRef]", this.state.place.GPSLatitudeRef);
-    formData.append("place[GPSLongitudeRef]", this.state.place.GPSLongitudeRef);
-
-    formData.append(this.state.place.image, this.state.place.image.name);
+    formData.append("place[name]", this.state.name);
+    formData.append("place[venue]", this.state.venue);
+    formData.append("place[contactName]", this.state.contactName);
+    formData.append("place[contactPhone]", this.state.contactPhone);
+    formData.append("place[email]", this.state.email);
+    formData.append("place[description]", this.state.description);
 
     return formData;
   }
