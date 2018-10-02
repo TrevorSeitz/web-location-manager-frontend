@@ -23,6 +23,11 @@
   padding-bottom: 30px;
 }
 
+.input {
+  padding-left: 10px;
+  margin-bottom: 10px;
+}
+
 .main-page{
   width:100%;
   background-color: #659DBD

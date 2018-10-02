@@ -246,21 +246,24 @@ class NewPlaceForm extends Component {
         </NavLink>
         <div>
           <form onSubmit={this.handleSubmit}>
-            <label>File Upload</label>
-            <div>
-              <input
-                type="file"
-                accept="image/*"
-                multiple={false}
-                disabled={this.state.isSubmittingForm}
-                onChange={this.handleFileSelect}
-              />
+            <div className="fileUpload">
+              <div>
+                <label>File Upload </label>
+                <input
+                  className="input"
+                  type="file"
+                  accept="image/*"
+                  multiple={false}
+                  disabled={this.state.isSubmittingForm}
+                  onChange={this.handleFileSelect}
+                />
+              </div>
             </div>
-            <div />
             <div>
               <label>Lat/Long</label>
               <div>
                 <Field
+                  className="input"
                   name="lat"
                   component="input"
                   type="text"
@@ -268,6 +271,7 @@ class NewPlaceForm extends Component {
                   onChange={this.handleChange}
                 />
                 <Field
+                  className="input"
                   name="long"
                   component="input"
                   type="text"
@@ -280,6 +284,7 @@ class NewPlaceForm extends Component {
               <label>Location Name</label>
               <div>
                 <Field
+                  className="input"
                   name="name"
                   component="input"
                   type="text"
@@ -292,6 +297,7 @@ class NewPlaceForm extends Component {
               <label>Venue/Region</label>
               <div>
                 <Field
+                  className="input"
                   name="venue"
                   component="input"
                   type="text"
@@ -304,6 +310,7 @@ class NewPlaceForm extends Component {
               <label>Contact Name</label>
               <div>
                 <Field
+                  className="input"
                   name="contactName"
                   component="input"
                   type="text"
@@ -316,6 +323,7 @@ class NewPlaceForm extends Component {
               <label>Contact Phone #</label>
               <div>
                 <Field
+                  className="input"
                   name="contactPhone"
                   component="input"
                   type="number"
@@ -328,6 +336,7 @@ class NewPlaceForm extends Component {
               <label>Contact Email</label>
               <div>
                 <Field
+                  className="input"
                   name="email"
                   component="input"
                   type="email"
@@ -356,6 +365,7 @@ class NewPlaceForm extends Component {
               <label>Description and Notes</label>
               <div>
                 <Field
+                  className="input"
                   name="description"
                   component="textarea"
                   onChange={this.handleChange}
