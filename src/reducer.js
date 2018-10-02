@@ -32,8 +32,20 @@ const getLocationsReducer = (state = [], action) => {
   }
 };
 
+const getAllLocationsReducer = (state = [], action) => {
+  switch (action.type) {
+    case "GET_ALL":
+      // debugger;
+      return action.payload;
+
+    default:
+      return state;
+  }
+};
+
 const reducers = {
   // ... your other reducers here ...
+  getAllLocationsReducer,
   getLocationsReducer,
   addLatReducer,
   addLongReducer,

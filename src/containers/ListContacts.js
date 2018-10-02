@@ -16,15 +16,15 @@ class ListAllContacts extends Component {
 
   FetchAllContactsFromAPI() {
     // debugger;
-    // this.props.getLocations(null, -180, 180, -90, 90);
-
-    fetch(`/api/places?min_lng=-180&max_lng=180&min_lat=-90&max_lat=90`, {
-      method: "GET"
-    })
-      .then(response => response.json())
-      .then(response => this.setState({ allPlaces: response }));
-
-    allContacts = this.state.allPlaces;
+    this.props.getAllLocations(null, -180, 180, -90, 90);
+    //
+    //   fetch(`/api/places?min_lng=-180&max_lng=180&min_lat=-90&max_lat=90`, {
+    //     method: "GET"
+    //   })
+    //     .then(response => response.json())
+    //     .then(response => this.setState({ allPlaces: response }));
+    //
+    // allContacts = this.props.allPlaces;
   }
 
   componentDidMount() {
@@ -32,6 +32,8 @@ class ListAllContacts extends Component {
   }
 
   render() {
+    allContacts = this.props.allPlaces;
+    // debugger;
     return (
       <div className="contact-list">
         <div className="navbar">
@@ -56,7 +58,7 @@ class ListAllContacts extends Component {
         </div>
         <div>
           <ul>
-            {this.state.allPlaces.map(place => {
+            {this.props.allPlaces.map(place => {
               return (
                 <div className="contact-list" key={place.id}>
                   <p>
@@ -78,7 +80,7 @@ class ListAllContacts extends Component {
 const mapStateToProps = state => {
   // console.log(state);
   return {
-    allPlaces: state.getLocationsReducer
+    allPlaces: state.getAllLocationsReducer
   };
 };
 
