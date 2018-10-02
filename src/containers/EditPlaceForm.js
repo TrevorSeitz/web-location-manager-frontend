@@ -8,13 +8,14 @@ import * as actions from "../actions";
 import * as ActiveStorage from "activestorage";
 import { NavLink } from "react-router-dom";
 
-class NewPlaceForm extends Component {
+class EditPlaceForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      place: this.props.place
+      place: props.history.location.state.place
     };
 
+    debugger;
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleFileSelect = this.handleFileSelect.bind(this);
@@ -38,11 +39,6 @@ class NewPlaceForm extends Component {
     let lngRef = place.lngRef;
     let fileName = place.fileName;
     let that = this;
-
-    // if (e.target.files && e.target.files[0]) {
-    //   let formPayLoad = new FormData();
-    //   formPayLoad.append("uploaded_image", e.target.files[0]);
-    // }
 
     function setProps(mapLat, mapLong, latRef, lngRef) {
       that.props.addLat(mapLat);
@@ -102,16 +98,11 @@ class NewPlaceForm extends Component {
   handleChange(e) {
     var place = this.state.place;
     place[e.target.name] = e.target.value;
-    // this.setState.place({ [e.target.name]: e.target.value });
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    // let currentPlace = this.state;
     var place = this.state.place;
-    // let currentPlace = { place: this.state };
-    //  TODO is this working???
-    // let image = this.state.place.image;
     this.setState(
       {
         isSubmittingForm: true,
@@ -124,8 +115,7 @@ class NewPlaceForm extends Component {
   }
 
   submitForm() {
-    // let submitMethod = this.state.place.id ? "patch" : "post";
-    let submitMethod = "puts";
+    let submitMethod = "patch";
     let url = "/api/places/{this.props.place.id}";
     axiosClient[submitMethod](url, this.buildFormData(), {
       onUploadProgress: progressEvent => {
@@ -190,18 +180,14 @@ class NewPlaceForm extends Component {
     formData.append("place[GPSLatitudeRef]", this.state.place.GPSLatitudeRef);
     formData.append("place[GPSLongitudeRef]", this.state.place.GPSLongitudeRef);
 
-    formData.append(
-      // this.state.place.image.name,
-      this.state.place.image,
-      this.state.place.image.name
-    );
+    formData.append(this.state.place.image, this.state.place.image.name);
 
     return formData;
   }
 
   render() {
     const { reset } = this.props;
-    // console.log(this.state.place.image);
+    const place = this.state.place;
     return (
       <div>
         <NavLink
@@ -211,7 +197,7 @@ class NewPlaceForm extends Component {
             background: "darkblue"
           }}
         >
-          <button className="button">See Contacts</button>
+          <button className="button">All Contacts</button>
         </NavLink>
         <NavLink
           to="/ListLocations"
@@ -220,40 +206,10 @@ class NewPlaceForm extends Component {
             background: "darkblue"
           }}
         >
-          <button className="button">See locations</button>
+          <button className="button">See Locations</button>
         </NavLink>
         <div>
           <form onSubmit={this.handleSubmit}>
-            <label>File Upload</label>
-            <div>
-              <input
-                type="file"
-                accept="image/*"
-                multiple={false}
-                disabled={this.state.isSubmittingForm}
-                onChange={this.handleFileSelect}
-              />
-            </div>
-            <div />
-            <div>
-              <label>Lat/Long</label>
-              <div>
-                <Field
-                  name="lat"
-                  component="input"
-                  type="text"
-                  placeholder={this.props.fileLat}
-                  onChange={this.handleChange}
-                />
-                <Field
-                  name="long"
-                  component="input"
-                  type="text"
-                  placeholder={this.props.fileLong}
-                  onChange={this.handleChange}
-                />
-              </div>
-            </div>
             <div>
               <label>Location Name</label>
               <div>
@@ -261,7 +217,7 @@ class NewPlaceForm extends Component {
                   name="name"
                   component="input"
                   type="text"
-                  placeholder="Name"
+                  placeholder={place.name}
                   onChange={this.handleChange}
                 />
               </div>
@@ -273,7 +229,7 @@ class NewPlaceForm extends Component {
                   name="venue"
                   component="input"
                   type="text"
-                  placeholder="Venue"
+                  placeholder={place.venue}
                   onChange={this.handleChange}
                 />
               </div>
@@ -285,7 +241,7 @@ class NewPlaceForm extends Component {
                   name="contactName"
                   component="input"
                   type="text"
-                  placeholder="Contact Name"
+                  placeholder={place.contactName}
                   onChange={this.handleChange}
                 />
               </div>
@@ -297,7 +253,7 @@ class NewPlaceForm extends Component {
                   name="contactPhone"
                   component="input"
                   type="number"
-                  placeholder="Contact Phone #"
+                  placeholder={place.contactPhone}
                   onChange={this.handleChange}
                 />
               </div>
@@ -309,39 +265,22 @@ class NewPlaceForm extends Component {
                   name="email"
                   component="input"
                   type="email"
-                  placeholder="Email"
+                  placeholder={place.email}
                   onChange={this.handleChange}
                 />
               </div>
             </div>
-            <div>
-              <label htmlFor="permit">Permit Required?(check for yes)</label>
-              <div>
-                <Field
-                  name="permit"
-                  id="permit"
-                  component="input"
-                  type="checkbox"
-                  value="false"
-                  checked={false}
-                  onChange={this.handleChange}
-                />
-              </div>
-            </div>
-            {/* Favorite Color was here */}
-            {/* employed Color was here */}
             <div>
               <label>Description and Notes</label>
               <div>
                 <Field
                   name="description"
                   component="textarea"
+                  placeholder={place.description}
                   onChange={this.handleChange}
                 />
               </div>
             </div>
-            {/* FileUpload here */}
-            {/* Buttons here */}
             <div>
               <button
                 type="submit"
@@ -365,46 +304,6 @@ class NewPlaceForm extends Component {
   }
 }
 
-// Favorite Color
-// <div>
-//   <label>Favorite Color</label>
-//   <div>
-//     <Field name="favoriteColor" component="select">
-//       <option />
-//       <option value="ff0000">Red</option>
-//       <option value="00ff00">Green</option>
-//       <option value="0000ff">Blue</option>
-//     </Field>
-//   </div>
-// </div>
-
-// Radio Buttons
-// <div>
-//   <label>Permit Required?</label>
-//   <div>
-//     <label>
-//       <Field
-//         name="permitYes"
-//         component="input"
-//         type="radio"
-//         value="yes"
-//         onChange={this.handleChange}
-//       />{" "}
-//       Yes
-//     </label>
-//     <label>
-//       <Field
-//         name="permitNo"
-//         component="input"
-//         type="radio"
-//         value="no"
-//         onChange={this.handleChange}
-//       />{" "}
-//       No
-//     </label>
-//   </div>
-// </div>
-
 const mapStateToProps = state => {
   return {
     fileLat: state.addLatReducer,
@@ -419,5 +318,5 @@ export default connect(
   reduxForm({
     form: "newPlace", // a unique identifier for this form
     onSubmit: submit
-  })(NewPlaceForm)
+  })(EditPlaceForm)
 );

@@ -17,17 +17,13 @@ class App extends Component {
           <Map />
         </div>
         <div className="not-map">
-          {/*          <div className="navbar">
-            <NavBar />
-          </div>*/}
           <div>
             <Router>
               <Switch>
-                {/*<Route exact path="/" component={ListContacts} />*/}
                 <Route exact path="/" component={NewPlaceForm} />
                 <Route exact path="/ListLocations" component={ListLocations} />
                 <Route exact path="/ListContacts" component={ListContacts} />
-                <Route exact path="/Place/Edit/:id" component={EditPlaceForm} />
+                <Route path="/Edit/:id" component={EditPlaceForm} />
                 <Route path="/Place/:id" component={ShowPlace} />
               </Switch>
             </Router>
