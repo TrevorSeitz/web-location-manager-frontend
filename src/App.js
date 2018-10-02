@@ -27,7 +27,7 @@ class App extends Component {
                 <Route exact path="/" component={NewPlaceForm} />
                 <Route exact path="/ListLocations" component={ListLocations} />
                 <Route exact path="/ListContacts" component={ListContacts} />
-                <Route exact path="/EditPlaceForm" component={EditPlaceForm} />
+                <Route exact path="/Place/Edit/:id" component={EditPlaceForm} />
                 <Route path="/Place/:id" component={ShowPlace} />
               </Switch>
             </Router>
