@@ -21,6 +21,17 @@ const addLongReducer = (state = "", action) => {
   }
 };
 
+const getLocationsReducer = (state = [], action) => {
+  switch (action.type) {
+    case "GET_LOC":
+      // debugger;
+      return action.payload;
+
+    default:
+      return state;
+  }
+};
+
 const reducers = {
   // ... your other reducers here ...
   getLocationsReducer,
