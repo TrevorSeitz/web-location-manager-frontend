@@ -32,13 +32,12 @@ export class PlaceMarker extends Component {
       id
     } = this.props;
 
-    // console.log(this.props);
-
     return (
       <Marker
         markerWithLabel={window.MarkerWithLabel}
         onClick={this.clickTooltip.bind(this)}
         position={{ lat: parseFloat(lat), lng: parseFloat(lng) }}
+        label={`${id}`}
         key={`marker${id}`}
       >
         {showTooltip && (
