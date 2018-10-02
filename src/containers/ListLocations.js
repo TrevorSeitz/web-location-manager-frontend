@@ -8,13 +8,13 @@ import IMG_0774 from "../assets/images/IMG_0774.jpg";
 class ListLocations extends Component {
   constructor(props) {
     super(props);
-    // this.state = { places: [] };
+
+    let sortBy = "";
 
     ActiveStorage.start();
   }
 
   render() {
-    debugger;
     this.props.places.sort(function(a, b) {
       var nameA = a.name.toUpperCase(); // ignore upper and lowercase
       var nameB = b.name.toUpperCase(); // ignore upper and lowercase
@@ -58,11 +58,14 @@ class ListLocations extends Component {
                 <div key={place.id}>
                   <Link
                     to={{
-                      pathname: `place/${place.id}`,
+                      pathname: `Place/${place.id}`,
+                      state: { place: place },
                       query: { id: place.id }
                     }}
                   >
-                    <p>Place: {place.name}</p>
+                    <p>
+                      {place.id}. Place: {place.name}
+                    </p>
                   </Link>
                   <p>Contact Name: {place.contactName}</p>
                   <p>Contact Phone: {place.contactPhone}</p>
@@ -99,7 +102,8 @@ class ListLocations extends Component {
 const mapStateToProps = state => {
   // console.log(state);
   return {
-    places: state.getLocationsReducer
+    places: state.getLocationsReducer,
+    place: state.getLocationReducer
   };
 };
 

@@ -1,25 +1,12 @@
-import React from "react";
+// import React from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { NavLink, BrowserRouter, Route, Link } from "react-router-dom";
 import { Field, reduxForm } from "redux-form";
 import * as actions from "../actions";
 
-// place GET    /api/places/:id
-// debugger;
 const ShowPlace = props => {
-  var place = props.place;
-
-  debugger;
-  let id = place.id;
-  let image = place.image;
-  let fileName = place.fileName;
-  let mapLat = place.mapLat;
-  let mapLong = place.mapLong;
-  let lat = place.lat;
-  let lng = place.lng;
-  let latRef = place.latRef;
-  let lngRef = place.lngRef;
-  image.name = fileName;
+  const place = props.history.location.state.place;
 
   return (
     <div>
@@ -43,44 +30,72 @@ const ShowPlace = props => {
           <button className="button">See Contacts</button>
         </NavLink>
       </div>
-      <div className="locations">
-        <ul>
-          {this.props.places.map(place => {
-            return (
-              <div key={props.place.id}>
-                <p>Place: {props.place.name}</p>
-                <p>
-                  Lat: {lat} Long: {lng}
-                </p>
-                <p>File Name: {fileName}</p>
-                <p>Contact Name: {place.contactName}</p>
-                <p>Contact Phone: {place.contactPhone}</p>
-                <p>email: {place.email}</p>
-                <p>image: </p>
-                <img
-                  src={require("../assets/images/IMG_0774.jpg")}
-                  width="250"
-                  alt=""
-                />
-                {/*<img src={require("")} width="250" alt="" />*/}
-              </div>
-            );
-          })}
-        </ul>
-        {/*<button
-          type="submit"
-          // disabled={pristine || submitting}
-          onClick={handleSubmit()}
-        >*/}
-        <button tag={Link} to="/EditPlaceForm">
-          Edit This Location
-        </button>
+      <div key={place.id}>
+        <p>Place: {place.name}</p>
+        <p>
+          Lat: {place.lat} Long: {place.lng}
+        </p>
+        <p>File Name: {place.fileName}</p>
+        <p>Contact Name: {place.contactName}</p>
+        <p>Contact Phone: {place.contactPhone}</p>
+        <p>email: {place.email}</p>
+        <p>image: </p>
+        <img
+          src={require("../assets/images/IMG_0774.jpg")}
+          width="250"
+          alt=""
+        />
       </div>
     </div>
   );
 };
 
-export default connect(
-  null,
-  actions
-)(ShowPlace);
+// const mapStateToProps = state => {
+//   console.log(state);
+//   return {
+//     place: state.getLocationReducer
+//   };
+// };
+
+export default connect()(ShowPlace);
+// mapStateToProps,
+// actions
+
+//
+// <ul>
+//   {this.props.places.map(place => {
+//     return (
+
+// this.props.history.location.state.place.name;
+
+//       <div key={props.place.id}>
+//         <p>Place: {props.place.name}</p>
+//         <p>
+//           Lat: {lat} Long: {lng}
+//         </p>
+//         <p>File Name: {fileName}</p>
+//         <p>Contact Name: {place.contactName}</p>
+//         <p>Contact Phone: {place.contactPhone}</p>
+//         <p>email: {place.email}</p>
+//         <p>image: </p>
+//         <img
+//           src={require("../assets/images/IMG_0774.jpg")}
+//           width="250"
+//           alt=""
+//         />
+//         {/*<img src={require("")} width="250" alt="" />*/}
+//       </div>
+//     );
+//   })}
+// </ul>
+
+// <div className="locations">
+//   {/*<button
+//     type="submit"
+//     // disabled={pristine || submitting}
+//     onClick={handleSubmit()}
+//   >*/}
+//   <button tag={Link} to="/EditPlaceForm">
+//     Edit This Location
+//   </button>
+// </div>
