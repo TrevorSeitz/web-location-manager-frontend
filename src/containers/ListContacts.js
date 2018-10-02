@@ -59,7 +59,9 @@ class ListAllContacts extends Component {
             {this.state.allPlaces.map(place => {
               return (
                 <div className="contact-list" key={place.id}>
-                  <p>Place: {place.name}</p>
+                  <p>
+                    {place.id}. Place: {place.name}
+                  </p>
                   <p>Contact Name: {place.contactName}</p>
                   <p>Contact Phone: {place.contactPhone}</p>
                   <p>email: {place.email}</p>

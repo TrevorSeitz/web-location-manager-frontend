@@ -76,7 +76,6 @@ class ListLocations extends Component {
                     width="250"
                     alt=""
                   />
-                  {/*<img src={require("")} width="250" alt="" />*/}
                 </div>
               );
             })}
@@ -85,25 +84,11 @@ class ListLocations extends Component {
       </div>
     );
   }
-  // debugger;
-  // <div>{(this, state.places.map(place => <p> {place.name} </p>))}</div>
-  // );
-  // }
 }
 
-// props.places.map(place => (
-// <div>
-//   <h3>{places.name} </h3>
-//   <p>{places.contactName} </p>
-//   <p>{places.contactPhone} </p>
-//   <p>{places.email} </p>
-// </div>)
-
 const mapStateToProps = state => {
-  // console.log(state);
   return {
-    places: state.getLocationsReducer,
-    place: state.getLocationReducer
+    places: state.getLocationsReducer
   };
 };
 
@@ -111,5 +96,3 @@ export default connect(
   mapStateToProps,
   actions
 )(ListLocations);
-
-// export default ListLocations;
