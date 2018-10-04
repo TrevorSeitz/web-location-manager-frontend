@@ -6,6 +6,7 @@ import { Field, reduxForm } from "redux-form";
 import * as actions from "../actions";
 
 const ShowPlace = props => {
+  debugger;
   const place = props.history.location.state.place;
 
   function shorten(x) {
@@ -25,7 +26,7 @@ const ShowPlace = props => {
           <button className="tripleButton">Add Location</button>
         </NavLink>
         <NavLink
-          to="/ListContacts"
+          to="/places/all_contacts"
           exact
           activeStyle={{
             background: "darkblue"
@@ -34,7 +35,7 @@ const ShowPlace = props => {
           <button className="tripleButton">See Contacts</button>
         </NavLink>
         <NavLink
-          to="/ListLocations"
+          to="/places/visible_locations"
           exact
           activeStyle={{
             background: "darkblue"
@@ -49,6 +50,7 @@ const ShowPlace = props => {
           Lat: {shorten(place.latitude)} Long: {shorten(place.longitude)}
         </p>
         <p>File Name: {place.fileName}</p>
+        <p>Venue: {place.venue}</p>
         <p>Contact Name: {place.contactName}</p>
         <p>Contact Phone: {place.contactPhone}</p>
         <p>email: {place.email}</p>
@@ -62,7 +64,7 @@ const ShowPlace = props => {
       <div className="navbar">
         <Link
           to={{
-            pathname: `/Edit/${place.id}`,
+            pathname: `/places/${place.id}/edit`,
             state: { place: place },
             query: { id: place.id }
           }}
@@ -80,7 +82,8 @@ const ShowPlace = props => {
 const mapStateToProps = state => {
   console.log(state);
   return {
-    allPlaces: state.getLocationsReducer
+    // allPlaces: state.getLocationsReducer
+    places: state.getLocationsReducer
   };
 };
 

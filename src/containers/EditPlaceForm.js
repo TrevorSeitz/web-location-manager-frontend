@@ -15,13 +15,13 @@ class EditPlaceForm extends Component {
       place: props.history.location.state.place
     };
 
-    // debugger;
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleFileSelect = this.handleFileSelect.bind(this);
     this.submitForm = this.submitForm.bind(this);
     this.renderUploadFormProgress = this.renderUploadFormProgress.bind(this);
     this.buildFormData = this.buildFormData.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
 
     ActiveStorage.start();
   }
@@ -114,9 +114,18 @@ class EditPlaceForm extends Component {
     );
   }
 
+  handleDelete(e) {
+    debugger;
+    let submitMethod = "destroy";
+    let url = `/api/places/${this.state.place.id}`;
+    axiosClient.delete(url);
+    this.props.delPlace(this.state.place.id);
+    this.props.history.push("/places/visible_locations");
+  }
+
   submitForm() {
     let submitMethod = "patch";
-    let url = `/api/place/{this.props.place.id}`;
+    let url = "/api/places/" + this.state.place.id;
     axiosClient[submitMethod](url, this.buildFormData(), {
       onUploadProgress: progressEvent => {
         let percentage = (progressEvent.loaded * 100.0) / progressEvent.total;
@@ -168,12 +177,13 @@ class EditPlaceForm extends Component {
   buildFormData() {
     debugger;
     let formData = new FormData();
-    formData.append("place[name]", this.state.name);
-    formData.append("place[venue]", this.state.venue);
-    formData.append("place[contactName]", this.state.contactName);
-    formData.append("place[contactPhone]", this.state.contactPhone);
-    formData.append("place[email]", this.state.email);
-    formData.append("place[description]", this.state.description);
+    formData.append("place[id]", this.state.place.id);
+    formData.append("place[name]", this.state.place.name);
+    formData.append("place[venue]", this.state.place.venue);
+    formData.append("place[contactName]", this.state.place.contactName);
+    formData.append("place[contactPhone]", this.state.place.contactPhone);
+    formData.append("place[email]", this.state.place.email);
+    formData.append("place[description]", this.state.place.description);
 
     return formData;
   }
@@ -181,10 +191,20 @@ class EditPlaceForm extends Component {
   render() {
     const { reset } = this.props;
     const place = this.state.place;
+
     return (
       <div>
         <NavLink
-          to="/ListContacts"
+          to="/"
+          exact
+          activeStyle={{
+            background: "darkblue"
+          }}
+        >
+          <button className="tripleButton">Add Location</button>
+        </NavLink>
+        <NavLink
+          to="/places/all_contacts"
           exact
           activeStyle={{
             background: "darkblue"
@@ -193,7 +213,7 @@ class EditPlaceForm extends Component {
           <button className="button">All Contacts</button>
         </NavLink>
         <NavLink
-          to="/ListLocations"
+          to="/places/visible_locations"
           exact
           activeStyle={{
             background: "darkblue"
@@ -204,12 +224,16 @@ class EditPlaceForm extends Component {
         <div>
           <form onSubmit={this.handleSubmit}>
             <div>
+              <h3>Location ID: {this.state.place.id}</h3>
+            </div>
+            <div>
               <label>Location Name</label>
               <div>
                 <Field
                   name="name"
                   component="input"
                   type="text"
+                  value={place.name}
                   placeholder={place.name}
                   onChange={this.handleChange}
                 />
@@ -227,6 +251,7 @@ class EditPlaceForm extends Component {
                 />
               </div>
             </div>
+
             <div>
               <label>Contact Name</label>
               <div>
@@ -276,6 +301,7 @@ class EditPlaceForm extends Component {
             </div>
             <div>
               <button
+                className="tripleButton"
                 type="submit"
                 // disabled={pristine || submitting}
                 onClick={this.handleSubmit}
@@ -283,11 +309,20 @@ class EditPlaceForm extends Component {
                 Submit
               </button>
               <button
+                className="tripleButton"
                 type="button"
                 // disabled={pristine || submitting}
                 onClick={reset}
               >
                 Clear Values
+              </button>
+              <button
+                className="tripleButton"
+                type="submit"
+                // disabled={pristine || submitting}
+                onClick={this.handleDelete}
+              >
+                Delete
               </button>
             </div>
           </form>
@@ -300,7 +335,8 @@ class EditPlaceForm extends Component {
 const mapStateToProps = state => {
   return {
     fileLat: state.addLatReducer,
-    fileLong: state.addLongReducer
+    fileLong: state.addLongReducer,
+    places: state.getLocationsReducer
   };
 };
 
