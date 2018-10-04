@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import Map from "./containers/Map";
+import Routes from "./Routes";
 import NewPlaceForm from "./containers/NewPlaceForm";
 import EditPlaceForm from "./containers/EditPlaceForm";
 import ShowPlace from "./components/ShowPlace";
 import ListLocations from "./components/ListLocations";
-import ListContacts from "./containers/ListContacts";
+import ListContacts from "./components/ListContacts";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import "./App.css";
@@ -18,23 +19,7 @@ class App extends Component {
         </div>
         <div className="not-map">
           <div>
-            <Router>
-              <Switch>
-                <Route exact path="/" component={NewPlaceForm} />
-                <Route
-                  exact
-                  path="/places/visible_locations"
-                  component={ListLocations}
-                />
-                <Route
-                  exact
-                  path="/places/all_contacts"
-                  component={ListContacts}
-                />
-                <Route path="/places/:id/edit" component={EditPlaceForm} />
-                <Route path="/places/:id" component={ShowPlace} />
-              </Switch>
-            </Router>
+            <Routes />
           </div>
         </div>
       </div>
