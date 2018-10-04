@@ -6,7 +6,7 @@ import axiosClient from "../axiosClient";
 import * as EXIF from "exif-js";
 import * as actions from "../actions";
 import * as ActiveStorage from "activestorage";
-import { NavLink } from "react-router-dom";
+import { NavLink, BrowserRouter, Route, Link } from "react-router-dom";
 
 class NewPlaceForm extends Component {
   constructor(props) {
@@ -60,11 +60,6 @@ class NewPlaceForm extends Component {
     let lngRef = "";
     let fileName = "";
     let that = this;
-
-    // if (e.target.files && e.target.files[0]) {
-    //   let formPayLoad = new FormData();
-    //   formPayLoad.append("uploaded_image", e.target.files[0]);
-    // }
 
     function setProps(mapLat, mapLong, latRef, lngRef) {
       that.props.addLat(mapLat);
@@ -128,19 +123,17 @@ class NewPlaceForm extends Component {
   }
 
   handleSubmit(e) {
-    e.preventDefault();
-    // let currentPlace = this.state;
+    // e.preventDefault();
+
     var place = this.state.place;
-    // let currentPlace = { place: this.state };
-    //  TODO is this working???
-    // let image = this.state.place.image;
+
     this.setState(
       {
         isSubmittingForm: true,
         place: place
       },
       () => {
-        this.submitForm();
+        this.submitForm(this);
       }
     );
   }
@@ -161,7 +154,6 @@ class NewPlaceForm extends Component {
         this.setState({
           didFormSubmissionComplete: true
         });
-        this.props.histpry.push("/places");
       })
       .catch(error => {
         var place = this.state.place;
@@ -173,6 +165,11 @@ class NewPlaceForm extends Component {
         });
       });
   }
+
+  redirectToTarget = () => {
+    let id = this.id;
+    this.props.history.push("/places/:id");
+  };
 
   renderUploadFormProgress() {
     if (this.state.isSubmittingForm === false) {
@@ -207,7 +204,7 @@ class NewPlaceForm extends Component {
     formData.append("place[contactName]", this.state.place.contactName);
     formData.append("place[contactPhone]", this.state.place.contactPhone);
     formData.append("place[email]", this.state.place.email);
-    formData.append("place[permit]", this.state.place.permit);
+    // formData.append("place[permit]", this.state.place.permit);
     formData.append("place[description]", this.state.place.description);
     formData.append("place[GPSLatitudeRef]", this.state.place.GPSLatitudeRef);
     formData.append("place[GPSLongitudeRef]", this.state.place.GPSLongitudeRef);
@@ -222,12 +219,15 @@ class NewPlaceForm extends Component {
   }
 
   render() {
+    if (this.state.toDashboard === true) {
+      return <Link to={{ pathname: `Place/${this.state.place.name}` }} />;
+    }
+    // render() {
     const { reset } = this.props;
-    console.log(this.state.place.image);
     return (
       <div>
         <NavLink
-          to="/ListContacts"
+          to="/places/all_contacts"
           exact
           activeStyle={{
             background: "darkblue"
@@ -236,7 +236,7 @@ class NewPlaceForm extends Component {
           <button className="button">See Contacts</button>
         </NavLink>
         <NavLink
-          to="/ListLocations"
+          to="/places/visible_locations"
           exact
           activeStyle={{
             background: "darkblue"
@@ -346,22 +346,6 @@ class NewPlaceForm extends Component {
               </div>
             </div>
             <div>
-              <label htmlFor="permit">Permit Required?(check for yes)</label>
-              <div>
-                <Field
-                  name="permit"
-                  id="permit"
-                  component="input"
-                  type="checkbox"
-                  value="false"
-                  checked={false}
-                  onChange={this.handleChange}
-                />
-              </div>
-            </div>
-            {/* Favorite Color was here */}
-            {/* employed Color was here */}
-            <div>
               <label>Description and Notes</label>
               <div>
                 <Field
@@ -396,6 +380,21 @@ class NewPlaceForm extends Component {
     );
   }
 }
+
+// <div>
+//   <label htmlFor="permit">Permit Required?(check for yes)</label>
+//   <div>
+//     <Field
+//       name="permit"
+//       id="permit"
+//       component="input"
+//       type="checkbox"
+//       value="false"
+//       checked={false}
+//       onChange={this.handleChange}
+//     />
+//   </div>
+// </div>
 
 // Favorite Color
 // <div>
@@ -440,7 +439,8 @@ class NewPlaceForm extends Component {
 const mapStateToProps = state => {
   return {
     fileLat: state.addLatReducer,
-    fileLong: state.addLongReducer
+    fileLong: state.addLongReducer,
+    allPlaces: state.getLocationsReducer
   };
 };
 
