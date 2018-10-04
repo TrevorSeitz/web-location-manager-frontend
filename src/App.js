@@ -3,7 +3,7 @@ import Map from "./containers/Map";
 import NewPlaceForm from "./containers/NewPlaceForm";
 import EditPlaceForm from "./containers/EditPlaceForm";
 import ShowPlace from "./components/ShowPlace";
-import ListLocations from "./containers/ListLocations";
+import ListLocations from "./components/ListLocations";
 import ListContacts from "./containers/ListContacts";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
@@ -21,10 +21,18 @@ class App extends Component {
             <Router>
               <Switch>
                 <Route exact path="/" component={NewPlaceForm} />
-                <Route exact path="/ListLocations" component={ListLocations} />
-                <Route exact path="/ListContacts" component={ListContacts} />
-                <Route path="/Edit/:id" component={EditPlaceForm} />
-                <Route path="/Place/:id" component={ShowPlace} />
+                <Route
+                  exact
+                  path="/places/visible_locations"
+                  component={ListLocations}
+                />
+                <Route
+                  exact
+                  path="/places/all_contacts"
+                  component={ListContacts}
+                />
+                <Route path="/places/:id/edit" component={EditPlaceForm} />
+                <Route path="/places/:id" component={ShowPlace} />
               </Switch>
             </Router>
           </div>
@@ -33,13 +41,5 @@ class App extends Component {
     );
   }
 }
-
-// <div className="form">
-//   {/*<NavBar />*/}
-//   <NewPlaceForm />
-// </div>
-// {div className="locList">
-//   <ListLocations />
-// </div>
 
 export default App;

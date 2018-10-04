@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import NewPlaceForm from "../containers/NewPlaceForm";
-import ListLocations from "../containers/ListLocations";
+import ListLocations from "./components/ListLocations";
 import ListContacts from "../containers/ListContacts";
 import {
   BrowserRouter as Router,

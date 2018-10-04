@@ -3,7 +3,7 @@ import { Switch, HashRouter as Router, Route } from "react-router-dom";
 import createBrowserHistory from "history/createBrowserHistory";
 
 import NewPlaceForm from "./containers/NewPlaceForm";
-import ListLocations from "./containers/ListLocations";
+import ListLocations from "./components/ListLocations";
 import ListContacts from "./containers/ListContacts";
 
 // import BookIndex from "./Book/Index";
