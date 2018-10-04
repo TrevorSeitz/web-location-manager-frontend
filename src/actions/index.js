@@ -12,8 +12,40 @@ export const addLong = mapLong => {
   };
 };
 
+export const delPlace = id => {
+  return {
+    type: "DELETE_COMMENT",
+    id: id
+  };
+};
+
 export const getLocations = (dispatch, min_lng, max_lng, min_lat, max_lat) => {
-  // debugger;
+  return dispatch => {
+    dispatch({ type: "ASYNC_START" });
+    // debugger;
+
+    fetch(
+      `http://localhost:4000/api/places?min_lng=${min_lng}&max_lng=${max_lng}&min_lat=${min_lat}&max_lat=${max_lat}`,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        }
+      }
+    )
+      .then(response => response.json())
+      .then(jsonData => dispatch({ type: "GET_LOC", payload: jsonData }));
+  };
+};
+
+export const getAllLocations = (
+  dispatch,
+  min_lng,
+  max_lng,
+  min_lat,
+  max_lat
+) => {
   return dispatch => {
     dispatch({ type: "ASYNC_START" });
 
@@ -28,7 +60,7 @@ export const getLocations = (dispatch, min_lng, max_lng, min_lat, max_lat) => {
       }
     )
       .then(response => response.json())
-      .then(jsonData => dispatch({ type: "GET_LOC", payload: jsonData }));
+      .then(jsonData => dispatch({ type: "GET_ALL", payload: jsonData }));
   };
 };
 // };

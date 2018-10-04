@@ -6,6 +6,7 @@
   "dependencies": {
     "activestorage": "^5.2.1",
     "axios": "^0.18.0",
+    "connected-react-router": "^4.5.0",
     "cors": "^2.8.4",
     "exif": "^0.6.0",
     "exif-js": "^2.3.0",

@@ -17,14 +17,6 @@ class ListAllContacts extends Component {
   FetchAllContactsFromAPI() {
     // debugger;
     this.props.getAllLocations(null, -180, 180, -90, 90);
-    //
-    //   fetch(`/api/places?min_lng=-180&max_lng=180&min_lat=-90&max_lat=90`, {
-    //     method: "GET"
-    //   })
-    //     .then(response => response.json())
-    //     .then(response => this.setState({ allPlaces: response }));
-    //
-    // allContacts = this.props.allPlaces;
   }
 
   componentDidMount() {
@@ -47,7 +39,7 @@ class ListAllContacts extends Component {
             <button className="button">Add Location</button>
           </NavLink>
           <NavLink
-            to="/ListLocations"
+            to="/places/visible_locations"
             exact
             activeStyle={{
               background: "darkblue"

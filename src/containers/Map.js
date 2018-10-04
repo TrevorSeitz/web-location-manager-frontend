@@ -43,7 +43,8 @@ class Map extends Component {
     this.state = {
       places: [],
       lat: 43.156338,
-      lng: -77.614304
+      lng: -77.614304,
+      bounds: {}
     };
   }
 
@@ -78,15 +79,6 @@ class Map extends Component {
       this.yMapBounds.min,
       this.yMapBounds.max
     );
-
-    // fetch(
-    //   `/api/places?min_lng=${this.xMapBounds.min}&max_lng=${
-    //     this.xMapBounds.max
-    //   }&min_lat=${this.yMapBounds.min}&max_lat=${this.yMapBounds.max}`,
-    //   { method: "GET" }
-    // )
-    //   .then(response => response.json())
-    //   .then(response => this.setState({ places: response }));
   }
 
   getMapBounds() {
@@ -104,8 +96,6 @@ class Map extends Component {
   render() {
     let { lat, lng } = this.state;
     let places = this.props.places;
-    // console.log(this.props);
-    // debugger;
 
     return (
       <div>
@@ -127,14 +117,12 @@ class Map extends Component {
 }
 
 const mapStateToProps = state => {
-  // console.log(state);
+  console.log(state);
   return {
     places: state.getLocationsReducer
-    // numberOfPlaces: state.getLocationsReducer.length
   };
 };
 
-// export default ConnectedMap = connect(
 export default connect(
   mapStateToProps,
   actions

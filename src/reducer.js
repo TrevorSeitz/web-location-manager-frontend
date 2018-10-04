@@ -43,8 +43,19 @@ const getAllLocationsReducer = (state = [], action) => {
   }
 };
 
+const delPlaceReducer = (state = [], action) => {
+  switch (action.type) {
+    case "DELETE_COMMENT":
+      return state.filter(({ id }) => id !== action.data);
+
+    default:
+      return state;
+  }
+};
+
 const reducers = {
   // ... your other reducers here ...
+  delPlaceReducer,
   getAllLocationsReducer,
   getLocationsReducer,
   addLatReducer,
