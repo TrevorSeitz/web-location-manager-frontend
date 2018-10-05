@@ -14,7 +14,7 @@ class EditPlaceForm extends Component {
     this.state = {
       place: props.history.location.state.place
     };
-
+    debugger;
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleFileSelect = this.handleFileSelect.bind(this);
@@ -115,7 +115,7 @@ class EditPlaceForm extends Component {
   }
 
   handleDelete(e) {
-    debugger;
+    // debugger;
     let submitMethod = "destroy";
     let url = `/api/places/${this.state.place.id}`;
     axiosClient.delete(url);
@@ -138,7 +138,7 @@ class EditPlaceForm extends Component {
         this.setState({
           didFormSubmissionComplete: true
         });
-        this.props.histpry.push("/places");
+        this.props.history.push("/places/visible_locations");
       })
       .catch(error => {
         var place = this.state.place;
@@ -175,7 +175,7 @@ class EditPlaceForm extends Component {
   }
 
   buildFormData() {
-    debugger;
+    // debugger;
     let formData = new FormData();
     formData.append("place[id]", this.state.place.id);
     formData.append("place[name]", this.state.place.name);
