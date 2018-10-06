@@ -31,7 +31,8 @@ class NewPlaceForm extends Component {
       selectedPlaceImageFiles: [],
       submitFormProgress: 0,
       isSubmittingForm: false,
-      didFormSubmissionComplete: false
+      didFormSubmissionComplete: false,
+      center: this.props.center
     };
 
     this.blankForm = this.state;
@@ -140,6 +141,7 @@ class NewPlaceForm extends Component {
 
   submitForm() {
     // let submitMethod = this.state.place.id ? "patch" : "post";
+
     let submitMethod = "post";
     let url = "/api/places";
     axiosClient[submitMethod](url, this.buildFormData(), {
@@ -173,6 +175,9 @@ class NewPlaceForm extends Component {
           place: place
         });
       });
+    let latitude = this.state.place.latitude;
+    let longitude = this.state.place.longitude;
+    this.setState({ center: [latitude, longitude] });
   }
   //
   // redirectToTarget = () => {
@@ -223,14 +228,16 @@ class NewPlaceForm extends Component {
       this.state.place.image,
       this.state.place.image.name
     );
-
     return formData;
   }
 
   render() {
-    if (this.state.toDashboard === true) {
-      return <Link to={{ pathname: `Place/${this.state.place.name}` }} />;
+    if (this.state.place.fileName != "") {
+      var place = this.state.place;
+      place.latitude = this.props.fileLat;
+      place.longitude = this.props.fileLong;
     }
+    // debugger;
     // render() {
     const { reset } = this.props;
     return (
@@ -276,7 +283,7 @@ class NewPlaceForm extends Component {
                   name="lat"
                   component="input"
                   type="text"
-                  placeholder={this.props.fileLat}
+                  placeholder={this.state.place.latitude}
                   onChange={this.handleChange}
                 />
                 <Field
@@ -284,7 +291,7 @@ class NewPlaceForm extends Component {
                   name="long"
                   component="input"
                   type="text"
-                  placeholder={this.props.fileLong}
+                  placeholder={this.state.place.longitude}
                   onChange={this.handleChange}
                 />
               </div>
@@ -449,7 +456,8 @@ const mapStateToProps = state => {
   return {
     fileLat: state.addLatReducer,
     fileLong: state.addLongReducer,
-    allPlaces: state.getLocationsReducer
+    allPlaces: state.getLocationsReducer,
+    center: state.setCenter
   };
 };
 

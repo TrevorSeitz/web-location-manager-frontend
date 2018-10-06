@@ -1,18 +1,20 @@
-// import React from "react";
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
-import { NavLink, BrowserRouter, Route, Link } from "react-router-dom";
-import { Field, reduxForm } from "redux-form";
-import * as actions from "../actions";
+import { NavLink, Link } from "react-router-dom";
 
 const ShowPlace = props => {
-  debugger;
-  const place = props.history.location.state.place;
+  const place = props.location.state.place;
 
   function shorten(x) {
     return Number.parseFloat(x).toFixed(4);
   }
+  if (place.id !== undefined) {
+    var button = <button className="button">Edit</button>;
+  } else {
+    var button = "";
+  }
 
+  // debugger;
   return (
     <div>
       <div className="navbar">
@@ -61,6 +63,7 @@ const ShowPlace = props => {
           alt=""
         />
       </div>
+
       <div className="navbar">
         <Link
           to={{
@@ -72,19 +75,11 @@ const ShowPlace = props => {
             background: "darkblue"
           }}
         >
-          <button className="button">Edit</button>
+          {button}
         </Link>
       </div>
     </div>
   );
-};
-
-const mapStateToProps = state => {
-  console.log(state);
-  return {
-    // allPlaces: state.getLocationsReducer
-    places: state.getLocationsReducer
-  };
 };
 
 export default connect()(ShowPlace);
