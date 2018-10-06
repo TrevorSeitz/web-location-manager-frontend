@@ -119,6 +119,7 @@ class EditPlaceForm extends Component {
   }
 
   submitForm() {
+    // debugger;
     let submitMethod = "patch";
     let url = "/api/places/" + this.state.place.id;
     axiosClient[submitMethod](url, this.buildFormData(), {
@@ -133,7 +134,10 @@ class EditPlaceForm extends Component {
         this.setState({
           didFormSubmissionComplete: true
         });
-        this.props.history.push("/places/visible_locations");
+        this.props.history.push({
+          pathname: "/places/{this.state.place.id}",
+          state: { place: this.state.place }
+        });
       })
       .catch(error => {
         var place = this.state.place;

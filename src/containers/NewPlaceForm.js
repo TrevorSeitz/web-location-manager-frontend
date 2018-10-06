@@ -6,7 +6,7 @@ import axiosClient from "../axiosClient";
 import * as EXIF from "exif-js";
 import * as actions from "../actions";
 import * as ActiveStorage from "activestorage";
-import { NavLink, BrowserRouter, Route, Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 class NewPlaceForm extends Component {
   constructor(props) {
@@ -123,7 +123,7 @@ class NewPlaceForm extends Component {
   }
 
   handleSubmit(e) {
-    // e.preventDefault();
+    e.preventDefault();
 
     var place = this.state.place;
 
@@ -155,6 +155,15 @@ class NewPlaceForm extends Component {
           didFormSubmissionComplete: true
         });
       })
+      .then(response => {
+        this.setState({
+          didFormSubmissionComplete: true
+        });
+        this.props.history.push({
+          pathname: "/places/{this.state.place.id}",
+          state: { place: this.state.place }
+        });
+      })
       .catch(error => {
         var place = this.state.place;
         // place.errors = error.response.data;
@@ -165,11 +174,11 @@ class NewPlaceForm extends Component {
         });
       });
   }
-
-  redirectToTarget = () => {
-    let id = this.id;
-    this.props.history.push("/places/:id");
-  };
+  //
+  // redirectToTarget = () => {
+  //   let id = this.id;
+  //   this.props.history.push("/places/:id");
+  // };
 
   renderUploadFormProgress() {
     if (this.state.isSubmittingForm === false) {
