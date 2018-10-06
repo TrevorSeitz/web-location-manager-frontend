@@ -14,7 +14,7 @@ class EditPlaceForm extends Component {
     this.state = {
       place: props.history.location.state.place
     };
-    debugger;
+
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleFileSelect = this.handleFileSelect.bind(this);
@@ -115,12 +115,7 @@ class EditPlaceForm extends Component {
   }
 
   handleDelete(e) {
-    // debugger;
-    let submitMethod = "destroy";
-    let url = `/api/places/${this.state.place.id}`;
-    axiosClient.delete(url);
-    this.props.delPlace(this.state.place.id);
-    this.props.history.push("/places/visible_locations");
+    this.props.delPlace(this.state.place.id, this.props.history);
   }
 
   submitForm() {
@@ -188,10 +183,13 @@ class EditPlaceForm extends Component {
     return formData;
   }
 
+  Shorten(x) {
+    return Number.parseFloat(x).toFixed(4);
+  }
+
   render() {
     const { reset } = this.props;
     const place = this.state.place;
-
     return (
       <div>
         <NavLink
@@ -224,12 +222,17 @@ class EditPlaceForm extends Component {
         <div>
           <form onSubmit={this.handleSubmit}>
             <div>
-              <h3>Location ID: {this.state.place.id}</h3>
-            </div>
-            <div>
+              <h3>
+                {place.id}. {place.name}
+              </h3>
+              <label>Lat/Long</label>
+              <div className="input">
+                {this.Shorten(place.latitude)} / {this.Shorten(place.longitude)}
+              </div>
               <label>Location Name</label>
               <div>
                 <Field
+                  className="input"
                   name="name"
                   component="input"
                   type="text"
@@ -243,6 +246,7 @@ class EditPlaceForm extends Component {
               <label>Venue/Region</label>
               <div>
                 <Field
+                  className="input"
                   name="venue"
                   component="input"
                   type="text"
@@ -256,6 +260,7 @@ class EditPlaceForm extends Component {
               <label>Contact Name</label>
               <div>
                 <Field
+                  className="input"
                   name="contactName"
                   component="input"
                   type="text"
@@ -268,6 +273,7 @@ class EditPlaceForm extends Component {
               <label>Contact Phone #</label>
               <div>
                 <Field
+                  className="input"
                   name="contactPhone"
                   component="input"
                   type="number"
@@ -280,6 +286,7 @@ class EditPlaceForm extends Component {
               <label>Contact Email</label>
               <div>
                 <Field
+                  className="input"
                   name="email"
                   component="input"
                   type="email"
@@ -292,6 +299,7 @@ class EditPlaceForm extends Component {
               <label>Description and Notes</label>
               <div>
                 <Field
+                  className="input"
                   name="description"
                   component="textarea"
                   placeholder={place.description}
@@ -307,14 +315,6 @@ class EditPlaceForm extends Component {
                 onClick={this.handleSubmit}
               >
                 Submit
-              </button>
-              <button
-                className="tripleButton"
-                type="button"
-                // disabled={pristine || submitting}
-                onClick={reset}
-              >
-                Clear Values
               </button>
               <button
                 className="tripleButton"

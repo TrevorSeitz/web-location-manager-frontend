@@ -12,12 +12,37 @@ export const addLong = mapLong => {
   };
 };
 
-export const delPlace = id => {
-  return {
-    type: "DELETE_COMMENT",
-    id: id
+export const delPlace = (id, history) => {
+  return dispatch => {
+    dispatch({ type: "ASYNC_START" });
+
+    fetch(`http://localhost:4000/api/places/${id}`, {
+      method: "DELETE"
+    }).then(
+      response => dispatch({ type: "DELETE_COMMENT", id: id }),
+      history.replace("/places/visible_locations")
+    );
+    // headers: {
+    //   Accept: "application/json",
+    //   "Content-Type": "application/json"
+    // }
+    // }).then(response => {
+    //   this.props.history.push("/places/visible_locations");
+    // });
+    // .then(response => dispatch({ type: "DELETE_COMMENT", id: id }));
   };
 };
+
+// export const deleteQuestion = (questionId, routerHistory) => {
+//   return fetch(`${API_URL}/questions/${questionId}`, {
+//     method: "DELETE"
+//   })
+//     .then(response => {
+//       dispatch(removeQuestion(questionId));
+//       routerHistory.replace(`/`);
+//     })
+//     .catch(error => console.log(error));
+// };
 
 export const getLocations = (dispatch, min_lng, max_lng, min_lat, max_lat) => {
   return dispatch => {
