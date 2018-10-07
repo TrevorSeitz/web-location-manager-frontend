@@ -196,31 +196,13 @@ class EditPlaceForm extends Component {
     const place = this.state.place;
     return (
       <div>
-        <NavLink
-          to="/"
-          exact
-          activeStyle={{
-            background: "darkblue"
-          }}
-        >
+        <NavLink to="/" exact>
           <button className="tripleButton">Add Location</button>
         </NavLink>
-        <NavLink
-          to="/places/all_contacts"
-          exact
-          activeStyle={{
-            background: "darkblue"
-          }}
-        >
+        <NavLink to="/places/all_contacts" exact>
           <button className="button">All Contacts</button>
         </NavLink>
-        <NavLink
-          to="/places/visible_locations"
-          exact
-          activeStyle={{
-            background: "darkblue"
-          }}
-        >
+        <NavLink to="/places/visible_locations" exact>
           <button className="button">See Locations</button>
         </NavLink>
         <div>

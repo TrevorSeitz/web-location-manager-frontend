@@ -50,8 +50,8 @@ class Map extends Component {
 
   handleMapChanged() {
     this.getMapBounds();
-    this.setMapCenterPoint();
     this.fetchPlacesFromApi();
+    this.setMapCenterPoint();
   }
 
   handleMapMounted(map) {
@@ -92,7 +92,18 @@ class Map extends Component {
 
     this.yMapBounds.min = yMapBounds.b;
     this.yMapBounds.max = yMapBounds.f;
+
+    let bounds = this.state.bounds;
+    bounds = [
+      this.xMapBounds.min,
+      this.xMapBounds.max,
+      this.yMapBounds.min,
+      this.yMapBounds.max
+    ];
+    this.props.setBounds(bounds);
   }
+
+  // export { fetchPlacesFromApi };
 
   render() {
     let { centerLat, centerLng } = this.state;
@@ -120,7 +131,8 @@ class Map extends Component {
 const mapStateToProps = state => {
   return {
     places: state.getLocationsReducer,
-    center: state.setCenter
+    center: state.setCenter,
+    bounds: state.setBoundsReducer
   };
 };
 

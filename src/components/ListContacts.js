@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../actions";
 import { NavLink } from "react-router-dom";
+// import { fetchPlacesFromApi } from "../containers/Map";
 
 let allContacts = [];
 let contactList = [];
 
 const ListAllContacts = props => {
-  props.getAllLocations(null, -180, 180, -90, 90);
+  // fetchPlacesFromApi();
+  debugger;
 
   let allPlaces = props.allPlaces.sort(function(a, b) {
     var nameA = a.name.toUpperCase(); // ignore upper and lowercase
@@ -68,7 +70,7 @@ const ListAllContacts = props => {
 
 const mapStateToProps = state => {
   return {
-    allPlaces: state.getAllLocationsReducer
+    places: state.getLocationsReducer
   };
 };
 

@@ -1,9 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
+import * as actions from "../actions";
 import { NavLink, Link } from "react-router-dom";
 
 const ShowPlace = props => {
   const place = props.location.state.place;
+  debugger;
+  const bounds = props.bounds;
+  // props.getLocations(null, -180, 180, -90, 90);
+  // const place = props.location.state.place;
+  props.getLocations(null, bounds[0], bounds[1], bounds[2], bounds[3]);
 
   function shorten(x) {
     return Number.parseFloat(x).toFixed(4);
@@ -19,31 +25,13 @@ const ShowPlace = props => {
   return (
     <div>
       <div className="navbar">
-        <NavLink
-          to="/"
-          exact
-          activeStyle={{
-            background: "darkblue"
-          }}
-        >
+        <NavLink to="/" exact>
           <button className="tripleButton">Add Location</button>
         </NavLink>
-        <NavLink
-          to="/places/all_contacts"
-          exact
-          activeStyle={{
-            background: "darkblue"
-          }}
-        >
+        <NavLink to="/places/all_contacts" exact>
           <button className="tripleButton">See Contacts</button>
         </NavLink>
-        <NavLink
-          to="/places/visible_locations"
-          exact
-          activeStyle={{
-            background: "darkblue"
-          }}
-        >
+        <NavLink to="/places/visible_locations" exact>
           <button className="tripleButton">Back to locations</button>
         </NavLink>
       </div>
@@ -72,9 +60,6 @@ const ShowPlace = props => {
             state: { place: place },
             query: { id: place.id }
           }}
-          activeStyle={{
-            background: "darkblue"
-          }}
         >
           {button}
         </Link>
@@ -83,4 +68,14 @@ const ShowPlace = props => {
   );
 };
 
-export default connect()(ShowPlace);
+const mapStateToProps = state => {
+  return {
+    places: state.getLocationsReducer,
+    bounds: state.setBoundsReducer
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  actions
+)(ShowPlace);

@@ -7,7 +7,14 @@ import IMG_0774 from "../assets/images/IMG_0774.jpg";
 // import Maps from "../containers/Map";
 
 const ListLocations = props => {
-  // debugger;
+  props.getLocations(
+    null,
+    props.bounds[0],
+    props.bounds[1],
+    props.bounds[2],
+    props.bounds[3]
+  );
+  debugger;
 
   let places = props.places.sort(function(a, b) {
     var nameA = a.name.toUpperCase(); // ignore upper and lowercase
@@ -81,7 +88,8 @@ const ListLocations = props => {
 
 const mapStateToProps = state => {
   return {
-    places: state.getLocationsReducer
+    places: state.getLocationsReducer,
+    bounds: state.setBoundsReducer
   };
 };
 
