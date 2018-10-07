@@ -1,12 +1,14 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import * as actions from "../actions";
 import { NavLink, Link } from "react-router-dom";
-import * as ActiveStorage from "activestorage";
+// import * as ActiveStorage from "activestorage";
 import IMG_0774 from "../assets/images/IMG_0774.jpg";
-import Maps from "../containers/Map";
+// import Maps from "../containers/Map";
 
 const ListLocations = props => {
+  // debugger;
+
   let places = props.places.sort(function(a, b) {
     var nameA = a.name.toUpperCase(); // ignore upper and lowercase
     var nameB = b.name.toUpperCase(); // ignore upper and lowercase

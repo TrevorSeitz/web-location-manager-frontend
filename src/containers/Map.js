@@ -42,8 +42,8 @@ class Map extends Component {
 
     this.state = {
       places: [],
-      lat: 43.156338,
-      lng: -77.614304,
+      centerLat: 43.156338,
+      centerLng: -77.614304,
       bounds: {}
     };
   }
@@ -66,9 +66,10 @@ class Map extends Component {
 
   setMapCenterPoint() {
     this.setState({
-      lat: this.map.getCenter().lat(),
-      lng: this.map.getCenter().lng()
+      centerLat: this.map.getCenter().lat(),
+      centerLng: this.map.getCenter().lng()
     });
+    this.props.setCenter(this.state.centerLat, this.state.centerLng);
   }
 
   fetchPlacesFromApi() {
@@ -94,7 +95,7 @@ class Map extends Component {
   }
 
   render() {
-    let { lat, lng } = this.state;
+    let { centerLat, centerLng } = this.state;
     let places = this.props.places;
 
     return (
@@ -104,7 +105,7 @@ class Map extends Component {
             onMapMounted={this.handleMapMounted.bind(this)}
             handleMapChanged={this.handleMapChanged.bind(this)}
             handleMapFullyLoaded={this.handleMapFullyLoaded.bind(this)}
-            center={{ lat: lat, lng: lng }}
+            center={{ lat: centerLat, lng: centerLng }}
             places={places}
             zoom={this.zoom}
             containerElement={<div style={{ height: `100%` }} />}
@@ -117,9 +118,9 @@ class Map extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
-    places: state.getLocationsReducer
+    places: state.getLocationsReducer,
+    center: state.setCenter
   };
 };
 

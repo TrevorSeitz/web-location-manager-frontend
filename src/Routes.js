@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, HashRouter as Router, Route } from "react-router-dom";
+import { Switch, Router, Route } from "react-router-dom";
 import createBrowserHistory from "history/createBrowserHistory";
 
 import NewPlaceForm from "./containers/NewPlaceForm";

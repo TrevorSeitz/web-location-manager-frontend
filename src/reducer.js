@@ -21,6 +21,16 @@ const addLongReducer = (state = "", action) => {
   }
 };
 
+const setCenterReducer = (state = "", action) => {
+  switch (action.type) {
+    case "SET_CENTER":
+      return action.center;
+
+    default:
+      return state;
+  }
+};
+
 const getLocationsReducer = (state = [], action) => {
   switch (action.type) {
     case "GET_LOC":

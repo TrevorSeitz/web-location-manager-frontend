@@ -8,6 +8,7 @@ const ShowPlace = props => {
   function shorten(x) {
     return Number.parseFloat(x).toFixed(4);
   }
+
   if (place.id !== undefined) {
     var button = <button className="button">Edit</button>;
   } else {

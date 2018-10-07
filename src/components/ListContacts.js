@@ -7,22 +7,7 @@ let allContacts = [];
 let contactList = [];
 
 const ListAllContacts = props => {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = { allPlaces: [] };
-  //
-  //   this.FetchAllContactsFromAPI = this.FetchAllContactsFromAPI.bind(this);
-  // }
-
-  // FetchAllContactsFromAPI() {
-  //   // debugger;
-  //   props.getAllLocations(null, -180, 180, -90, 90);
-  // }
-
-  // componentDidMount() {
-  // FetchAllContactsFromAPI();
   props.getAllLocations(null, -180, 180, -90, 90);
-  // }
 
   let allPlaces = props.allPlaces.sort(function(a, b) {
     var nameA = a.name.toUpperCase(); // ignore upper and lowercase
@@ -38,9 +23,6 @@ const ListAllContacts = props => {
     return 0;
   });
 
-  // render() {
-  //   allContacts = props.allPlaces;
-  //   // debugger;
   return (
     <div className="contact-list">
       <div className="navbar">
@@ -85,7 +67,6 @@ const ListAllContacts = props => {
 };
 
 const mapStateToProps = state => {
-  // console.log(state);
   return {
     allPlaces: state.getAllLocationsReducer
   };
