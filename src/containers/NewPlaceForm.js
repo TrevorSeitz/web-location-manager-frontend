@@ -232,32 +232,29 @@ class NewPlaceForm extends Component {
   }
 
   render() {
-    if (this.state.place.fileName != "") {
+    // debugger;
+    if (
+      this.state.place.fileName === "" ||
+      this.state.place.fileName === undefined ||
+      this.state.place.fileName === null
+    ) {
+      var place = this.state.place;
+      place.latitude = "";
+      place.longitude = "";
+    } else {
       var place = this.state.place;
       place.latitude = this.props.fileLat;
       place.longitude = this.props.fileLong;
     }
-    // debugger;
-    // render() {
+
     const { reset } = this.props;
+
     return (
       <div>
-        <NavLink
-          to="/places/all_contacts"
-          exact
-          activeStyle={{
-            background: "darkblue"
-          }}
-        >
+        <NavLink to="/places/all_contacts" exact>
           <button className="button">See Contacts</button>
         </NavLink>
-        <NavLink
-          to="/places/visible_locations"
-          exact
-          activeStyle={{
-            background: "darkblue"
-          }}
-        >
+        <NavLink to="/places/visible_locations" exact>
           <button className="button">See locations</button>
         </NavLink>
         <div>
@@ -377,7 +374,7 @@ class NewPlaceForm extends Component {
             <div>
               <button
                 type="submit"
-                // disabled={pristine || submitting}
+                disabled={this.props.pristine}
                 onClick={this.handleSubmit}
               >
                 Submit
