@@ -57,18 +57,12 @@ export const getLocations = (dispatch, min_lng, max_lng, min_lat, max_lat) => {
   };
 };
 
-export const getAllLocations = (
-  dispatch,
-  min_lng,
-  max_lng,
-  min_lat,
-  max_lat
-) => {
+export const getAllLocations = dispatch => {
   return dispatch => {
     dispatch({ type: "ASYNC_START" });
 
     fetch(
-      `http://localhost:4000/api/places?min_lng=${min_lng}&max_lng=${max_lng}&min_lat=${min_lat}&max_lat=${max_lat}`,
+      `http://localhost:4000/api/places?min_lng=-180&max_lng=180&min_lat=-90&max_lat=90`,
       {
         method: "GET",
         headers: {
