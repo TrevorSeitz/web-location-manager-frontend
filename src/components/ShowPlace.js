@@ -5,10 +5,8 @@ import { NavLink, Link } from "react-router-dom";
 
 const ShowPlace = props => {
   const place = props.location.state.place;
-  debugger;
   const bounds = props.bounds;
-  // props.getLocations(null, -180, 180, -90, 90);
-  // const place = props.location.state.place;
+
   props.getLocations(null, bounds[0], bounds[1], bounds[2], bounds[3]);
 
   function shorten(x) {
@@ -21,7 +19,6 @@ const ShowPlace = props => {
     var button = "";
   }
 
-  // debugger;
   return (
     <div>
       <div className="navbar">

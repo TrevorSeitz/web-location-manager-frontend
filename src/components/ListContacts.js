@@ -2,15 +2,11 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../actions";
 import { NavLink } from "react-router-dom";
-// import { fetchPlacesFromApi } from "../containers/Map";
 
 let allContacts = [];
 let contactList = [];
 
 const ListAllContacts = props => {
-  // fetchPlacesFromApi();
-  debugger;
-
   let allPlaces = props.allPlaces.sort(function(a, b) {
     var nameA = a.name.toUpperCase(); // ignore upper and lowercase
     var nameB = b.name.toUpperCase(); // ignore upper and lowercase

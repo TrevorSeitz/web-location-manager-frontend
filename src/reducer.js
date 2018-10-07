@@ -32,7 +32,6 @@ const setCenterReducer = (state = "", action) => {
 };
 
 const setBoundsReducer = (state = "", action) => {
-  debugger;
   switch (action.type) {
     case "SET_BOUNDS":
       return action.bounds;
@@ -45,7 +44,6 @@ const setBoundsReducer = (state = "", action) => {
 const getLocationsReducer = (state = [], action) => {
   switch (action.type) {
     case "GET_LOC":
-      // debugger;
       return action.payload;
 
     default:
@@ -56,7 +54,6 @@ const getLocationsReducer = (state = [], action) => {
 const getAllLocationsReducer = (state = [], action) => {
   switch (action.type) {
     case "GET_ALL":
-      debugger;
       return action.payload;
 
     default:
@@ -67,7 +64,6 @@ const getAllLocationsReducer = (state = [], action) => {
 const delPlaceReducer = (state = [], action) => {
   switch (action.type) {
     case "DELETE_PLACE":
-      debugger;
       return state.filter(({ place }) => place.id !== action.id);
 
     default:

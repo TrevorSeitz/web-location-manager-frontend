@@ -15,8 +15,6 @@ export const addLong = mapLong => {
 };
 
 export const setBounds = bounds => {
-  // let center = [centerLat, centerLng];
-  debugger;
   return {
     type: "SET_BOUNDS",
     bounds: bounds
@@ -33,26 +31,16 @@ export const setCenter = (centerLat, centerLng) => {
 
 export const delPlace = (id, history) => {
   return dispatch => {
-    debugger;
     dispatch({ type: "ASYNC_START" });
     fetch(`http://localhost:4000/api/places/${id}`, {
       method: "DELETE"
-    })
-      // .then(getAllLocations(null, -180, 180, -90, 90))
-      .then(history.push("/places/visible_locations"));
-
-    // .then()
-    // .then(
-    //   // response => dispatch({ type: "DELETE_PLACE", id: id }),
-    //   history.push("/places/visible_locations")
-    // );
+    }).then(history.push("/places/visible_locations"));
   };
 };
 
 export const getLocations = (dispatch, min_lng, max_lng, min_lat, max_lat) => {
   return dispatch => {
     dispatch({ type: "ASYNC_START" });
-    debugger;
 
     fetch(
       `http://localhost:4000/api/places?min_lng=${min_lng}&max_lng=${max_lng}&min_lat=${min_lat}&max_lat=${max_lat}`,
@@ -93,4 +81,3 @@ export const getAllLocations = (
       .then(jsonData => dispatch({ type: "GET_ALL", payload: jsonData }));
   };
 };
-// };

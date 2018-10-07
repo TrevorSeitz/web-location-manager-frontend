@@ -43,7 +43,7 @@ class EditPlaceForm extends Component {
     function setProps(mapLat, mapLong, latRef, lngRef) {
       that.props.addLat(mapLat);
       that.props.addLong(mapLong);
-      //
+
       var place = that.state.place;
       place.latitude = that.props.fileLat;
       place.longitude = that.props.fileLong;
@@ -119,7 +119,6 @@ class EditPlaceForm extends Component {
   }
 
   submitForm() {
-    // debugger;
     let submitMethod = "patch";
     let url = "/api/places/" + this.state.place.id;
     axiosClient[submitMethod](url, this.buildFormData(), {
@@ -141,7 +140,6 @@ class EditPlaceForm extends Component {
       })
       .catch(error => {
         var place = this.state.place;
-        // place.errors = error.response.data;
         this.setState({
           isSubmittingForm: false,
           submitFormProgress: 0,
@@ -174,7 +172,6 @@ class EditPlaceForm extends Component {
   }
 
   buildFormData() {
-    // debugger;
     let formData = new FormData();
     formData.append("place[id]", this.state.place.id);
     formData.append("place[name]", this.state.place.name);

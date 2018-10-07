@@ -232,7 +232,6 @@ class NewPlaceForm extends Component {
   }
 
   render() {
-    // debugger;
     if (
       this.state.place.fileName === "" ||
       this.state.place.fileName === undefined ||
