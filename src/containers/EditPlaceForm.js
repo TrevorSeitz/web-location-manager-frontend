@@ -196,8 +196,13 @@ class EditPlaceForm extends Component {
         <NavLink to="/" exact>
           <button className="tripleButton">Add Location</button>
         </NavLink>
-        <NavLink to="/places/all_contacts" exact>
-          <button className="button">All Contacts</button>
+        <NavLink
+          to={{
+            pathname: "/places/all_contacts",
+            places: { places: this.props.allPlaces }
+          }}
+        >
+          <button className="button">See Contacts</button>
         </NavLink>
         <NavLink to="/places/visible_locations" exact>
           <button className="button">See Locations</button>
@@ -319,7 +324,8 @@ const mapStateToProps = state => {
   return {
     fileLat: state.addLatReducer,
     fileLong: state.addLongReducer,
-    places: state.getLocationsReducer
+    places: state.getLocationsReducer,
+    allPlaces: state.getAllLocationsReducer
   };
 };
 

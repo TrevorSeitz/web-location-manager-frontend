@@ -248,7 +248,6 @@ class NewPlaceForm extends Component {
     }
 
     const { reset } = this.props;
-    debugger;
     return (
       <div>
         <NavLink

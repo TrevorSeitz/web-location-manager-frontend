@@ -3,7 +3,9 @@ import * as actions from "../actions";
 import { NavLink, Link } from "react-router-dom";
 
 const ShowPlace = props => {
+  debugger;
   const place = props.location.state.place;
+  const places = props.location.state.places;
 
   function shorten(x) {
     return Number.parseFloat(x).toFixed(4);
@@ -14,15 +16,19 @@ const ShowPlace = props => {
   } else {
     var button = "";
   }
-
   return (
     <div>
       <div className="navbar">
         <NavLink to="/" exact>
           <button className="tripleButton">Add Location</button>
         </NavLink>
-        <NavLink to="/places/all_contacts" exact>
-          <button className="tripleButton">See Contacts</button>
+        <NavLink
+          to={{
+            pathname: "/places/all_contacts",
+            places: { places: places }
+          }}
+        >
+          <button className="button">See Contacts</button>
         </NavLink>
         <NavLink to="/places/visible_locations" exact>
           <button className="tripleButton">Back to locations</button>

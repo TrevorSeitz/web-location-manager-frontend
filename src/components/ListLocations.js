@@ -49,7 +49,7 @@ const ListLocations = props => {
                 <Link
                   to={{
                     pathname: `Place/${place.id}`,
-                    state: { place: place },
+                    state: { place: place, places: props.allPlaces },
                     query: { id: place.id }
                   }}
                 >
