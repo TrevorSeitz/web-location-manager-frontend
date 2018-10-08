@@ -14,6 +14,6 @@ The back end is started by running rails s -p 4000 in the folder that the repo i
 
 All information is saved locally on the rails server.
 
-Contributing Bug reports and pull requests are welcome on GitHub at https://github.com/TrevorSeitz/Burrito_Order_System.
+Contributing Bug reports and pull requests are welcome on GitHub at https://github.com/TrevorSeitz/location_manager_front-end/blob/master/README.md.
 
 License The app is available as open source under the terms of the MIT License.
