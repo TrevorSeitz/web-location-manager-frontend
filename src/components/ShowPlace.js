@@ -43,12 +43,12 @@ const ShowPlace = props => {
         <p>Contact Name: {place.contactName}</p>
         <p>Contact Phone: {place.contactPhone}</p>
         <p>email: {place.email}</p>
-        <p>image: </p>
+        {/*<p>image: </p>
         <img
           src={require("../assets/images/IMG_0774.jpg")}
           width="250"
           alt=""
-        />
+        />*/}
       </div>
 
       <div className="navbar">
