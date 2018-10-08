@@ -43,7 +43,8 @@ class Map extends Component {
     this.state = {
       places: [],
       centerLat: 43.156338,
-      centerLng: -77.614304
+      centerLng: -77.614304,
+      bounds: []
     };
   }
 
@@ -91,6 +92,16 @@ class Map extends Component {
 
     this.yMapBounds.min = yMapBounds.b;
     this.yMapBounds.max = yMapBounds.f;
+
+    this.setState({
+      bounds: [
+        this.xMapBounds.min,
+        this.xMapBounds.max,
+        this.yMapBounds.min,
+        this.yMapBounds.max
+      ]
+    });
+    this.props.setBounds(this.state.bounds);
   }
 
   render() {

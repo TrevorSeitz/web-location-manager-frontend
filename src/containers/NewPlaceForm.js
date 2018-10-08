@@ -151,10 +151,19 @@ class NewPlaceForm extends Component {
       }
     })
       .then(response => {
-        this.props.setCenter(this.props.fileLat, this.props.fileLong);
+        this.props.getLocations(
+          null,
+          this.props.bounds[0],
+          this.props.bounds[1],
+          this.props.bounds[2],
+          this.props.bounds[3]
+        );
         this.props.history.push({
           pathname: "/places/{this.state.place.id}",
-          state: { place: this.state.place }
+          state: {
+            place: this.state.place,
+            places: this.props.allPlaces
+          }
         });
       })
       .catch(error => {
@@ -442,7 +451,8 @@ const mapStateToProps = state => {
     fileLong: state.addLongReducer,
     places: state.getLocationsReducer,
     allPlaces: state.getAllLocationsReducer,
-    center: state.setCenterReducer
+    center: state.setCenterReducer,
+    bounds: state.setBoundsReducer
   };
 };
 
