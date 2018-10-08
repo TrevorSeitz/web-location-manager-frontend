@@ -11,6 +11,7 @@ import { NavLink } from "react-router-dom";
 class EditPlaceForm extends Component {
   constructor(props) {
     super(props);
+    debugger;
     this.state = {
       place: props.history.location.state.place
     };
@@ -135,16 +136,16 @@ class EditPlaceForm extends Component {
         });
         this.props.history.push({
           pathname: "/places/{this.state.place.id}",
-          state: { place: this.state.place }
+          state: { place: this.state.place, places: this.props.allPlaces }
         });
       })
       .catch(error => {
         var place = this.state.place;
-        this.setState({
-          isSubmittingForm: false,
-          submitFormProgress: 0,
-          place: place
-        });
+        // this.setState({
+        //   isSubmittingForm: false,
+        //   submitFormProgress: 0,
+        //   place: place
+        // });
       });
   }
 
