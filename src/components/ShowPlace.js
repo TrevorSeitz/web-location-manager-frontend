@@ -3,7 +3,6 @@ import * as actions from "../actions";
 import { NavLink, Link } from "react-router-dom";
 
 const ShowPlace = props => {
-  debugger;
   const place = props.location.state.place;
   const places = props.location.state.places;
 

@@ -7,7 +7,6 @@ let allContacts = [];
 let contactList = [];
 
 const ListAllContacts = props => {
-  debugger;
   const places = props.location.places.places;
   let allPlaces = places.sort(function(a, b) {
     var nameA = a.name.toUpperCase(); // ignore upper and lowercase
