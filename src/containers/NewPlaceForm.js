@@ -228,19 +228,19 @@ class NewPlaceForm extends Component {
   }
 
   render() {
-    // if (
-    //   this.state.place.fileName === "" ||
-    //   this.state.place.fileName === undefined ||
-    //   this.state.place.fileName === null
-    // ) {
-    //   var place = this.state.place;
-    //   place.latitude = "";
-    //   place.longitude = "";
-    // } else {
-    //   var place = this.state.place;
-    //   place.latitude = this.props.fileLat;
-    //   place.longitude = this.props.fileLong;
-    // }
+    if (
+      this.state.place.fileName === "" ||
+      this.state.place.fileName === undefined ||
+      this.state.place.fileName === null
+    ) {
+      var place = this.state.place;
+      place.latitude = "";
+      place.longitude = "";
+    } else {
+      var place = this.state.place;
+      place.latitude = this.props.fileLat;
+      place.longitude = this.props.fileLong;
+    }
 
     const { reset } = this.props;
     return (
