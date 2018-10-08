@@ -7,6 +7,7 @@ import EditPlaceForm from "./containers/EditPlaceForm";
 import ShowPlace from "./components/ShowPlace";
 import ListLocations from "./components/ListLocations";
 import ListContacts from "./components/ListContacts";
+import ListContactsByID from "./components/ListContactsByID";
 
 const history = createBrowserHistory();
 const Routes = () => (
@@ -15,6 +16,7 @@ const Routes = () => (
       <Route exact path="/" component={NewPlaceForm} />
       <Route exact path="/places/visible_locations" component={ListLocations} />
       <Route exact path="/places/all_contacts" component={ListContacts} />
+      <Route exact path="/places/contacts_by_id" component={ListContactsByID} />
       <Route path="/places/:id/edit" component={EditPlaceForm} />
       <Route path="/places/:id" component={ShowPlace} />
     </Switch>
