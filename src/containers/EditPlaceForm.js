@@ -11,7 +11,6 @@ import { NavLink } from "react-router-dom";
 class EditPlaceForm extends Component {
   constructor(props) {
     super(props);
-    debugger;
     this.state = {
       place: props.history.location.state.place
     };
