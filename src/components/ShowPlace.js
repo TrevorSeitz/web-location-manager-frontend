@@ -30,7 +30,7 @@ const ShowPlace = props => {
           <button className="button">See Contacts</button>
         </NavLink>
         <NavLink to="/places/visible_locations" exact>
-          <button className="tripleButton">Back to locations</button>
+          <button className="tripleButton">See locations</button>
         </NavLink>
       </div>
       <div key={place.id}>
