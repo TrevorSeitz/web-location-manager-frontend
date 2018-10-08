@@ -1,13 +1,9 @@
 import React from "react";
-import { connect } from "react-redux";
 import * as actions from "../actions";
 import { NavLink, Link } from "react-router-dom";
 
 const ShowPlace = props => {
   const place = props.location.state.place;
-  const bounds = props.bounds;
-
-  props.getLocations(null, bounds[0], bounds[1], bounds[2], bounds[3]);
 
   function shorten(x) {
     return Number.parseFloat(x).toFixed(4);
@@ -65,14 +61,4 @@ const ShowPlace = props => {
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    places: state.getLocationsReducer,
-    bounds: state.setBoundsReducer
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  actions
-)(ShowPlace);
+export default ShowPlace;

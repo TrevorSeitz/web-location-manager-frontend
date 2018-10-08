@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React from "react";
+// import { connect } from "react-redux";
 import * as actions from "../actions";
 import { NavLink } from "react-router-dom";
 
@@ -7,9 +7,9 @@ let allContacts = [];
 let contactList = [];
 
 const ListAllContacts = props => {
-  props.getAllLocations();
-  // debugger;
-  let allPlaces = props.allPlaces.sort(function(a, b) {
+  debugger;
+  const places = props.location.places.places;
+  let allPlaces = places.sort(function(a, b) {
     var nameA = a.name.toUpperCase(); // ignore upper and lowercase
     var nameB = b.name.toUpperCase(); // ignore upper and lowercase
     if (nameA < nameB) {
@@ -66,14 +66,16 @@ const ListAllContacts = props => {
   // }
 };
 
-const mapStateToProps = state => {
-  return {
-    places: state.getLocationsReducer,
-    allPlaces: state.getAllLocationsReducer
-  };
-};
+export default ListAllContacts;
 
-export default connect(
-  mapStateToProps,
-  actions
-)(ListAllContacts);
+// const mapStateToProps = state => {
+//   return {
+//     places: state.getLocationsReducer,
+//     allPlaces: state.getAllLocationsReducer
+//   };
+// };
+//
+// export default connect(
+//   mapStateToProps,
+//   actions
+// )(ListAllContacts);

@@ -28,6 +28,7 @@ class NewPlaceForm extends Component {
         GPSLatitudeRef: "",
         GPSLongitudeRef: ""
       },
+      // allPlaces: [],
       selectedPlaceImageFiles: [],
       submitFormProgress: 0,
       isSubmittingForm: false,
@@ -247,12 +248,18 @@ class NewPlaceForm extends Component {
     }
 
     const { reset } = this.props;
-
+    debugger;
     return (
       <div>
-        <NavLink to="/places/all_contacts" exact>
+        <NavLink
+          to={{
+            pathname: "/places/all_contacts",
+            places: { places: this.props.allPlaces }
+          }}
+        >
           <button className="button">See Contacts</button>
         </NavLink>
+
         <NavLink to="/places/visible_locations" exact>
           <button className="button">See locations</button>
         </NavLink>
@@ -452,7 +459,8 @@ const mapStateToProps = state => {
   return {
     fileLat: state.addLatReducer,
     fileLong: state.addLongReducer,
-    allPlaces: state.getLocationsReducer,
+    places: state.getLocationsReducer,
+    allPlaces: state.getAllLocationsReducer,
     center: state.setCenter
   };
 };

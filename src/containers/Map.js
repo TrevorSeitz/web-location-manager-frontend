@@ -106,6 +106,7 @@ class Map extends Component {
   // export { fetchPlacesFromApi };
 
   render() {
+    this.props.getAllLocations();
     let { centerLat, centerLng } = this.state;
     let places = this.props.places;
 
