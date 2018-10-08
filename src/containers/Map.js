@@ -43,8 +43,7 @@ class Map extends Component {
     this.state = {
       places: [],
       centerLat: 43.156338,
-      centerLng: -77.614304,
-      bounds: {}
+      centerLng: -77.614304
     };
   }
 
@@ -92,18 +91,7 @@ class Map extends Component {
 
     this.yMapBounds.min = yMapBounds.b;
     this.yMapBounds.max = yMapBounds.f;
-
-    let bounds = this.state.bounds;
-    bounds = [
-      this.xMapBounds.min,
-      this.xMapBounds.max,
-      this.yMapBounds.min,
-      this.yMapBounds.max
-    ];
-    this.props.setBounds(bounds);
   }
-
-  // export { fetchPlacesFromApi };
 
   render() {
     this.props.getAllLocations();
@@ -132,7 +120,7 @@ class Map extends Component {
 const mapStateToProps = state => {
   return {
     places: state.getLocationsReducer,
-    center: state.setCenter,
+    center: state.setCenterReducer,
     bounds: state.setBoundsReducer
   };
 };

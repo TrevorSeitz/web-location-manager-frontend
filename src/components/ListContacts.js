@@ -1,5 +1,4 @@
 import React from "react";
-// import { connect } from "react-redux";
 import * as actions from "../actions";
 import { NavLink } from "react-router-dom";
 
@@ -62,19 +61,6 @@ const ListAllContacts = props => {
       </div>
     </div>
   );
-  // }
 };
 
 export default ListAllContacts;
-
-// const mapStateToProps = state => {
-//   return {
-//     places: state.getLocationsReducer,
-//     allPlaces: state.getAllLocationsReducer
-//   };
-// };
-//
-// export default connect(
-//   mapStateToProps,
-//   actions
-// )(ListAllContacts);

@@ -121,7 +121,6 @@ class NewPlaceForm extends Component {
   handleChange(e) {
     var place = this.state.place;
     place[e.target.name] = e.target.value;
-    // this.setState.place({ [e.target.name]: e.target.value });
   }
 
   handleSubmit(e) {
@@ -141,8 +140,6 @@ class NewPlaceForm extends Component {
   }
 
   submitForm() {
-    // let submitMethod = this.state.place.id ? "patch" : "post";
-
     let submitMethod = "post";
     let url = "/api/places";
     axiosClient[submitMethod](url, this.buildFormData(), {
@@ -154,9 +151,7 @@ class NewPlaceForm extends Component {
       }
     })
       .then(response => {
-        this.setState({
-          didFormSubmissionComplete: true
-        });
+        this.props.setCenter(this.props.fileLat, this.props.fileLong);
         this.props.history.push({
           pathname: "/places/{this.state.place.id}",
           state: { place: this.state.place }
@@ -171,15 +166,11 @@ class NewPlaceForm extends Component {
           place: place
         });
       });
-    let latitude = this.state.place.latitude;
-    let longitude = this.state.place.longitude;
-    this.setState({ center: [latitude, longitude] });
+    // debugger;
+    // let latitude = this.state.place.latitude;
+    // let longitude = this.state.place.longitude;
+    // this.setState({ center: [latitude, longitude] });
   }
-  //
-  // redirectToTarget = () => {
-  //   let id = this.id;
-  //   this.props.history.push("/places/:id");
-  // };
 
   renderUploadFormProgress() {
     if (this.state.isSubmittingForm === false) {
@@ -198,7 +189,7 @@ class NewPlaceForm extends Component {
           areaValuemax="100"
           style={{ width: this.state.submitFormProgress + "%" }}
         >
-          {this.state.submitFormProgress}%autoComplete
+          {this.state.submitFormProgress}
         </div>
       </div>
     );
@@ -219,11 +210,7 @@ class NewPlaceForm extends Component {
     formData.append("place[GPSLatitudeRef]", this.state.place.GPSLatitudeRef);
     formData.append("place[GPSLongitudeRef]", this.state.place.GPSLongitudeRef);
 
-    formData.append(
-      // this.state.place.image.name,
-      this.state.place.image,
-      this.state.place.image.name
-    );
+    formData.append(this.state.place.image, this.state.place.image.name);
     return formData;
   }
 
@@ -455,7 +442,7 @@ const mapStateToProps = state => {
     fileLong: state.addLongReducer,
     places: state.getLocationsReducer,
     allPlaces: state.getAllLocationsReducer,
-    center: state.setCenter
+    center: state.setCenterReducer
   };
 };
 

@@ -73,6 +73,7 @@ const delPlaceReducer = (state = [], action) => {
 
 const reducers = {
   // ... your other reducers here ...
+  setCenterReducer,
   setBoundsReducer,
   delPlaceReducer,
   getAllLocationsReducer,

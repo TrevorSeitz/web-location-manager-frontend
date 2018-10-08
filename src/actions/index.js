@@ -22,7 +22,7 @@ export const setBounds = bounds => {
 };
 
 export const setCenter = (centerLat, centerLng) => {
-  let center = [centerLat, centerLng];
+  let center = { centerLat, centerLng };
   return {
     type: "SET_CENTER",
     center: center
@@ -34,7 +34,7 @@ export const delPlace = (id, history) => {
     dispatch({ type: "ASYNC_START" });
     fetch(`http://localhost:4000/api/places/${id}`, {
       method: "DELETE"
-    }).then(history.push("/places/visible_locations"));
+    }).then(history.push("/"));
   };
 };
 

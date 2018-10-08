@@ -141,11 +141,6 @@ class EditPlaceForm extends Component {
       })
       .catch(error => {
         var place = this.state.place;
-        // this.setState({
-        //   isSubmittingForm: false,
-        //   submitFormProgress: 0,
-        //   place: place
-        // });
       });
   }
 
