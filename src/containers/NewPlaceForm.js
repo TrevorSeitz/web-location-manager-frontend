@@ -36,18 +36,10 @@ class NewPlaceForm extends Component {
       center: this.props.center
     };
 
-    this.blankForm = this.state;
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleFileSelect = this.handleFileSelect.bind(this);
-    this.submitForm = this.submitForm.bind(this);
-    this.renderUploadFormProgress = this.renderUploadFormProgress.bind(this);
-    this.buildFormData = this.buildFormData.bind(this);
-
     ActiveStorage.start();
   }
 
-  handleFileSelect(e) {
+  handleFileSelect = e => {
     const image = e.target.files[0];
     const place = this.state.place;
     place.image = image;
@@ -59,11 +51,10 @@ class NewPlaceForm extends Component {
     let latRef = "";
     let lngRef = "";
     let fileName = "";
-    // let that = this;
 
     const setProps = (mapLat, mapLong, latRef, lngRef) => {
       const place = this.state.place;
-      // return {
+
       this.props.addLat(mapLat);
       this.props.addLong(mapLong);
 
@@ -72,12 +63,6 @@ class NewPlaceForm extends Component {
       place.GPSLatitudeRef = latRef;
       place.GPSLongitudeRef = lngRef;
     };
-
-    // that.setState.place({ latitude: that.props.fileLat });
-    // that.setState.place({ longitude: that.props.fileLong });
-    // that.setState.place({ GPSLatitudeRef: latRef });
-    // that.setState.place({ GPSLongitudeRef: lngRef });
-    // };
 
     function makeReadable(lat, lng, latRef, lngRef) {
       mapLat = parseFloat(
@@ -116,18 +101,17 @@ class NewPlaceForm extends Component {
 
       makeReadable(lat, lng, latRef, lngRef);
     });
-  }
+  };
 
-  handleChange(e) {
+  handleChange = e => {
     const place = this.state.place;
     place[e.target.name] = e.target.value;
-  }
+  };
 
-  handleSubmit(e) {
+  handleSubmit = e => {
     e.preventDefault();
 
     const place = this.state.place;
-
     this.setState(
       {
         isSubmittingForm: true,
@@ -137,9 +121,9 @@ class NewPlaceForm extends Component {
         this.submitForm(this);
       }
     );
-  }
+  };
 
-  submitForm() {
+  submitForm = () => {
     const submitMethod = "post";
     const url = "/api/places";
     axiosClient[submitMethod](url, this.buildFormData(), {
@@ -175,13 +159,9 @@ class NewPlaceForm extends Component {
           place: place
         });
       });
-    // debugger;
-    // let latitude = this.state.place.latitude;
-    // let longitude = this.state.place.longitude;
-    // this.setState({ center: [latitude, longitude] });
-  }
+  };
 
-  renderUploadFormProgress() {
+  renderUploadFormProgress = () => {
     if (this.state.isSubmittingForm === false) {
       return null;
     }
@@ -202,9 +182,9 @@ class NewPlaceForm extends Component {
         </div>
       </div>
     );
-  }
+  };
 
-  buildFormData() {
+  buildFormData = () => {
     const formData = new FormData();
 
     formData.append("place[fileName]", this.state.place.image.name);
@@ -222,7 +202,7 @@ class NewPlaceForm extends Component {
 
     formData.append(this.state.place.image, this.state.place.image.name);
     return formData;
-  }
+  };
 
   render() {
     if (
@@ -366,8 +346,6 @@ class NewPlaceForm extends Component {
                 />
               </div>
             </div>
-            {/* FileUpload here */}
-            {/* Buttons here */}
             <div>
               <button
                 type="submit"
@@ -390,61 +368,6 @@ class NewPlaceForm extends Component {
     );
   }
 }
-
-// <div>
-//   <label htmlFor="permit">Permit Required?(check for yes)</label>
-//   <div>
-//     <Field
-//       name="permit"
-//       id="permit"
-//       component="input"
-//       type="checkbox"
-//       value="false"
-//       checked={false}
-//       onChange={this.handleChange}
-//     />
-//   </div>
-// </div>
-
-// Favorite Color
-// <div>
-//   <label>Favorite Color</label>
-//   <div>
-//     <Field name="favoriteColor" component="select">
-//       <option />
-//       <option value="ff0000">Red</option>
-//       <option value="00ff00">Green</option>
-//       <option value="0000ff">Blue</option>
-//     </Field>
-//   </div>
-// </div>
-
-// Radio Buttons
-// <div>
-//   <label>Permit Required?</label>
-//   <div>
-//     <label>
-//       <Field
-//         name="permitYes"
-//         component="input"
-//         type="radio"
-//         value="yes"
-//         onChange={this.handleChange}
-//       />{" "}
-//       Yes
-//     </label>
-//     <label>
-//       <Field
-//         name="permitNo"
-//         component="input"
-//         type="radio"
-//         value="no"
-//         onChange={this.handleChange}
-//       />{" "}
-//       No
-//     </label>
-//   </div>
-// </div>
 
 const mapStateToProps = state => {
   return {
