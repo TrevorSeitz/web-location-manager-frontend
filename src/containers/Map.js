@@ -83,9 +83,9 @@ class Map extends Component {
   }
 
   getMapBounds() {
-    var mapBounds = this.map.getBounds();
-    var xMapBounds = mapBounds.b;
-    var yMapBounds = mapBounds.f;
+    const mapBounds = this.map.getBounds();
+    const xMapBounds = mapBounds.b;
+    const yMapBounds = mapBounds.f;
 
     this.xMapBounds.min = xMapBounds.b;
     this.xMapBounds.max = xMapBounds.f;
@@ -106,8 +106,8 @@ class Map extends Component {
 
   render() {
     this.props.getAllLocations();
-    let { centerLat, centerLng } = this.state;
-    let places = this.props.places;
+    const { centerLat, centerLng } = this.state;
+    const places = this.props.places;
 
     return (
       <div>

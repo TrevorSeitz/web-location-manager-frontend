@@ -27,24 +27,19 @@ class EditPlaceForm extends Component {
   }
 
   handleFileSelect(e) {
-    let image = e.target.files[0];
-    var place = this.state.place;
+    const image = e.target.files[0];
+    const place = this.state.place;
     place.image = image;
     place.fileName = image.name;
-    let mapLat = place.mapLat;
-    let mapLong = place.mapLong;
-    let lat = place.lat;
-    let lng = place.lng;
-    let latRef = place.latRef;
-    let lngRef = place.lngRef;
-    let fileName = place.fileName;
-    let that = this;
+    const that = this; //this should be replaced wit => for setProps
+
+    let { mapLat, mapLong, lat, lng, latRef, lngRef, filename } = place;
 
     function setProps(mapLat, mapLong, latRef, lngRef) {
       that.props.addLat(mapLat);
       that.props.addLong(mapLong);
 
-      var place = that.state.place;
+      const place = that.state.place;
       place.latitude = that.props.fileLat;
       place.longitude = that.props.fileLong;
       place.GPSLatitudeRef = latRef;
@@ -96,13 +91,13 @@ class EditPlaceForm extends Component {
   }
 
   handleChange(e) {
-    var place = this.state.place;
+    const place = this.state.place;
     place[e.target.name] = e.target.value;
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    var place = this.state.place;
+    const place = this.state.place;
     this.setState(
       {
         isSubmittingForm: true,
@@ -119,8 +114,8 @@ class EditPlaceForm extends Component {
   }
 
   submitForm() {
-    let submitMethod = "patch";
-    let url = "/api/places/" + this.state.place.id;
+    const submitMethod = "patch";
+    const url = "/api/places/" + this.state.place.id;
     axiosClient[submitMethod](url, this.buildFormData(), {
       onUploadProgress: progressEvent => {
         let percentage = (progressEvent.loaded * 100.0) / progressEvent.total;
@@ -139,7 +134,7 @@ class EditPlaceForm extends Component {
         });
       })
       .catch(error => {
-        var place = this.state.place;
+        const place = this.state.place;
       });
   }
 
@@ -179,8 +174,8 @@ class EditPlaceForm extends Component {
     return formData;
   }
 
-  Shorten(x) {
-    return Number.parseFloat(x).toFixed(4);
+  Shorten(latLng) {
+    return Number.parseFloat(latLng).toFixed(4);
   }
 
   render() {

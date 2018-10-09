@@ -48,8 +48,8 @@ class NewPlaceForm extends Component {
   }
 
   handleFileSelect(e) {
-    let image = e.target.files[0];
-    var place = this.state.place;
+    const image = e.target.files[0];
+    const place = this.state.place;
     place.image = image;
     place.fileName = image.name;
     // this.setState.place({ image: image });
@@ -67,7 +67,7 @@ class NewPlaceForm extends Component {
       that.props.addLat(mapLat);
       that.props.addLong(mapLong);
       //
-      var place = that.state.place;
+      const place = that.state.place;
       place.latitude = that.props.fileLat;
       place.longitude = that.props.fileLong;
       place.GPSLatitudeRef = latRef;
@@ -119,14 +119,14 @@ class NewPlaceForm extends Component {
   }
 
   handleChange(e) {
-    var place = this.state.place;
+    const place = this.state.place;
     place[e.target.name] = e.target.value;
   }
 
   handleSubmit(e) {
     e.preventDefault();
 
-    var place = this.state.place;
+    const place = this.state.place;
 
     this.setState(
       {
@@ -140,8 +140,8 @@ class NewPlaceForm extends Component {
   }
 
   submitForm() {
-    let submitMethod = "post";
-    let url = "/api/places";
+    const submitMethod = "post";
+    const url = "/api/places";
     axiosClient[submitMethod](url, this.buildFormData(), {
       onUploadProgress: progressEvent => {
         let percentage = (progressEvent.loaded * 100.0) / progressEvent.total;
@@ -167,7 +167,7 @@ class NewPlaceForm extends Component {
         });
       })
       .catch(error => {
-        var place = this.state.place;
+        const place = this.state.place;
         // place.errors = error.response.data;
         this.setState({
           isSubmittingForm: false,
@@ -205,7 +205,8 @@ class NewPlaceForm extends Component {
   }
 
   buildFormData() {
-    let formData = new FormData();
+    const formData = new FormData();
+
     formData.append("place[fileName]", this.state.place.image.name);
     formData.append("place[name]", this.state.place.name);
     formData.append("place[venue]", this.state.place.venue);
@@ -229,11 +230,11 @@ class NewPlaceForm extends Component {
       this.state.place.fileName === undefined ||
       this.state.place.fileName === null
     ) {
-      var place = this.state.place;
+      const place = this.state.place;
       place.latitude = "";
       place.longitude = "";
     } else {
-      var place = this.state.place;
+      const place = this.state.place;
       place.latitude = this.props.fileLat;
       place.longitude = this.props.fileLong;
     }

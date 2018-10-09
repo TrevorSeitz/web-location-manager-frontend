@@ -34,7 +34,9 @@ const ShowPlace = props => {
         </NavLink>
       </div>
       <div key={place.id}>
-        <p>Place: {place.name}</p>
+        <p>
+          {place.id} Place: {place.name}
+        </p>
         <p>
           Lat: {shorten(place.latitude)} Long: {shorten(place.longitude)}
         </p>

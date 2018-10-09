@@ -5,9 +5,9 @@ import { NavLink, Link } from "react-router-dom";
 import IMG_0774 from "../assets/images/IMG_0774.jpg";
 
 const ListLocations = props => {
-  let places = props.places.sort(function(a, b) {
-    var nameA = a.name.toUpperCase(); // ignore upper and lowercase
-    var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+  const places = props.places.sort(function(a, b) {
+    const nameA = a.name.toUpperCase(); // ignore upper and lowercase
+    const nameB = b.name.toUpperCase(); // ignore upper and lowercase
     if (nameA < nameB) {
       return -1;
     }

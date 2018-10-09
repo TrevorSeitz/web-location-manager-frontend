@@ -2,14 +2,14 @@ import React from "react";
 import * as actions from "../actions";
 import { NavLink } from "react-router-dom";
 
-let allContacts = [];
-let contactList = [];
+const allContacts = [];
+const contactList = [];
 
 const ListAllContacts = props => {
   const places = props.location.places.places;
-  let allPlaces = places.sort(function(a, b) {
-    var idA = a.id; // ignore upper and lowercase
-    var idB = b.id; // ignore upper and lowercase
+  const allPlaces = places.sort(function(a, b) {
+    const idA = a.id; // ignore upper and lowercase
+    const idB = b.id; // ignore upper and lowercase
     if (idA < idB) {
       return -1;
     }
