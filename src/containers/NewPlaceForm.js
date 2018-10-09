@@ -52,8 +52,6 @@ class NewPlaceForm extends Component {
     const place = this.state.place;
     place.image = image;
     place.fileName = image.name;
-    // this.setState.place({ image: image });
-    // this.setState.place({ fileName: image.name });
     let mapLat = "";
     let mapLong = "";
     let lat = "";
@@ -61,23 +59,25 @@ class NewPlaceForm extends Component {
     let latRef = "";
     let lngRef = "";
     let fileName = "";
-    let that = this;
+    // let that = this;
 
-    function setProps(mapLat, mapLong, latRef, lngRef) {
-      that.props.addLat(mapLat);
-      that.props.addLong(mapLong);
-      //
-      const place = that.state.place;
-      place.latitude = that.props.fileLat;
-      place.longitude = that.props.fileLong;
+    const setProps = (mapLat, mapLong, latRef, lngRef) => {
+      const place = this.state.place;
+      // return {
+      this.props.addLat(mapLat);
+      this.props.addLong(mapLong);
+
+      place.latitude = this.props.fileLat;
+      place.longitude = this.props.fileLong;
       place.GPSLatitudeRef = latRef;
       place.GPSLongitudeRef = lngRef;
+    };
 
-      // that.setState.place({ latitude: that.props.fileLat });
-      // that.setState.place({ longitude: that.props.fileLong });
-      // that.setState.place({ GPSLatitudeRef: latRef });
-      // that.setState.place({ GPSLongitudeRef: lngRef });
-    }
+    // that.setState.place({ latitude: that.props.fileLat });
+    // that.setState.place({ longitude: that.props.fileLong });
+    // that.setState.place({ GPSLatitudeRef: latRef });
+    // that.setState.place({ GPSLongitudeRef: lngRef });
+    // };
 
     function makeReadable(lat, lng, latRef, lngRef) {
       mapLat = parseFloat(
