@@ -15,87 +15,15 @@ class EditPlaceForm extends Component {
       place: props.history.location.state.place
     };
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleFileSelect = this.handleFileSelect.bind(this);
-    this.submitForm = this.submitForm.bind(this);
-    this.renderUploadFormProgress = this.renderUploadFormProgress.bind(this);
-    this.buildFormData = this.buildFormData.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
-
     ActiveStorage.start();
   }
 
-  handleFileSelect(e) {
-    const image = e.target.files[0];
-    const place = this.state.place;
-    place.image = image;
-    place.fileName = image.name;
-    const that = this; //this should be replaced wit => for setProps
-
-    let { mapLat, mapLong, lat, lng, latRef, lngRef } = place;
-
-    function setProps(mapLat, mapLong, latRef, lngRef) {
-      that.props.addLat(mapLat);
-      that.props.addLong(mapLong);
-
-      const place = that.state.place;
-      place.latitude = that.props.fileLat;
-      place.longitude = that.props.fileLong;
-      place.GPSLatitudeRef = latRef;
-      place.GPSLongitudeRef = lngRef;
-
-      // that.setState.place({ latitude: that.props.fileLat });
-      // that.setState.place({ longitude: that.props.fileLong });
-      // that.setState.place({ GPSLatitudeRef: latRef });
-      // that.setState.place({ GPSLongitudeRef: lngRef });
-    }
-
-    function makeReadable(lat, lng, latRef, lngRef) {
-      mapLat = parseFloat(
-        lat[0]["numerator"] +
-          lat[1]["numerator"] / 60 +
-          lat[2]["numerator"] / 360000
-      ).toFixed(13);
-
-      if (latRef === "S") {
-        mapLat = -1 * mapLat;
-      } else {
-        mapLat = 1 * mapLat;
-      }
-
-      mapLong = parseFloat(
-        lng[0]["numerator"] +
-          lng[1]["numerator"] / 60 +
-          lng[2]["numerator"] / 360000
-      ).toFixed(13);
-
-      if (lngRef === "W") {
-        mapLong = -1 * mapLong;
-      } else {
-        mapLong = 1 * mapLong;
-      }
-
-      setProps(mapLat, mapLong, latRef, lngRef);
-    }
-
-    // first function to be hit when handleFileSelect is called
-    EXIF.getData(image, function() {
-      lat = EXIF.getTag(this, "GPSLatitude");
-      lng = EXIF.getTag(this, "GPSLongitude");
-      latRef = EXIF.getTag(this, "GPSLatitudeRef");
-      lngRef = EXIF.getTag(this, "GPSLongitudeRef");
-
-      makeReadable(lat, lng, latRef, lngRef);
-    });
-  }
-
-  handleChange(e) {
+  handleChange = e => {
     const place = this.state.place;
     place[e.target.name] = e.target.value;
-  }
+  };
 
-  handleSubmit(e) {
+  handleSubmit = e => {
     e.preventDefault();
     const place = this.state.place;
     this.setState(
@@ -107,13 +35,13 @@ class EditPlaceForm extends Component {
         this.submitForm();
       }
     );
-  }
+  };
 
-  handleDelete(e) {
+  handleDelete = e => {
     this.props.delPlace(this.state.place.id, this.props.history);
-  }
+  };
 
-  submitForm() {
+  submitForm = () => {
     const submitMethod = "patch";
     const url = "/api/places/" + this.state.place.id;
     axiosClient[submitMethod](url, this.buildFormData(), {
@@ -132,9 +60,9 @@ class EditPlaceForm extends Component {
         state: { place: this.state.place, places: this.props.allPlaces }
       });
     });
-  }
+  };
 
-  renderUploadFormProgress() {
+  renderUploadFormProgress = () => {
     if (this.state.isSubmittingForm === false) {
       return null;
     }
@@ -155,9 +83,9 @@ class EditPlaceForm extends Component {
         </div>
       </div>
     );
-  }
+  };
 
-  buildFormData() {
+  buildFormData = () => {
     let formData = new FormData();
     formData.append("place[id]", this.state.place.id);
     formData.append("place[name]", this.state.place.name);
@@ -168,7 +96,7 @@ class EditPlaceForm extends Component {
     formData.append("place[description]", this.state.place.description);
 
     return formData;
-  }
+  };
 
   Shorten(latLng) {
     return Number.parseFloat(latLng).toFixed(4);
