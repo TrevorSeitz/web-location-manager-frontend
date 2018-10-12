@@ -1,5 +1,4 @@
 import React from "react";
-import * as actions from "../actions";
 import { NavLink, Link } from "react-router-dom";
 
 const ShowPlace = props => {
@@ -13,7 +12,7 @@ const ShowPlace = props => {
   if (place.id !== undefined) {
     var button = <button className="button">Edit</button>;
   } else {
-    var button = "";
+    button = "";
   }
   return (
     <div>
@@ -29,7 +28,13 @@ const ShowPlace = props => {
         >
           <button className="button">See Contacts</button>
         </NavLink>
-        <NavLink to="/places/visible_locations" exact>
+        <NavLink
+          to={{
+            pathname: "/places/visible_locations",
+            places: { places: props.places }
+          }}
+          exact
+        >
           <button className="tripleButton">See locations</button>
         </NavLink>
       </div>

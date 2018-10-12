@@ -1,5 +1,3 @@
-import { browserHistory } from "react-router-dom";
-
 export const addLat = mapLat => {
   return {
     type: "ADD_LAT",

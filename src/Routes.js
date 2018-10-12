@@ -5,7 +5,7 @@ import createBrowserHistory from "history/createBrowserHistory";
 import NewPlaceForm from "./containers/NewPlaceForm";
 import EditPlaceForm from "./containers/EditPlaceForm";
 import ShowPlace from "./components/ShowPlace";
-import ListLocations from "./components/ListLocations";
+import ListLocations from "./containers/ListLocations";
 import ListContacts from "./components/ListContacts";
 import ListContactsByID from "./components/ListContactsByID";
 

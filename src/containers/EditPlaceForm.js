@@ -33,7 +33,7 @@ class EditPlaceForm extends Component {
     place.fileName = image.name;
     const that = this; //this should be replaced wit => for setProps
 
-    let { mapLat, mapLong, lat, lng, latRef, lngRef, filename } = place;
+    let { mapLat, mapLong, lat, lng, latRef, lngRef } = place;
 
     function setProps(mapLat, mapLong, latRef, lngRef) {
       that.props.addLat(mapLat);
@@ -123,19 +123,15 @@ class EditPlaceForm extends Component {
           submitFormProgress: percentage
         });
       }
-    })
-      .then(response => {
-        this.setState({
-          didFormSubmissionComplete: true
-        });
-        this.props.history.push({
-          pathname: "/places/{this.state.place.id}",
-          state: { place: this.state.place, places: this.props.allPlaces }
-        });
-      })
-      .catch(error => {
-        const place = this.state.place;
+    }).then(response => {
+      this.setState({
+        didFormSubmissionComplete: true
       });
+      this.props.history.push({
+        pathname: "/places/{this.state.place.id}",
+        state: { place: this.state.place, places: this.props.allPlaces }
+      });
+    });
   }
 
   renderUploadFormProgress() {
@@ -179,7 +175,6 @@ class EditPlaceForm extends Component {
   }
 
   render() {
-    const { reset } = this.props;
     const place = this.state.place;
     return (
       <div>
@@ -194,8 +189,14 @@ class EditPlaceForm extends Component {
         >
           <button className="button">See Contacts</button>
         </NavLink>
-        <NavLink to="/places/visible_locations" exact>
-          <button className="button">See Locations</button>
+        <NavLink
+          to={{
+            pathname: "/places/visible_locations",
+            places: { places: this.props.places }
+          }}
+          exact
+        >
+          <button className="button">See locations</button>
         </NavLink>
         <div>
           <form onSubmit={this.handleSubmit}>

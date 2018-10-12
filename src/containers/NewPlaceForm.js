@@ -6,7 +6,7 @@ import axiosClient from "../axiosClient";
 import * as EXIF from "exif-js";
 import * as actions from "../actions";
 import * as ActiveStorage from "activestorage";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 class NewPlaceForm extends Component {
   constructor(props) {
@@ -51,7 +51,6 @@ class NewPlaceForm extends Component {
     let lng = "";
     let latRef = "";
     let lngRef = "";
-    let fileName = "";
 
     const setProps = (mapLat, mapLong, latRef, lngRef) => {
       const place = this.state.place;
@@ -206,6 +205,7 @@ class NewPlaceForm extends Component {
   };
 
   render() {
+    debugger;
     if (
       this.state.place.fileName === "" ||
       this.state.place.fileName === undefined ||
@@ -219,7 +219,6 @@ class NewPlaceForm extends Component {
       place.latitude = this.props.fileLat;
       place.longitude = this.props.fileLong;
     }
-
     const { reset } = this.props;
     return (
       <div>
@@ -232,7 +231,13 @@ class NewPlaceForm extends Component {
           <button className="button">See Contacts</button>
         </NavLink>
 
-        <NavLink to="/places/visible_locations" exact>
+        <NavLink
+          to={{
+            pathname: "/places/visible_locations",
+            places: { places: this.props.places }
+          }}
+          exact
+        >
           <button className="button">See locations</button>
         </NavLink>
         <div>

@@ -1,9 +1,5 @@
 import React from "react";
-import * as actions from "../actions";
 import { NavLink } from "react-router-dom";
-
-const allContacts = [];
-const contactList = [];
 
 const ListAllContacts = props => {
   const places = props.location.places.places;
@@ -34,11 +30,11 @@ const ListAllContacts = props => {
           <button className="button">Add Location</button>
         </NavLink>
         <NavLink
-          to="/places/visible_locations"
-          exact
-          activeStyle={{
-            background: "darkblue"
+          to={{
+            pathname: "/places/visible_locations",
+            places: { places: props.places }
           }}
+          exact
         >
           <button className="button">See locations</button>
         </NavLink>

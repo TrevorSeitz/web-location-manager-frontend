@@ -1,20 +1,23 @@
-import React from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../actions";
 import { NavLink, Link } from "react-router-dom";
-import IMG_0774 from "../assets/images/IMG_0774.jpg";
 
-// const ListLocations = props => {
 class ListLocations extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      places: {}
+      places: props.places
     };
   }
 
+  handleLikes = e => {
+    e.preventDefault();
+    debugger;
+  };
+
   render() {
-    const places = props.places.sort(function(a, b) {
+    const places = this.props.places.slice().sort(function(a, b) {
       const nameA = a.name.toUpperCase(); // ignore upper and lowercase
       const nameB = b.name.toUpperCase(); // ignore upper and lowercase
       if (nameA < nameB) {
@@ -28,22 +31,17 @@ class ListLocations extends Component {
       return 0;
     });
 
+    // debugger;
     return (
       <div>
         <div className="navbar">
-          <NavLink
-            to="/"
-            exact
-            activeStyle={{
-              background: "darkblue"
-            }}
-          >
+          <NavLink to="/" exact>
             <button className="button">Add Location</button>
           </NavLink>
           <NavLink
             to={{
               pathname: "/places/all_contacts",
-              places: { places: props.allPlaces }
+              places: { places: this.props.allPlaces }
             }}
           >
             <button className="button">See Contacts</button>
@@ -57,7 +55,7 @@ class ListLocations extends Component {
                   <Link
                     to={{
                       pathname: `Place/${place.id}`,
-                      state: { place: place, places: props.allPlaces },
+                      state: { place: place, places: this.props.allPlaces },
                       query: { id: place.id }
                     }}
                   >
@@ -69,7 +67,12 @@ class ListLocations extends Component {
                   <p>Contact Phone: {place.contactPhone}</p>
                   <p>email: {place.email}</p>
                   <p>Description: {place.description}</p>
-                  <p>likes: {place.likes}</p>
+                  {/*<p>
+                    Likes: {place.likes}
+                    <button type="button" onClick={this.handleLikes()}>
+                      Like
+                    </button>
+                  </p>*/}
                   {/*<p>image: {place.image}</p>
                 <img
                   src={require("../assets/images/IMG_0774.jpg")}
