@@ -23,6 +23,7 @@ class NewPlaceForm extends Component {
         contactName: "",
         contactPhone: "",
         email: "",
+        likes: "",
         permit: "",
         description: "",
         GPSLatitudeRef: "",
