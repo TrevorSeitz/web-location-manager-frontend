@@ -3,7 +3,6 @@ import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import submit from "../submit";
 import axiosClient from "../axiosClient";
-import * as EXIF from "exif-js";
 import * as actions from "../actions";
 import * as ActiveStorage from "activestorage";
 import { NavLink } from "react-router-dom";

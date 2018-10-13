@@ -20,13 +20,7 @@ const ListAllContacts = props => {
   return (
     <div className="contact-list">
       <div className="navbar">
-        <NavLink
-          to="/"
-          exact
-          activeStyle={{
-            background: "darkblue"
-          }}
-        >
+        <NavLink to="/" exact>
           <button className="button">Add Location</button>
         </NavLink>
         <NavLink

@@ -205,7 +205,6 @@ class NewPlaceForm extends Component {
   };
 
   render() {
-    debugger;
     if (
       this.state.place.fileName === "" ||
       this.state.place.fileName === undefined ||
@@ -362,7 +361,7 @@ class NewPlaceForm extends Component {
               </button>
               <button
                 type="button"
-                // disabled={pristine || submitting}
+                disabled={this.props.pristine}
                 onClick={reset}
               >
                 Clear Values
