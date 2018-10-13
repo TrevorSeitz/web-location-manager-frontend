@@ -1,20 +1,49 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../actions";
+import axiosClient from "../axiosClient";
 import { NavLink, Link } from "react-router-dom";
 
 class ListLocations extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      places: props.places
+      places: this.props.places
     };
   }
 
-  handleLikes = e => {
-    e.preventDefault();
+  handleLikes = place => {
     debugger;
+    // e.preventDefault();
+    place.likes += 1;
+    const id = place.id;
+    console.log(place.likes);
+    // debugger;
+    axiosClient["patch"]("/api/places/" + id, place.likes, {
+      onUploadProgress: progressEvent => {
+        let percentage = (progressEvent.loaded * 100.0) / progressEvent.total;
+        this.setState({
+          submitFormProgress: percentage
+        });
+      }
+    }).then(response => {
+      this.setState({
+        didFormSubmissionComplete: true
+      });
+      this.props.getLocations(
+        null,
+        this.props.bounds[0],
+        this.props.bounds[1],
+        this.props.bounds[2],
+        this.props.bounds[3]
+      );
+    });
   };
+
+  // handleChange = e => {
+  //   const place = this.state.place;
+  //   place[e.target.name] = e.target.value;
+  // };
 
   render() {
     const places = this.props.places.slice().sort(function(a, b) {
@@ -67,12 +96,14 @@ class ListLocations extends Component {
                   <p>Contact Phone: {place.contactPhone}</p>
                   <p>email: {place.email}</p>
                   <p>Description: {place.description}</p>
-                  {/*<p>
-                    Likes: {place.likes}
-                    <button type="button" onClick={this.handleLikes()}>
-                      Like
-                    </button>
-                  </p>*/}
+                  <p>Likes: {place.likes}</p>
+                  <button
+                    type="button"
+                    onClick={this.handleLikes.bind(this, place)}
+                  >
+                    Like
+                  </button>
+
                   {/*<p>image: {place.image}</p>
                 <img
                   src={require("../assets/images/IMG_0774.jpg")}
