@@ -8,28 +8,19 @@ class ListLocations extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      places: this.props.places
+      places: props.places
     };
   }
 
   handleLikes = place => {
-    debugger;
-    // e.preventDefault();
     place.likes += 1;
+    debugger;
     const id = place.id;
+    const submitMethod = "patch";
+    const url = `/api/places/${id}`;
     console.log(place.likes);
     // debugger;
-    axiosClient["patch"]("/api/places/" + id, place.likes, {
-      onUploadProgress: progressEvent => {
-        let percentage = (progressEvent.loaded * 100.0) / progressEvent.total;
-        this.setState({
-          submitFormProgress: percentage
-        });
-      }
-    }).then(response => {
-      this.setState({
-        didFormSubmissionComplete: true
-      });
+    axiosClient[submitMethod](url, place).then(response => {
       this.props.getLocations(
         null,
         this.props.bounds[0],
@@ -40,10 +31,10 @@ class ListLocations extends Component {
     });
   };
 
-  // handleChange = e => {
-  //   const place = this.state.place;
-  //   place[e.target.name] = e.target.value;
-  // };
+  componentDidMount() {
+    debugger;
+    this.setState({ places: this.props.places });
+  }
 
   render() {
     const places = this.props.places.slice().sort(function(a, b) {

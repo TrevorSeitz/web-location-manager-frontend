@@ -42,7 +42,7 @@ class EditPlaceForm extends Component {
 
   submitForm = () => {
     const submitMethod = "patch";
-    const url = "/api/places/" + this.state.place.id;
+    const url = `/api/places/${this.state.place.id}`;
     axiosClient[submitMethod](url, this.buildFormData(), {
       onUploadProgress: progressEvent => {
         let percentage = (progressEvent.loaded * 100.0) / progressEvent.total;
