@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+
 }
 
 .App-logo {
@@ -14,6 +15,43 @@
   color: white;
 }
 
+.button {
+  margin: 15px;
+}
+
+.tripleButton {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  margin-right: 15px;
+}
+
+.contact-list {
+  padding-bottom: 30px;
+}
+
+.input {
+  padding-left: 10px;
+  margin-bottom: 10px;
+}
+
+.main-page{
+  width:100%;
+  background-color: #659DBD
+}
+
+.map {
+  float:left;
+  width: 60%;
+  position: fixed;
+  overflow-y: hidden;
+}
+
+.not-map {
+  float:right;
+  width: 30%;
+  border-left: 10%;
+}
+
 .App-title {
   font-size: 1.5em;
 }
@@ -21,6 +59,8 @@
 .App-intro {
   font-size: large;
 }
+
+
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }

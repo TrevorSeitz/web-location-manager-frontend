@@ -4,16 +4,45 @@
   "private": true,
   "proxy": "http://localhost:4000",
   "dependencies": {
-    "react": "^16.5.0",
-    "react-dom": "^16.5.0",
-    "react-google-maps": "^7.3.0",
-    "react-scripts": "1.1.5"
+    "@types/googlemaps": "^3.30.14",
+    "@types/markerclustererplus": "^2.1.33",
+    "@types/react": "^16.4.16",
+    "activestorage": "^5.2.1",
+    "ajv": "^6.5.4",
+    "axios": "^0.15.3",
+    "connected-react-router": "^4.5.0",
+    "cors": "^2.8.4",
+    "dotenv": "^6.1.0",
+    "exif": "^0.6.0",
+    "exif-js": "^2.3.0",
+    "exif-parser": "^0.1.12",
+    "exifreader": "^2.5.0",
+    "google-maps-react": "^2.0.2",
+    "prop-types": "^15.6.2",
+    "react": "^16.5.2",
+    "react-axios": "^2.0.1",
+    "react-dom": "^16.5.2",
+    "react-google-maps": "^9.4.5",
+    "react-image-file": "^0.3.0",
+    "react-redux": "^5.0.7",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "1.1.5",
+    "redux": "^4.0.1",
+    "redux-form": "^7.4.2",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "exif-async": "^1.0.6",
+    "redux-devtools-extension": "^2.13.5"
   }
   
 }

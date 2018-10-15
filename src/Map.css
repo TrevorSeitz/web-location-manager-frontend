@@ -1,0 +1,10 @@
+.map {
+  float:left;
+  width: 60%;
+}
+
+.form {
+  float:right;
+  width: 35%;
+  border-left: 5%;
+}
