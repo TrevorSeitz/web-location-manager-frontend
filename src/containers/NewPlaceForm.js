@@ -205,6 +205,7 @@ class NewPlaceForm extends Component {
   };
 
   render() {
+    // console.log(API_KEY);
     if (
       this.state.place.fileName === "" ||
       this.state.place.fileName === undefined ||
@@ -233,7 +234,7 @@ class NewPlaceForm extends Component {
         <NavLink
           to={{
             pathname: "/places/visible_locations",
-            places: { places: this.props.places }
+            state: { places: this.props.places }
           }}
           exact
         >

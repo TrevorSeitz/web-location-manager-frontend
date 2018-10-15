@@ -119,7 +119,7 @@ class EditPlaceForm extends Component {
         <NavLink
           to={{
             pathname: "/places/visible_locations",
-            places: { places: this.props.places }
+            state: { places: this.props.places }
           }}
           exact
         >

@@ -8,7 +8,7 @@ class ListLocations extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      places: props.places
+      places: props.history.location.state.places
     };
   }
 
@@ -31,13 +31,8 @@ class ListLocations extends Component {
     });
   };
 
-  componentDidMount() {
-    debugger;
-    this.setState({ places: this.props.places });
-  }
-
   render() {
-    const places = this.props.places.slice().sort(function(a, b) {
+    const places = this.state.places.sort(function(a, b) {
       const nameA = a.name.toUpperCase(); // ignore upper and lowercase
       const nameB = b.name.toUpperCase(); // ignore upper and lowercase
       if (nameA < nameB) {

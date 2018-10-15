@@ -25,7 +25,7 @@ const ListAllContacts = props => {
         <NavLink
           to={{
             pathname: "/places/visible_locations",
-            places: { places: props.places }
+            state: { places: props.places }
           }}
           exact
         >

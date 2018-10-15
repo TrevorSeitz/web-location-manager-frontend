@@ -23,7 +23,7 @@ const ShowPlace = props => {
         <NavLink
           to={{
             pathname: "/places/all_contacts",
-            places: { places: places }
+            state: { places: places }
           }}
         >
           <button className="button">See Contacts</button>
