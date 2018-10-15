@@ -44,4 +44,5 @@
     "exif-async": "^1.0.6",
     "redux-devtools-extension": "^2.13.5"
   }
+  
 }

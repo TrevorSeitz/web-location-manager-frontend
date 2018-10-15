@@ -13,7 +13,6 @@ export class PlaceInfoWindow extends Component {
           <p>{contactName}</p>
           <p>{contactPhone}</p>
           <p>{email}</p>
-          <span />
         </div>
       </InfoWindow>
     );
