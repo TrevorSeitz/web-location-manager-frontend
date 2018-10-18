@@ -78,8 +78,7 @@ class EditPlaceForm extends Component {
           areaValuemax="100"
           style={{ width: this.state.submitFormProgress + "%" }}
         >
-          {this.state.submitFormProgress}
-          %autoComplete
+          {this.state.submitFormProgress}%autoComplete
         </div>
       </div>
     );
@@ -241,10 +240,10 @@ class EditPlaceForm extends Component {
 
 const mapStateToProps = state => {
   return {
-    fileLat: state.mainReducer,
-    fileLong: state.mainReducer,
-    places: state.mainReducer,
-    allPlaces: state.mainReducer
+    fileLat: state.addLatReducer,
+    fileLong: state.addLongReducer,
+    places: state.getLocationsReducer,
+    allPlaces: state.getAllLocationsReducer
   };
 };
 
