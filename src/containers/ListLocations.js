@@ -84,9 +84,10 @@ class ListLocations extends Component {
 
 const mapStateToProps = state => {
   return {
-    places: state.getLocationsReducer,
-    bounds: state.setBoundsReducer,
-    allPlaces: state.getAllLocationsReducer
+    center: state.mapReducer.center,
+    bounds: state.mapReducer.bounds,
+    places: state.getLocationsReducer.places,
+    allPlaces: state.getLocationsReducer.allPlaces
   };
 };
 

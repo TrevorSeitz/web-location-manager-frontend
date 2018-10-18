@@ -5,25 +5,35 @@ class LikesButton extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      likes: this.props.place.likes
+      // likes: this.props.place.likes
+      place: this.props.place
     };
   }
 
   updateLikes() {
-    debugger;
-    this.setState(() => {
-      return { likes: this.state.likes + 1 };
+    //   debugger;
+    //   this.setState(() => {
+    //     return { likes: this.state.place.likes + 1 };
+    //   });
+    // }
+
+    this.setState({
+      ...state,
+      place: {
+        ...state.place,
+        likes: this.state.place.likes + 1
+      }
     });
   }
 
   render() {
     return (
-      <fragment>
-        <p>Likes: {this.state.likes}</p>
+      <React.Fragment>
+        <p>Likes: {this.state.place.likes}</p>
         <button type="button" onClick={() => this.updateLikes()}>
           Like
         </button>
-      </fragment>
+      </React.Fragment>
     );
   }
 }
