@@ -1,23 +1,47 @@
 import { combineReducers } from "redux";
 import { reducer as formReducer } from "redux-form";
-import { addLatReducer, addLongReducer } from "./reducers/latLngReducers";
-import { setBoundsReducer, setCenterReducer } from "./reducers/mapReducers";
-import {
-  getLocationsReducer,
-  getAllLocationsReducer,
-  delPlaceReducer
-} from "./reducers/locationReducers";
+
+const mainReducer = (
+  state = {
+    lat: "",
+    lng: "",
+    center: "",
+    bounds: "",
+    places: [],
+    allPlaces: []
+  },
+  action
+) => {
+  switch (action.type) {
+    case "ADD_LAT":
+      return action.lat;
+
+    case "ADD_LONG":
+      return action.lng;
+
+    case "SET_CENTER":
+      return action.center;
+
+    case "SET_BOUNDS":
+      return action.bounds;
+
+    case "GET_LOC":
+      return action.places;
+
+    case "GET_ALL":
+      return action.allPlaces;
+
+    case "DELETE_PLACE":
+      return state.filter(({ place }) => place.id !== action.id);
+
+    default:
+      return state;
+  }
+};
 
 const reducers = {
   // ... your other reducers here ...
-  setCenterReducer,
-  setBoundsReducer,
-  // mapReducer,
-  getLocationsReducer,
-  getAllLocationsReducer,
-  delPlaceReducer,
-  addLatReducer,
-  addLongReducer,
+  mainReducer,
   form: formReducer
 };
 const rootReducer = combineReducers(reducers);

@@ -377,12 +377,12 @@ class NewPlaceForm extends Component {
 
 const mapStateToProps = state => {
   return {
-    fileLat: state.addLatReducer,
-    fileLong: state.addLongReducer,
-    places: state.getLocationsReducer,
-    allPlaces: state.getAllLocationsReducer,
-    center: state.setCenterReducer,
-    bounds: state.setBoundsReducer
+    fileLat: state.mainReducer,
+    fileLong: state.mainReducer,
+    places: state.mainReducer,
+    allPlaces: state.mainReducer,
+    center: state.mainReducer,
+    bounds: state.mainReducer
   };
 };
 
