@@ -10,10 +10,6 @@ class LikesButton extends Component {
   }
 
   updateLikes() {
-    // debugger;
-    // this.setState(() => {
-    //   return { likes: this.state.likes + 1 };
-    // });
     this.setState({
       ...this.state,
       place: {
@@ -21,6 +17,9 @@ class LikesButton extends Component {
         likes: this.state.place.likes + 1
       }
     });
+    const getLocations = this.props.getLocations;
+    const bounds = this.props.bounds;
+    SubmitEdit((place: place), (getLocations: getLocations), (bounds: bounds));
   }
 
   render() {

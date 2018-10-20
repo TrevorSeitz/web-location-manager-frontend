@@ -64,7 +64,11 @@ class ListLocations extends Component {
                   <p>Contact Phone: {place.contactPhone}</p>
                   <p>email: {place.email}</p>
                   <p>Description: {place.description}</p>
-                  <LikesButton place={place} bounds={this.props.bounds} />
+                  <LikesButton
+                    place={place}
+                    bounds={this.props.bounds}
+                    getLocations={this.props.getLocations}
+                  />
 
                   {/*<p>image: {place.image}</p>
                 <img
