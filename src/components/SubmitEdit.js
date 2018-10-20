@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axiosClient from "../axiosClient";
 
 const SubmitEdit = props => {
-  debugger;
+  console.log(props);
   const submitMethod = "patch";
   const url = `/api/places/${props.place.id}`;
   axiosClient[submitMethod](url, props.place).then(response => {
@@ -15,3 +15,5 @@ const SubmitEdit = props => {
     );
   });
 };
+
+export default SubmitEdit;
