@@ -2,20 +2,21 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 const ListAllContacts = props => {
-  const places = props.location.places.places;
-  const allPlaces = places.sort(function(a, b) {
-    const idA = a.id; // ignore upper and lowercase
-    const idB = b.id; // ignore upper and lowercase
-    if (idA < idB) {
-      return -1;
-    }
-    if (idA > idB) {
-      return 1;
-    }
+  const allPlaces = props.location.places.allPlaces
+    .slice()
+    .sort(function(a, b) {
+      const idA = a.id; // ignore upper and lowercase
+      const idB = b.id; // ignore upper and lowercase
+      if (idA < idB) {
+        return -1;
+      }
+      if (idA > idB) {
+        return 1;
+      }
 
-    // names must be equal
-    return 0;
-  });
+      // names must be equal
+      return 0;
+    });
 
   return (
     <div className="contact-list">
@@ -25,8 +26,7 @@ const ListAllContacts = props => {
         </NavLink>
         <NavLink
           to={{
-            pathname: "/places/visible_locations",
-            state: { places: places }
+            pathname: "/places/visible_locations"
           }}
           exact
         >
@@ -38,7 +38,7 @@ const ListAllContacts = props => {
         <NavLink
           to={{
             pathname: "/places/all_contacts",
-            places: { places: places }
+            places: { allPlaces: allPlaces }
           }}
         >
           <button className="button">Order Contacts by Location</button>

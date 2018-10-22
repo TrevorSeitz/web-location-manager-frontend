@@ -18,12 +18,7 @@ class LikesButton extends Component {
         likes: (this.state.place.likes += 1)
       }
     });
-    // debugger;
-    // <SubmitEdit
-    //   place={this.state.place}
-    //   getLocations={this.props.getLocations}
-    //   bounds={this.props.bounds}
-    // />;
+
     const submitMethod = "patch";
     const url = `/api/places/${this.state.id}`;
     axiosClient[submitMethod](url, this.state.place).then(response => {

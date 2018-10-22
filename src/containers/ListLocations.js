@@ -9,7 +9,8 @@ class ListLocations extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      places: props.history.location.state.places
+      // places: props.history.location.state.places
+      places: this.props.places
     };
   }
 
@@ -38,7 +39,7 @@ class ListLocations extends Component {
           <NavLink
             to={{
               pathname: "/places/all_contacts",
-              places: { places: this.props.allPlaces }
+              places: { allPlaces: this.props.allPlaces }
             }}
           >
             <button className="button">See Contacts</button>

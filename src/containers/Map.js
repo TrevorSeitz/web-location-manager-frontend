@@ -105,7 +105,6 @@ class Map extends Component {
   }
 
   render() {
-    this.props.getAllLocations();
     const { centerLat, centerLng } = this.state;
     const places = this.props.places;
 
