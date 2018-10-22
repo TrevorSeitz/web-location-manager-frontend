@@ -29,7 +29,6 @@ class ListLocations extends Component {
       return 0;
     });
 
-    // debugger;
     return (
       <div>
         <div className="navbar">
@@ -39,7 +38,7 @@ class ListLocations extends Component {
           <NavLink
             to={{
               pathname: "/places/all_contacts",
-              places: { allPlaces: this.props.allPlaces }
+              allPlaces: { allPlaces: this.props.allPlaces }
             }}
           >
             <button className="button">See Contacts</button>
@@ -53,7 +52,11 @@ class ListLocations extends Component {
                   <Link
                     to={{
                       pathname: `Place/${place.id}`,
-                      state: { place: place, places: this.props.allPlaces },
+                      state: {
+                        place: place,
+                        places: this.state.places,
+                        allPlaces: this.props.allPlaces
+                      },
                       query: { id: place.id }
                     }}
                   >
@@ -90,8 +93,8 @@ class ListLocations extends Component {
 const mapStateToProps = state => {
   return {
     places: state.getLocationsReducer,
-    bounds: state.setBoundsReducer,
-    allPlaces: state.getAllLocationsReducer
+    bounds: state.mapReducer,
+    allPlaces: state.getLocationsReducer
   };
 };
 

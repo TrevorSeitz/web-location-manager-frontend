@@ -14,7 +14,7 @@ const ShowPlace = props => {
   } else {
     button = "";
   }
-
+  debugger;
   //const button = (statement) ? true : false
   return (
     <div>
@@ -25,7 +25,7 @@ const ShowPlace = props => {
         <NavLink
           to={{
             pathname: "/places/all_contacts",
-            state: { places: places }
+            allPlaces: { allPlaces: this.props.allPlaces }
           }}
         >
           <button className="button">See Contacts</button>

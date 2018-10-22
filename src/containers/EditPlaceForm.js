@@ -78,7 +78,8 @@ class EditPlaceForm extends Component {
           areaValuemax="100"
           style={{ width: this.state.submitFormProgress + "%" }}
         >
-          {this.state.submitFormProgress}%autoComplete
+          {this.state.submitFormProgress}
+          %autoComplete
         </div>
       </div>
     );
@@ -111,7 +112,7 @@ class EditPlaceForm extends Component {
         <NavLink
           to={{
             pathname: "/places/all_contacts",
-            places: { places: this.props.allPlaces }
+            allPlaces: { allPlaces: this.props.allPlaces }
           }}
         >
           <button className="button">See Contacts</button>
@@ -240,10 +241,10 @@ class EditPlaceForm extends Component {
 
 const mapStateToProps = state => {
   return {
-    fileLat: state.addLatReducer,
-    fileLong: state.addLongReducer,
+    fileLat: state.LatlngReducer,
+    fileLong: state.LatlngReducer,
     places: state.getLocationsReducer,
-    allPlaces: state.getAllLocationsReducer
+    allPlaces: state.getLocationsReducer
   };
 };
 

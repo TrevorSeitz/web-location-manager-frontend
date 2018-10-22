@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 const ListAllContacts = props => {
-  const allPlaces = props.location.places.allPlaces
+  const allPlaces = props.location.allPlaces.allPlaces
     .slice()
     .sort(function(a, b) {
       const idA = a.id; // ignore upper and lowercase
@@ -38,7 +38,7 @@ const ListAllContacts = props => {
         <NavLink
           to={{
             pathname: "/places/all_contacts",
-            places: { allPlaces: allPlaces }
+            allPlaces: { allPlaces: this.props.allPlaces }
           }}
         >
           <button className="button">Order Contacts by Location</button>

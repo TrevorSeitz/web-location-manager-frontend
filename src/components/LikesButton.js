@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import SubmitEdit from "./SubmitEdit";
+// import SubmitEdit from "./SubmitEdit";
 import axiosClient from "../axiosClient";
 
 class LikesButton extends Component {
@@ -15,7 +15,7 @@ class LikesButton extends Component {
       ...this.state,
       place: {
         ...this.state.place,
-        likes: (this.state.place.likes += 1)
+        likes: this.state.place.likes + 1
       }
     });
 

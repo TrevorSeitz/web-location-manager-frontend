@@ -1,4 +1,10 @@
-export const mapReducer = (state = "", action) => {
+export const mapReducer = (
+  state = {
+    center: [],
+    bounds: []
+  },
+  action
+) => {
   switch (action.type) {
     case "SET_CENTER":
       return action.center;
