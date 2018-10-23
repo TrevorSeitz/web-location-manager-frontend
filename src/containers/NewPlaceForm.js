@@ -7,6 +7,8 @@ import * as EXIF from "exif-js";
 import * as actions from "../actions";
 import * as ActiveStorage from "activestorage";
 import { NavLink } from "react-router-dom";
+import HandleFileSelect from "../components/FileSelect";
+import HandleFileSelectFunction from "../components/FileSelectFunction";
 
 class NewPlaceForm extends Component {
   constructor(props) {
@@ -25,9 +27,9 @@ class NewPlaceForm extends Component {
         email: "",
         likes: "",
         permit: "",
-        description: "",
-        GPSLatitudeRef: "",
-        GPSLongitudeRef: ""
+        description: ""
+        // GPSLatitudeRef: "",
+        // GPSLongitudeRef: ""
       },
       // allPlaces: [],
       selectedPlaceImageFiles: [],
@@ -37,71 +39,8 @@ class NewPlaceForm extends Component {
       center: this.props.center
     };
 
-    ActiveStorage.start();
+    // ActiveStorage.start();
   }
-
-  handleFileSelect = e => {
-    const image = e.target.files[0];
-    const place = this.state.place;
-    place.image = image;
-    place.fileName = image.name;
-    let mapLat = "";
-    let mapLong = "";
-    let lat = "";
-    let lng = "";
-    let latRef = "";
-    let lngRef = "";
-
-    const setProps = (mapLat, mapLong, latRef, lngRef) => {
-      const place = this.state.place;
-
-      this.props.addLat(mapLat);
-      this.props.addLong(mapLong);
-
-      place.latitude = this.props.fileLat;
-      place.longitude = this.props.fileLong;
-      place.GPSLatitudeRef = latRef;
-      place.GPSLongitudeRef = lngRef;
-    };
-
-    function makeReadable(lat, lng, latRef, lngRef) {
-      mapLat = parseFloat(
-        lat[0]["numerator"] +
-          lat[1]["numerator"] / 60 +
-          lat[2]["numerator"] / 360000
-      ).toFixed(13);
-
-      if (latRef === "S") {
-        mapLat = -1 * mapLat;
-      } else {
-        mapLat = 1 * mapLat;
-      }
-
-      mapLong = parseFloat(
-        lng[0]["numerator"] +
-          lng[1]["numerator"] / 60 +
-          lng[2]["numerator"] / 360000
-      ).toFixed(13);
-
-      if (lngRef === "W") {
-        mapLong = -1 * mapLong;
-      } else {
-        mapLong = 1 * mapLong;
-      }
-
-      setProps(mapLat, mapLong, latRef, lngRef);
-    }
-
-    // first function to be hit when handleFileSelect is called
-    EXIF.getData(image, function() {
-      lat = EXIF.getTag(this, "GPSLatitude");
-      lng = EXIF.getTag(this, "GPSLongitude");
-      latRef = EXIF.getTag(this, "GPSLatitudeRef");
-      lngRef = EXIF.getTag(this, "GPSLongitudeRef");
-
-      makeReadable(lat, lng, latRef, lngRef);
-    });
-  };
 
   handleChange = e => {
     const place = this.state.place;
@@ -196,32 +135,22 @@ class NewPlaceForm extends Component {
     formData.append("place[contactPhone]", this.state.place.contactPhone);
     formData.append("place[email]", this.state.place.email);
     // formData.append("place[permit]", this.state.place.permit);
-    formData.append("place[description]", this.state.place.description);
-    formData.append("place[GPSLatitudeRef]", this.state.place.GPSLatitudeRef);
-    formData.append("place[GPSLongitudeRef]", this.state.place.GPSLongitudeRef);
+    // formData.append("place[description]", this.state.place.description);
+    // formData.append("place[GPSLatitudeRef]", this.state.place.GPSLatitudeRef);
+    // formData.append("place[GPSLongitudeRef]", this.state.place.GPSLongitudeRef);
 
     formData.append(this.state.place.image, this.state.place.image.name);
     return formData;
   };
 
+  getLatLong = e => {
+    e.persist();
+    const latLong = HandleFileSelectFunction(e, this.props);
+  };
+
   render() {
-    // console.log(API_KEY);
-    if (
-      this.state.place.fileName === "" ||
-      this.state.place.fileName === undefined ||
-      this.state.place.fileName === null
-    ) {
-      const place = this.state.place;
-      place.latitude = "";
-      place.longitude = "";
-    } else {
-      const place = this.state.place;
-      place.latitude = this.props.fileLat;
-      place.longitude = this.props.fileLong;
-    }
     const { reset } = this.props;
 
-    // console.log(this.props);
     return (
       <div>
         <NavLink
@@ -253,7 +182,7 @@ class NewPlaceForm extends Component {
                   accept="image/*"
                   multiple={false}
                   disabled={this.state.isSubmittingForm}
-                  onChange={this.handleFileSelect}
+                  onChange={this.getLatLong}
                 />
               </div>
             </div>
@@ -265,7 +194,9 @@ class NewPlaceForm extends Component {
                   name="lat"
                   component="input"
                   type="text"
-                  placeholder={this.state.place.latitude}
+                  placeholder={
+                    this.props.fileLat === 0 ? "" : this.props.fileLat
+                  }
                   onChange={this.handleChange}
                 />
                 <Field
@@ -273,7 +204,9 @@ class NewPlaceForm extends Component {
                   name="long"
                   component="input"
                   type="text"
-                  placeholder={this.state.place.longitude}
+                  placeholder={
+                    this.props.fileLong === 0 ? "" : this.props.fileLong
+                  }
                   onChange={this.handleChange}
                 />
               </div>
@@ -380,19 +313,10 @@ class NewPlaceForm extends Component {
 const mapStateToProps = state => {
   // console.log(state);
   return {
-    fileLat: state.LatlngReducer,
-    fileLong: state.LatlngReducer,
-    // places: state.getLocationsReducer,
+    fileLat: state.latLngReducer.lat,
+    fileLong: state.latLngReducer.lng,
     places: state.getLocationsReducer.places,
     allPlaces: state.getLocationsReducer.allPlaces,
-    // center: state.mapReducer,
-    // bounds: state.mapReducer
-    // };
-
-    //   fileLat: state.addLatLngReducer.lat,
-    //   fileLong: state.addLatLngReducer.lng,
-    // places: state.getLocationsReducer.places,
-    //   allPlaces: state.getLocationsReducer.allPlaces,
     center: state.mapReducer.center,
     bounds: state.mapReducer.bounds
   };
