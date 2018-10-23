@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 const ListAllContacts = props => {
+  // console.log(props);
   const allPlaces = props.location.allPlaces.allPlaces
     .slice()
     .sort(function(a, b) {

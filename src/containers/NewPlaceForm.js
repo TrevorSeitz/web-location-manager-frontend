@@ -221,7 +221,7 @@ class NewPlaceForm extends Component {
     }
     const { reset } = this.props;
 
-    console.log(this.props);
+    // console.log(this.props);
     return (
       <div>
         <NavLink

@@ -4,6 +4,8 @@ import { NavLink, Link } from "react-router-dom";
 const ShowPlace = props => {
   const place = props.location.state.place;
   const places = props.location.state.places;
+  const allPlaces = props.location.state.allPlaces;
+  // console.log(props);
 
   function shorten(x) {
     return Number.parseFloat(x).toFixed(4);
@@ -25,7 +27,7 @@ const ShowPlace = props => {
         <NavLink
           to={{
             pathname: "/places/all_contacts",
-            allPlaces: { allPlaces: this.props.allPlaces }
+            allPlaces: { allPlaces: allPlaces }
           }}
         >
           <button className="button">See Contacts</button>
@@ -33,7 +35,7 @@ const ShowPlace = props => {
         <NavLink
           to={{
             pathname: "/places/visible_locations",
-            places: { places: props.places }
+            places: { places: places }
           }}
           exact
         >

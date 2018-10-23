@@ -103,6 +103,7 @@ class EditPlaceForm extends Component {
   }
 
   render() {
+    console.log(this.props);
     const place = this.state.place;
     return (
       <div>
@@ -120,7 +121,7 @@ class EditPlaceForm extends Component {
         <NavLink
           to={{
             pathname: "/places/visible_locations",
-            state: { places: this.props.places }
+            places: { places: this.props.places }
           }}
           exact
         >
@@ -246,8 +247,8 @@ const mapStateToProps = state => {
     //     places: state.getLocationsReducer,
     //     allPlaces: state.getLocationsReducer
 
-    fileLat: state.addLatLngReducer.lat,
-    fileLong: state.addLatLngReducer.lng,
+    fileLat: state.latLngReducer.lat,
+    fileLong: state.latLngReducer.lng,
     places: state.getLocationsReducer.places,
     allPlaces: state.getLocationsReducer.allPlaces,
     center: state.mapReducer.center,
