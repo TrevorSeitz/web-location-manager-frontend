@@ -242,11 +242,6 @@ class EditPlaceForm extends Component {
 
 const mapStateToProps = state => {
   return {
-    //     fileLat: state.LatlngReducer,
-    //     fileLong: state.LatlngReducer,
-    //     places: state.getLocationsReducer,
-    //     allPlaces: state.getLocationsReducer
-
     fileLat: state.latLngReducer.lat,
     fileLong: state.latLngReducer.lng,
     places: state.getLocationsReducer.places,
