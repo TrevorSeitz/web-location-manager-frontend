@@ -10,25 +10,32 @@ class LikesButton extends Component {
   }
 
   updateLikes() {
-    this.setState({
-      ...this.state,
-      place: {
-        ...this.state.place,
-        likes: this.state.place.likes + 1
+    this.setState(
+      {
+        ...this.state,
+        place: {
+          ...this.state.place,
+          likes: this.state.place.likes + 1
+        }
+        // });
+      },
+      async () => {
+        try {
+          // await this.callAsync(
+          const submitMethod = "patch";
+          const url = `/api/places/${this.state.id}`;
+          axiosClient[submitMethod](url, this.state.place);
+        } finally {
+          return this.props.getLocations(
+            null,
+            this.props.bounds[0],
+            this.props.bounds[1],
+            this.props.bounds[2],
+            this.props.bounds[3]
+          );
+        }
       }
-    });
-
-    const submitMethod = "patch";
-    const url = `/api/places/${this.state.id}`;
-    axiosClient[submitMethod](url, this.state.place).then(response => {
-      return this.props.getLocations(
-        null,
-        this.props.bounds[0],
-        this.props.bounds[1],
-        this.props.bounds[2],
-        this.props.bounds[3]
-      );
-    });
+    );
   }
 
   render() {
