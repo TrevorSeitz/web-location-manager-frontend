@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import SubmitEdit from "./SubmitEdit";
 import axiosClient from "../axiosClient";
 
 class LikesButton extends Component {
