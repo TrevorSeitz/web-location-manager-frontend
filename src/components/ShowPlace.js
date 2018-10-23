@@ -9,13 +9,13 @@ const ShowPlace = props => {
     return Number.parseFloat(x).toFixed(4);
   }
 
-  if (place.id !== undefined) {
-    var button = <button className="button">Edit</button>;
-  } else {
-    button = "";
-  }
-  debugger;
-  //const button = (statement) ? true : false
+  // if (place.id !== undefined) {
+  //   var button = <button className="button">Edit</button>;
+  // } else {
+  //   button = "";
+  // }
+  const button =
+    place.id === undefined ? "" : <button className="button">Edit</button>;
   return (
     <div>
       <div className="navbar">

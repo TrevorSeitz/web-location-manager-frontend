@@ -15,6 +15,7 @@ class ListLocations extends Component {
   }
 
   render() {
+    console.log(this.props);
     const places = this.state.places.sort(function(a, b) {
       const nameA = a.name.toUpperCase(); // ignore upper and lowercase
       const nameB = b.name.toUpperCase(); // ignore upper and lowercase
@@ -91,16 +92,17 @@ class ListLocations extends Component {
 }
 
 const mapStateToProps = state => {
+  // console.log(state);
   return {
     // <<<<<<< HEAD
-    places: state.getLocationsReducer,
-    bounds: state.mapReducer,
-    allPlaces: state.getLocationsReducer
+    // places: state.getLocationsReducer,
+    // bounds: state.mapReducer,
+    // allPlaces: state.getLocationsReducer,
     // =======
-    //     center: state.mapReducer.center,
-    //     bounds: state.mapReducer.bounds,
-    //     places: state.getLocationsReducer.places,
-    //     allPlaces: state.getLocationsReducer.allPlaces
+    center: state.mapReducer.center,
+    bounds: state.mapReducer.bounds,
+    places: state.getLocationsReducer.places,
+    allPlaces: state.getLocationsReducer.allPlaces
     // >>>>>>> master
   };
 };

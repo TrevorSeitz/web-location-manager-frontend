@@ -130,7 +130,7 @@ class Map extends Component {
 }
 
 const mapStateToProps = state => {
-  debugger;
+  // console.log(state);
   return {
     // <<<<<<< HEAD
     places: state.getLocationsReducer,
@@ -138,10 +138,10 @@ const mapStateToProps = state => {
     center: state.mapReducer,
     bounds: state.mapReducer
     // =======
-    //     center: state.mapReducer.center,
-    //     bounds: state.mapReducer.bounds,
-    //     places: state.getLocationsReducer.places,
-    //     allPlaces: state.getLocationsReducer.allPlaces
+    // center: state.mapReducer.center,
+    // bounds: state.mapReducer.bounds,
+    // places: state.getLocationsReducer.places,
+    // allPlaces: state.getLocationsReducer.allPlaces
     // >>>>>>> master
   };
 };
