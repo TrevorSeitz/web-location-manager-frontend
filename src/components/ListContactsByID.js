@@ -38,7 +38,7 @@ const ListAllContacts = props => {
         <NavLink
           to={{
             pathname: "/places/all_contacts",
-            allPlaces: { allPlaces: this.props.allPlaces }
+            allPlaces: { allPlaces: allPlaces }
           }}
         >
           <button className="button">Order Contacts by Location</button>

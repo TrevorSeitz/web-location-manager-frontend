@@ -15,7 +15,6 @@ class ListLocations extends Component {
   }
 
   render() {
-    console.log(this.props);
     const places = this.state.places.sort(function(a, b) {
       const nameA = a.name.toUpperCase(); // ignore upper and lowercase
       const nameB = b.name.toUpperCase(); // ignore upper and lowercase

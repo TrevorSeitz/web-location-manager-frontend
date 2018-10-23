@@ -2,7 +2,6 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 const ListAllContacts = props => {
-  console.log(props);
   const allPlaces = props.location.allPlaces.allPlaces
     .slice()
     .sort(function(a, b) {
@@ -18,7 +17,6 @@ const ListAllContacts = props => {
       // names must be equal
       return 0;
     });
-  console.log(props);
   return (
     <div className="contact-list">
       <div className="navbar">

@@ -220,7 +220,8 @@ class NewPlaceForm extends Component {
       place.longitude = this.props.fileLong;
     }
     const { reset } = this.props;
-    debugger;
+
+    console.log(this.props);
     return (
       <div>
         <NavLink
@@ -381,19 +382,20 @@ const mapStateToProps = state => {
   return {
     fileLat: state.LatlngReducer,
     fileLong: state.LatlngReducer,
-    places: state.getLocationsReducer,
-    allPlaces: state.getLocationsReducer,
-    center: state.mapReducer,
-    bounds: state.mapReducer
-  };
+    // places: state.getLocationsReducer,
+    places: state.getLocationsReducer.places,
+    allPlaces: state.getLocationsReducer.allPlaces,
+    // center: state.mapReducer,
+    // bounds: state.mapReducer
+    // };
 
-  //   fileLat: state.addLatLngReducer.lat,
-  //   fileLong: state.addLatLngReducer.lng,
-  //   places: state.getLocationsReducer.places,
-  //   allPlaces: state.getLocationsReducer.allPlaces,
-  //   center: state.mapReducer.center,
-  //   bounds: state.mapReducer.bounds
-  // };
+    //   fileLat: state.addLatLngReducer.lat,
+    //   fileLong: state.addLatLngReducer.lng,
+    // places: state.getLocationsReducer.places,
+    //   allPlaces: state.getLocationsReducer.allPlaces,
+    center: state.mapReducer.center,
+    bounds: state.mapReducer.bounds
+  };
 };
 
 export default connect(
