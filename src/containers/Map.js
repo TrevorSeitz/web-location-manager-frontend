@@ -85,14 +85,14 @@ class Map extends Component {
 
   getMapBounds() {
     const mapBounds = this.map.getBounds();
-    const xMapBounds = mapBounds.b;
-    const yMapBounds = mapBounds.f;
+    const xMapBounds = mapBounds.j;
+    const yMapBounds = mapBounds.l;
 
-    this.xMapBounds.min = xMapBounds.b;
-    this.xMapBounds.max = xMapBounds.f;
+    this.xMapBounds.min = xMapBounds.j;
+    this.xMapBounds.max = xMapBounds.l;
 
-    this.yMapBounds.min = yMapBounds.b;
-    this.yMapBounds.max = yMapBounds.f;
+    this.yMapBounds.min = yMapBounds.j;
+    this.yMapBounds.max = yMapBounds.l;
 
     this.setState({
       bounds: [
@@ -131,17 +131,17 @@ class Map extends Component {
 const mapStateToProps = state => {
   debugger;
   return {
-<<<<<<< HEAD
+    // <<<<<<< HEAD
     places: state.getLocationsReducer,
     allPlaces: state.getLocationsReducer,
     center: state.mapReducer,
     bounds: state.mapReducer
-=======
-    center: state.mapReducer.center,
-    bounds: state.mapReducer.bounds,
-    places: state.getLocationsReducer.places,
-    allPlaces: state.getLocationsReducer.allPlaces
->>>>>>> master
+    // =======
+    //     center: state.mapReducer.center,
+    //     bounds: state.mapReducer.bounds,
+    //     places: state.getLocationsReducer.places,
+    //     allPlaces: state.getLocationsReducer.allPlaces
+    // >>>>>>> master
   };
 };
 

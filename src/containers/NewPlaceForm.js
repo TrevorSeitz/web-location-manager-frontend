@@ -379,21 +379,21 @@ class NewPlaceForm extends Component {
 const mapStateToProps = state => {
   console.log(state);
   return {
-    // fileLat: state.LatlngReducer,
-    // fileLong: state.LatlngReducer,
-    // places: state.getLocationsReducer,
-    // allPlaces: state.getLocationsReducer,
-    // center: state.mapReducer,
-    // bounds: state.mapReducer
-    // };
-
-    fileLat: state.addLatLngReducer.lat,
-    fileLong: state.addLatLngReducer.lng,
-    places: state.getLocationsReducer.places,
-    allPlaces: state.getLocationsReducer.allPlaces,
-    center: state.mapReducer.center,
-    bounds: state.mapReducer.bounds
+    fileLat: state.LatlngReducer,
+    fileLong: state.LatlngReducer,
+    places: state.getLocationsReducer,
+    allPlaces: state.getLocationsReducer,
+    center: state.mapReducer,
+    bounds: state.mapReducer
   };
+
+  //   fileLat: state.addLatLngReducer.lat,
+  //   fileLong: state.addLatLngReducer.lng,
+  //   places: state.getLocationsReducer.places,
+  //   allPlaces: state.getLocationsReducer.allPlaces,
+  //   center: state.mapReducer.center,
+  //   bounds: state.mapReducer.bounds
+  // };
 };
 
 export default connect(
