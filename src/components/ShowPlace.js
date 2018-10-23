@@ -7,15 +7,10 @@ const ShowPlace = props => {
   const allPlaces = props.location.state.allPlaces;
   // console.log(props);
 
-  function shorten(x) {
-    return Number.parseFloat(x).toFixed(4);
+  function shorten(latLng) {
+    return Number.parseFloat(latLng).toFixed(4);
   }
 
-  // if (place.id !== undefined) {
-  //   var button = <button className="button">Edit</button>;
-  // } else {
-  //   button = "";
-  // }
   const button =
     place.id === undefined ? "" : <button className="button">Edit</button>;
   return (
