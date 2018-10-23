@@ -1,26 +1,16 @@
-export const getLocationsReducer = (state = [], action) => {
+export const getLocationsReducer = (
+  state = { places: [], allPlaces: [] },
+  action
+) => {
   switch (action.type) {
     case "GET_LOC":
       const places = action.payload;
       return places;
 
-    default:
-      return state;
-  }
-};
-
-export const getAllLocationsReducer = (state = [], action) => {
-  switch (action.type) {
     case "GET_ALL":
-      return action.payload;
+      const allPlaces = action.payload;
+      return allPlaces;
 
-    default:
-      return state;
-  }
-};
-
-export const delPlaceReducer = (state = [], action) => {
-  switch (action.type) {
     case "DELETE_PLACE":
       return state.filter(({ place }) => place.id !== action.id);
 

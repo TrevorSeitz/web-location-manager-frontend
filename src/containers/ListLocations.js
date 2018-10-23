@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../actions";
-import axiosClient from "../axiosClient";
+// import axiosClient from "../axiosClient";
 import { NavLink, Link } from "react-router-dom";
+import LikesButton from "../components/LikesButton";
 
 class ListLocations extends Component {
   constructor(props) {
@@ -11,25 +12,6 @@ class ListLocations extends Component {
       places: props.history.location.state.places
     };
   }
-
-  handleLikes = place => {
-    place.likes += 1;
-    debugger;
-    const id = place.id;
-    const submitMethod = "patch";
-    const url = `/api/places/${id}`;
-    console.log(place.likes);
-    // debugger;
-    axiosClient[submitMethod](url, place).then(response => {
-      this.props.getLocations(
-        null,
-        this.props.bounds[0],
-        this.props.bounds[1],
-        this.props.bounds[2],
-        this.props.bounds[3]
-      );
-    });
-  };
 
   render() {
     const places = this.state.places.sort(function(a, b) {
@@ -82,13 +64,7 @@ class ListLocations extends Component {
                   <p>Contact Phone: {place.contactPhone}</p>
                   <p>email: {place.email}</p>
                   <p>Description: {place.description}</p>
-                  <p>Likes: {place.likes}</p>
-                  <button
-                    type="button"
-                    onClick={this.handleLikes.bind(this, place)}
-                  >
-                    Like
-                  </button>
+                  <LikesButton place={place} />
 
                   {/*<p>image: {place.image}</p>
                 <img
@@ -108,9 +84,10 @@ class ListLocations extends Component {
 
 const mapStateToProps = state => {
   return {
-    places: state.getLocationsReducer,
-    bounds: state.setBoundsReducer,
-    allPlaces: state.getAllLocationsReducer
+    center: state.mapReducer.center,
+    bounds: state.mapReducer.bounds,
+    places: state.getLocationsReducer.places,
+    allPlaces: state.getLocationsReducer.allPlaces
   };
 };
 

@@ -14,6 +14,8 @@ const ShowPlace = props => {
   } else {
     button = "";
   }
+
+  //const button = (statement) ? true : false
   return (
     <div>
       <div className="navbar">
