@@ -17,11 +17,9 @@ class LikesButton extends Component {
           ...this.state.place,
           likes: this.state.place.likes + 1
         }
-        // });
       },
       async () => {
         try {
-          // await this.callAsync(
           const submitMethod = "patch";
           const url = `/api/places/${this.state.id}`;
           axiosClient[submitMethod](url, this.state.place);
