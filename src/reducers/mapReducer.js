@@ -1,4 +1,4 @@
-const locationsReducer = (
+export const mapReducer = (
   state = {
     center: [],
     bounds: []

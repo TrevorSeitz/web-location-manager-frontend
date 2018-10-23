@@ -51,11 +51,12 @@ export const getLocations = (dispatch, min_lng, max_lng, min_lat, max_lat) => {
       }
     )
       .then(response => response.json())
-      .then(jsonData => dispatch({ type: "GET_LOC", payload: jsonData }));
+      .then(jsonData => dispatch({ type: "GET_LOC", places: jsonData }));
   };
 };
 
 export const getAllLocations = dispatch => {
+  debugger;
   return dispatch => {
     dispatch({ type: "ASYNC_START" });
 
@@ -70,6 +71,6 @@ export const getAllLocations = dispatch => {
       }
     )
       .then(response => response.json())
-      .then(jsonData => dispatch({ type: "GET_ALL", payload: jsonData }));
+      .then(jsonData => dispatch({ type: "GET_ALL", allPlaces: jsonData }));
   };
 };

@@ -1,4 +1,4 @@
-const locationReducer = (
+export const getLocationsReducer = (
   state = {
     places: [],
     allPlaces: []
@@ -12,6 +12,7 @@ const locationReducer = (
 
     // getAllLocationsReducer
     case "GET_ALL":
+      debugger;
       return { ...state, allPlaces: action.allPlaces };
 
     // delPlaceReducer

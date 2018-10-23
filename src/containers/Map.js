@@ -80,6 +80,7 @@ class Map extends Component {
       this.yMapBounds.min,
       this.yMapBounds.max
     );
+    this.props.getAllLocations();
   }
 
   getMapBounds() {
@@ -105,10 +106,9 @@ class Map extends Component {
   }
 
   render() {
-    this.props.getAllLocations();
     const { centerLat, centerLng } = this.state;
-    const places = this.props.places;
-
+    const places = this.props.places.places;
+    // debugger;
     return (
       <div>
         <div className="map" style={{ width: `750px`, height: `550px` }}>
@@ -131,10 +131,17 @@ class Map extends Component {
 const mapStateToProps = state => {
   debugger;
   return {
+<<<<<<< HEAD
+    places: state.getLocationsReducer,
+    allPlaces: state.getLocationsReducer,
+    center: state.mapReducer,
+    bounds: state.mapReducer
+=======
     center: state.mapReducer.center,
     bounds: state.mapReducer.bounds,
     places: state.getLocationsReducer.places,
     allPlaces: state.getLocationsReducer.allPlaces
+>>>>>>> master
   };
 };
 

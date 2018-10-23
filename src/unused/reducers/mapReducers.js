@@ -1,5 +1,8 @@
 export const mapReducer = (
-  state = { center: { ...state }, bounde: [] },
+  state = {
+    center: [],
+    bounds: []
+  },
   action
 ) => {
   switch (action.type) {

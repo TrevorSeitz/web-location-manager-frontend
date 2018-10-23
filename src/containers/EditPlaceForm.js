@@ -112,7 +112,7 @@ class EditPlaceForm extends Component {
         <NavLink
           to={{
             pathname: "/places/all_contacts",
-            places: { places: this.props.allPlaces }
+            allPlaces: { allPlaces: this.props.allPlaces }
           }}
         >
           <button className="button">See Contacts</button>
@@ -241,6 +241,11 @@ class EditPlaceForm extends Component {
 
 const mapStateToProps = state => {
   return {
+    //     fileLat: state.LatlngReducer,
+    //     fileLong: state.LatlngReducer,
+    //     places: state.getLocationsReducer,
+    //     allPlaces: state.getLocationsReducer
+
     fileLat: state.addLatLngReducer.lat,
     fileLong: state.addLatLngReducer.lng,
     places: state.getLocationsReducer.places,
