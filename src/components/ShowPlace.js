@@ -5,7 +5,6 @@ const ShowPlace = props => {
   const place = props.location.state.place;
   const places = props.location.state.places;
   const allPlaces = props.location.state.allPlaces;
-  // console.log(props);
 
   function shorten(latLng) {
     return Number.parseFloat(latLng).toFixed(4);

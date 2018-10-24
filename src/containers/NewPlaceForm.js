@@ -3,11 +3,8 @@ import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import submit from "../submit";
 import axiosClient from "../axiosClient";
-import * as EXIF from "exif-js";
 import * as actions from "../actions";
-import * as ActiveStorage from "activestorage";
 import { NavLink } from "react-router-dom";
-import HandleFileSelect from "../components/FileSelect";
 import HandleFileSelectFunction from "../components/FileSelectFunction";
 
 class NewPlaceForm extends Component {
@@ -28,18 +25,13 @@ class NewPlaceForm extends Component {
         likes: "",
         permit: "",
         description: ""
-        // GPSLatitudeRef: "",
-        // GPSLongitudeRef: ""
       },
-      // allPlaces: [],
       selectedPlaceImageFiles: [],
       submitFormProgress: 0,
       isSubmittingForm: false,
       didFormSubmissionComplete: false,
       center: this.props.center
     };
-
-    // ActiveStorage.start();
   }
 
   handleChange = e => {
@@ -91,7 +83,6 @@ class NewPlaceForm extends Component {
       })
       .catch(error => {
         const place = this.state.place;
-        // place.errors = error.response.data;
         this.setState({
           isSubmittingForm: false,
           submitFormProgress: 0,
@@ -134,10 +125,6 @@ class NewPlaceForm extends Component {
     formData.append("place[contactName]", this.state.place.contactName);
     formData.append("place[contactPhone]", this.state.place.contactPhone);
     formData.append("place[email]", this.state.place.email);
-    // formData.append("place[permit]", this.state.place.permit);
-    // formData.append("place[description]", this.state.place.description);
-    // formData.append("place[GPSLatitudeRef]", this.state.place.GPSLatitudeRef);
-    // formData.append("place[GPSLongitudeRef]", this.state.place.GPSLongitudeRef);
 
     formData.append(this.state.place.image, this.state.place.image.name);
     return formData;
@@ -145,7 +132,7 @@ class NewPlaceForm extends Component {
 
   getLatLong = e => {
     e.persist();
-    const latLong = HandleFileSelectFunction(e, this.props);
+    HandleFileSelectFunction(e, this.props);
   };
 
   render() {
@@ -311,7 +298,6 @@ class NewPlaceForm extends Component {
 }
 
 const mapStateToProps = state => {
-  // console.log(state);
   return {
     fileLat: state.latLngReducer.lat,
     fileLong: state.latLngReducer.lng,

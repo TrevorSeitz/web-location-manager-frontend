@@ -13,7 +13,6 @@ const ListAllContacts = props => {
       if (idA > idB) {
         return 1;
       }
-
       // names must be equal
       return 0;
     });

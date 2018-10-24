@@ -1,27 +1,7 @@
-import React, { Component } from "react";
 import * as EXIF from "exif-js";
-import * as actions from "../actions";
-import { connect } from "react-redux";
 
 function HandleFileSelectFunction(e, props) {
-  // e.persist();
-  console.log(e);
-  console.log(props);
-  // console.log(props.target.files[0]);
-
-  // console.log(place);
-  debugger;
   const image = e.target.files[0];
-  // const place = props.place;
-  // place.image = image;
-  const fileName = image.name;
-
-  let mapLat = "";
-  let mapLong = "";
-  let lat = "";
-  let lng = "";
-  let latRef = "";
-  let lngRef = "";
 
   // first function to be hit when handleFileSelect is called
   EXIF.getData(image, function() {
@@ -64,15 +44,6 @@ function HandleFileSelectFunction(e, props) {
   function setProps(mapLat, mapLong, latRef, lngRef) {
     props.addLat(mapLat);
     props.addLong(mapLong);
-    //
-    // const latitude = props.fileLat;
-    // const longitude = props.fileLong;
-    //
-    // const GPSLatitudeRef = latRef;
-    // const GPSLongitudeRef = lngRef;
-
-    // return [latitude, longitude, GPSLatitudeRef, GPSLongitudeRef];
-    console.log(latRef);
   }
 }
 export default HandleFileSelectFunction;

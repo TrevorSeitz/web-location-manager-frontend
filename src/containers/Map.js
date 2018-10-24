@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { withGoogleMap, GoogleMap } from "react-google-maps";
 import { PlaceMarker } from "../components/PlaceMarker";
+import { PlaceInfoWindow } from "../components/PlaceInfoWindow";
 import { connect } from "react-redux";
 import * as actions from "../actions";
 
@@ -130,19 +131,11 @@ class Map extends Component {
 }
 
 const mapStateToProps = state => {
-  // console.log(state);
   return {
-    // <<<<<<< HEAD
     places: state.getLocationsReducer,
     allPlaces: state.getLocationsReducer,
     center: state.mapReducer,
     bounds: state.mapReducer
-    // =======
-    // center: state.mapReducer.center,
-    // bounds: state.mapReducer.bounds,
-    // places: state.getLocationsReducer.places,
-    // allPlaces: state.getLocationsReducer.allPlaces
-    // >>>>>>> master
   };
 };
 

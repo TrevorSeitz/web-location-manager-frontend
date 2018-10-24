@@ -2,7 +2,6 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 const ListAllContacts = props => {
-  // console.log(props);
   const allPlaces = props.location.allPlaces.allPlaces
     .slice()
     .sort(function(a, b) {
@@ -14,7 +13,6 @@ const ListAllContacts = props => {
       if (nameA > nameB) {
         return 1;
       }
-
       // names must be equal
       return 0;
     });

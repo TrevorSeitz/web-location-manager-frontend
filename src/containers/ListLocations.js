@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../actions";
-// import axiosClient from "../axiosClient";
 import { NavLink, Link } from "react-router-dom";
 import LikesButton from "../components/LikesButton";
 
@@ -9,13 +8,12 @@ class ListLocations extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // places: props.history.location.state.places
       places: this.props.places
     };
   }
 
   render() {
-    const places = this.state.places.sort(function(a, b) {
+    const places = this.props.places.slice().sort(function(a, b) {
       const nameA = a.name.toUpperCase(); // ignore upper and lowercase
       const nameB = b.name.toUpperCase(); // ignore upper and lowercase
       if (nameA < nameB) {
@@ -24,7 +22,6 @@ class ListLocations extends Component {
       if (nameA > nameB) {
         return 1;
       }
-
       // names must be equal
       return 0;
     });
@@ -91,18 +88,11 @@ class ListLocations extends Component {
 }
 
 const mapStateToProps = state => {
-  // console.log(state);
   return {
-    // <<<<<<< HEAD
-    // places: state.getLocationsReducer,
-    // bounds: state.mapReducer,
-    // allPlaces: state.getLocationsReducer,
-    // =======
     center: state.mapReducer.center,
     bounds: state.mapReducer.bounds,
     places: state.getLocationsReducer.places,
     allPlaces: state.getLocationsReducer.allPlaces
-    // >>>>>>> master
   };
 };
 
