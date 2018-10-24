@@ -2,12 +2,7 @@ import React, { Component } from "react";
 import axiosClient from "../axiosClient";
 
 class LikesButton extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      place: this.props.place
-    };
-  }
+  state = { place: this.props.place };
 
   updateLikes() {
     this.setState(
