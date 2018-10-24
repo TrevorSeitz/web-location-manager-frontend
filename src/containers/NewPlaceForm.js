@@ -130,6 +130,8 @@ class NewPlaceForm extends Component {
     return formData;
   };
 
+  // this is the call to external function to retrieve the lat long of the photo
+  // the proccess was moved to components/FileSelectFunction.js.
   getLatLong = e => {
     e.persist();
     HandleFileSelectFunction(e, this.props);
@@ -137,7 +139,6 @@ class NewPlaceForm extends Component {
 
   render() {
     const { reset } = this.props;
-
     return (
       <div>
         <NavLink
