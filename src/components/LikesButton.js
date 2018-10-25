@@ -3,7 +3,6 @@ import axiosClient from "../axiosClient";
 
 class LikesButton extends Component {
   state = { place: this.props.place };
-
   updateLikes() {
     this.setState(
       {

@@ -12,7 +12,6 @@ export const getLocationsReducer = (
 
     // getAllLocationsReducer
     case "GET_ALL":
-      debugger;
       return { ...state, allPlaces: action.allPlaces };
 
     // delPlaceReducer

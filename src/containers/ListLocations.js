@@ -67,8 +67,9 @@ class ListLocations extends Component {
                   <p>Description: {place.description}</p>
                   <LikesButton
                     place={place}
-                    bounds={this.props.bounds}
                     getLocations={this.props.getLocations}
+                    updateLikes={this.updateLikes}
+                    bounds={this.props.bounds}
                   />
 
                   {/*<p>image: {place.image}</p>
