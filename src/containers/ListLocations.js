@@ -8,26 +8,35 @@ class ListLocations extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      places: this.props.places
+      places: this.props.location.state.places
     };
   }
 
-  render() {
-    const places = this.props.places.slice().sort(function(a, b) {
-      const nameA = a.name.toUpperCase(); // ignore upper and lowercase
-      const nameB = b.name.toUpperCase(); // ignore upper and lowercase
-      if (nameA < nameB) {
-        return -1;
-      }
-      if (nameA > nameB) {
-        return 1;
-      }
-      // names must be equal
-      return 0;
-    });
+  sortLikesAscending = () => {
+    const places = this.state.places.slice().sort((a, b) => a.likes - b.likes);
+    this.setState({ places });
+  };
 
+  sortLikesDescending = () => {
+    const places = this.state.places.slice().sort((a, b) => b.likes - a.likes);
+    this.setState({ places });
+  };
+
+  sortPlacesByName = () => {
+    const places = this.state.places.slice().sort((a, b) => a.name - b.name);
+    this.setState({ places });
+  };
+
+  sortIdAscending = () => {
+    const places = this.state.places.slice().sort((a, b) => a.id - b.id);
+    this.setState({ places });
+  };
+
+  render() {
+    // const places = this.state.places;
+    debugger;
     return (
-      <div>
+      <div class="row">
         <div className="navbar">
           <NavLink to="/" exact>
             <button className="button">Add Location</button>
@@ -40,10 +49,24 @@ class ListLocations extends Component {
           >
             <button className="button">See Contacts</button>
           </NavLink>
+          <button className="button" onClick={this.sortIdAscending}>
+            Sort by ID Asc
+          </button>
+          <div>
+            <button className="tripleButton" onClick={this.sortLikesAscending}>
+              Sort Likes Asc
+            </button>
+            <button className="tripleButton" onClick={this.sortLikesDescending}>
+              Sort Likes Dsc
+            </button>
+            <button className="tripleButton" onClick={this.sortPlacesByName}>
+              Sort By Name
+            </button>
+          </div>
         </div>
         <div className="locations">
           <ul>
-            {places.map(place => {
+            {this.state.places.map(place => {
               return (
                 <div key={place.id}>
                   <Link
@@ -51,7 +74,7 @@ class ListLocations extends Component {
                       pathname: `Place/${place.id}`,
                       state: {
                         place: place,
-                        places: this.state.places,
+                        places: this.props.places,
                         allPlaces: this.props.allPlaces
                       },
                       query: { id: place.id }

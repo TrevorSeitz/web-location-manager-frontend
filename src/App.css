@@ -16,13 +16,19 @@
 }
 
 .button {
-  margin: 15px;
+  justifyContent: center;
+  /* margin: 15px; */
+
+  margin-bottom: 5px;
+  margin-right: 15px;
+  /* margin-left: 15px; */
 }
 
 .tripleButton {
-  margin-top: 15px;
-  margin-bottom: 15px;
-  margin-right: 15px;
+  justifyContent: center;
+  margin-bottom: 5px;
+  margin-right: 10px;
+  /* margin-left: 15px; */
 }
 
 .contact-list {
@@ -40,14 +46,14 @@
 }
 
 .map {
-  float:left;
+  float: left;
   width: 60%;
   position: fixed;
   overflow-y: hidden;
 }
 
 .not-map {
-  float:right;
+  float: right;
   width: 30%;
   border-left: 10%;
 }
