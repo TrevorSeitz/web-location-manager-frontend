@@ -17,21 +17,6 @@ class ListLocations extends Component {
     this.setState({ places });
   };
 
-  sortLikesDescending = () => {
-    const places = this.state.places.slice().sort((a, b) => b.likes - a.likes);
-    this.setState({ places });
-  };
-
-  sortPlacesByName = () => {
-    const places = this.state.places.slice().sort((a, b) => a.name - b.name);
-    this.setState({ places });
-  };
-
-  sortIdAscending = () => {
-    const places = this.state.places.slice().sort((a, b) => a.id - b.id);
-    this.setState({ places });
-  };
-
   render() {
     // const places = this.state.places;
     debugger;
@@ -47,22 +32,11 @@ class ListLocations extends Component {
               allPlaces: { allPlaces: this.props.allPlaces }
             }}
           >
-            <button className="button">See Contacts</button>
+            <button className="tripleButton">See Contacts</button>
           </NavLink>
-          <button className="button" onClick={this.sortIdAscending}>
-            Sort by ID Asc
+          <button className="tripleButton" onClick={this.sortLikesAscending}>
+            Sort Likes Asc
           </button>
-          <div>
-            <button className="tripleButton" onClick={this.sortLikesAscending}>
-              Sort Likes Asc
-            </button>
-            <button className="tripleButton" onClick={this.sortLikesDescending}>
-              Sort Likes Dsc
-            </button>
-            <button className="tripleButton" onClick={this.sortPlacesByName}>
-              Sort By Name
-            </button>
-          </div>
         </div>
         <div className="locations">
           <ul>
