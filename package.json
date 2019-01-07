@@ -43,5 +43,11 @@
     "babel-plugin-transform-class-properties": "^6.24.1",
     "exif-async": "^1.0.6",
     "redux-devtools-extension": "^2.13.5"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

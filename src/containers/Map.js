@@ -87,8 +87,8 @@ class Map extends Component {
   getMapBounds() {
     const mapBounds = this.map.getBounds();
 
-    const xMapBounds = mapBounds.j;
-    const yMapBounds = mapBounds.l;
+    const xMapBounds = mapBounds.fa;
+    const yMapBounds = mapBounds.ma;
 
     this.xMapBounds.min = xMapBounds.j;
     this.xMapBounds.max = xMapBounds.l;
